@@ -1,0 +1,8 @@
+[VPN Connection]
+name=iodine
+service=org.freedesktop.NetworkManager.iodine
+program=@LIBEXECDIR@/nm-iodine-service
+
+[GNOME]
+auth-dialog=nm-iodine-auth-dialog
+properties=libnm-iodine-properties

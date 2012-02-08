@@ -1,0 +1,30 @@
+INCLUDES = -I${top_srcdir} 
+
+AM_CPPFLAGS = \
+	$(DBUS_CFLAGS) \
+	$(GTHREAD_CFLAGS) \
+	$(NM_CFLAGS) \
+	-DG_DISABLE_DEPRECATED \
+	-DBINDIR=\"$(bindir)\" \
+	-DPREFIX=\""$(prefix)"\" \
+	-DSYSCONFDIR=\""$(sysconfdir)"\" \
+	-DVERSION="\"$(VERSION)\"" \
+	-DLIBDIR=\""$(libdir)"\" \
+	-DLIBEXECDIR=\""$(libexecdir)"\" \
+	-DLOCALSTATEDIR=\""$(localstatedir)"\" \
+	-DDATADIR=\"$(datadir)\"
+
+libexec_PROGRAMS = \
+	nm-iodine-service
+
+nm_iodine_service_SOURCES = \
+	nm-iodine-service.c \
+	nm-iodine-service.h
+
+
+nm_iodine_service_LDADD = \
+	$(DBUS_LIBS) \
+	$(GTHREAD_LIBS) \
+	$(NM_LIBS)
+
+CLEANFILES = *~
