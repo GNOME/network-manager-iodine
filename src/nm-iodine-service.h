@@ -52,6 +52,4 @@ GType nm_iodine_plugin_get_type (void);
 
 NMIODINEPlugin *nm_iodine_plugin_new (void);
 
-#define NM_IODINE_USER "nm-iodine"
-
 #endif /* NM_IODINE_PLUGIN_H */

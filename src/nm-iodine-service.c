@@ -45,6 +45,9 @@
 #include "nm-iodine-service.h"
 #include "nm-utils.h"
 
+#define NM_IODINE_USER "nm-iodine"
+#define NM_IODINE_RUNDIR LOCALSTATEDIR "/run/" NM_IODINE_USER
+
 G_DEFINE_TYPE (NMIODINEPlugin, nm_iodine_plugin, NM_TYPE_VPN_PLUGIN)
 
 typedef struct {
@@ -478,6 +481,12 @@ nm_iodine_start_iodine_binary(NMIODINEPlugin *plugin,
 		g_ptr_array_add (iodine_argv, (gpointer) NM_IODINE_USER);
 	} else
 		g_warning("Running as root user");
+
+	if (!g_mkdir_with_parents(NM_IODINE_RUNDIR, 700)) {
+		g_ptr_array_add (iodine_argv, (gpointer) "-t");
+		g_ptr_array_add (iodine_argv, (gpointer) NM_IODINE_RUNDIR);
+	} else
+		g_warning("Not running chrooted");
 
 	if (props_nameserver && strlen(props_nameserver))
 		g_ptr_array_add (iodine_argv, (gpointer) props_nameserver);
