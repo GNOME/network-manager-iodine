@@ -461,6 +461,9 @@ nm_iodine_start_iodine_binary(NMIODINEPlugin *plugin,
 
 	passwd = nm_setting_vpn_get_secret (s_vpn, NM_IODINE_KEY_PASSWORD);
 
+	if (passwd && strlen(passwd))
+		g_setenv("IODINE_PASS", passwd, TRUE);
+
 	iodine_argv = g_ptr_array_new ();
 	g_ptr_array_add (iodine_argv, (gpointer) (*iodine_binary));
 	/* Run in foreground */
@@ -469,11 +472,6 @@ nm_iodine_start_iodine_binary(NMIODINEPlugin *plugin,
 	if (props_fragsize && strlen(props_fragsize)) {
 		g_ptr_array_add (iodine_argv, (gpointer) "-m");
 		g_ptr_array_add (iodine_argv, (gpointer) props_fragsize);
-	}
-
-	if (passwd && strlen(passwd)) {
-		g_ptr_array_add (iodine_argv, (gpointer) "-P");
-		g_ptr_array_add (iodine_argv, (gpointer) passwd);
 	}
 
 	if (has_user(NM_IODINE_USER)) {
