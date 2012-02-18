@@ -10,6 +10,7 @@
 
   <homepage rdf:resource="http://honk.sigxcpu.org/piki/projects//network-manager-iodine/" />
   <category rdf:resource="http://api.gnome.org/doap-extensions#development" />
+  <download-page rdf:resource="http://download.gnome.org/sources/krb5-auth-dialog/" />
 
   <maintainer>
     <foaf:Person>
@@ -18,6 +19,5 @@
       <gnome:userid>guidog</gnome:userid>
     </foaf:Person>
   </maintainer>
-
 </Project>
 
