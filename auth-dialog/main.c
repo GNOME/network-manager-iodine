@@ -132,8 +132,6 @@ get_secrets (const char *vpn_uuid,
 		vpn_password_dialog_new (_("Authenticate VPN"), prompt, NULL);
 	g_free (prompt);
 
-	vpn_password_dialog_set_show_password_secondary (dialog, FALSE);
-
 	/* pre-fill dialog with the password */
 	if (pw && !(pw_flags & NM_SETTING_SECRET_FLAG_NOT_SAVED))
 		vpn_password_dialog_set_password (dialog, pw);

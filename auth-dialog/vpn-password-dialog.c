@@ -38,11 +38,9 @@ G_DEFINE_TYPE (VpnPasswordDialog, vpn_password_dialog, GTK_TYPE_DIALOG)
 typedef struct {
 	/* Attributes */
 	gboolean show_password;
-	gboolean show_password_secondary;
 	
 	/* Internal widgetry and flags */
 	GtkWidget *password_entry;
-	GtkWidget *password_entry_secondary;
 	GtkWidget *show_passwords_checkbox;
 
 	GtkWidget *table_alignment;
@@ -50,7 +48,6 @@ typedef struct {
 	GtkSizeGroup *group;
 	
 	char *primary_password_label;
-	char *secondary_password_label;
 } VpnPasswordDialogPrivate;
 
 /* VpnPasswordDialogClass methods */
@@ -67,11 +64,9 @@ finalize (GObject *object)
 	VpnPasswordDialogPrivate *priv = VPN_PASSWORD_DIALOG_GET_PRIVATE (object);
 	
 	g_object_unref (priv->password_entry);
-	g_object_unref (priv->password_entry_secondary);
 	g_object_unref (priv->group);
 
 	g_free (priv->primary_password_label);
-	g_free (priv->secondary_password_label);
 
 	G_OBJECT_CLASS (vpn_password_dialog_parent_class)->finalize (object);
 }
@@ -93,8 +88,6 @@ vpn_password_dialog_init (VpnPasswordDialog *dialog)
 
 	priv->show_password = TRUE;
 	priv->primary_password_label = g_strdup ( _("_Password:") );
-	priv->show_password_secondary = TRUE;
-	priv->secondary_password_label = g_strdup ( _("_Secondary Password:") );
 }
 
 /* GtkDialog callbacks */
@@ -106,8 +99,6 @@ dialog_show_callback (GtkWidget *widget, gpointer callback_data)
 
 	if (gtk_widget_get_visible (priv->password_entry))
 		gtk_widget_grab_focus (priv->password_entry);
-	else if (gtk_widget_get_visible (priv->password_entry_secondary))
-		gtk_widget_grab_focus (priv->password_entry_secondary);
 }
 
 static void
@@ -151,8 +142,6 @@ add_table_rows (VpnPasswordDialog *dialog)
 	row = 0;
 	if (priv->show_password)
 		add_row (priv->table, row++, priv->primary_password_label, priv->password_entry);
-	if (priv->show_password_secondary)
-		add_row (priv->table, row++, priv->secondary_password_label,  priv->password_entry_secondary);
 
 	gtk_table_attach_defaults (GTK_TABLE (priv->table), priv->show_passwords_checkbox, 1, 2, row, row + 1);
 
@@ -169,7 +158,6 @@ show_passwords_toggled_cb (GtkWidget *widget, gpointer user_data)
 	visible = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
 
 	gtk_entry_set_visibility (GTK_ENTRY (priv->password_entry), visible);
-	gtk_entry_set_visibility (GTK_ENTRY (priv->password_entry_secondary), visible);
 }
 
 /* Public VpnPasswordDialog methods */
@@ -234,22 +222,16 @@ vpn_password_dialog_new (const char *title,
 	gtk_container_add (GTK_CONTAINER (priv->table_alignment), priv->table);
 
 	priv->password_entry = gtk_entry_new ();
-	priv->password_entry_secondary = gtk_entry_new ();
 
 	priv->show_passwords_checkbox = gtk_check_button_new_with_mnemonic (_("Sh_ow passwords"));
 
 	/* We want to hold on to these during the table rearrangement */
 	g_object_ref_sink (priv->password_entry);
-	g_object_ref_sink (priv->password_entry_secondary);
 	g_object_ref_sink (priv->show_passwords_checkbox);
 	
 	gtk_entry_set_visibility (GTK_ENTRY (priv->password_entry), FALSE);
-	gtk_entry_set_visibility (GTK_ENTRY (priv->password_entry_secondary), FALSE);
 
 	g_signal_connect_swapped (priv->password_entry, "activate",
-	                          G_CALLBACK (gtk_window_activate_default),
-	                          dialog);
-	g_signal_connect_swapped (priv->password_entry_secondary, "activate",
 	                          G_CALLBACK (gtk_window_activate_default),
 	                          dialog);
 
@@ -330,19 +312,6 @@ vpn_password_dialog_set_password (VpnPasswordDialog	*dialog,
 }
 
 void
-vpn_password_dialog_set_password_secondary (VpnPasswordDialog *dialog,
-                                            const char *password_secondary)
-{
-	VpnPasswordDialogPrivate *priv;
-
-	g_return_if_fail (VPN_IS_PASSWORD_DIALOG (dialog));
-
-	priv = VPN_PASSWORD_DIALOG_GET_PRIVATE (dialog);
-	gtk_entry_set_text (GTK_ENTRY (priv->password_entry_secondary),
-	                    password_secondary ? password_secondary : "");
-}
-
-void
 vpn_password_dialog_set_show_password (VpnPasswordDialog *dialog, gboolean show)
 {
 	VpnPasswordDialogPrivate *priv;
@@ -360,24 +329,6 @@ vpn_password_dialog_set_show_password (VpnPasswordDialog *dialog, gboolean show)
 }
 
 void
-vpn_password_dialog_set_show_password_secondary (VpnPasswordDialog *dialog,
-                                                 gboolean show)
-{
-	VpnPasswordDialogPrivate *priv;
-
-	g_return_if_fail (dialog != NULL);
-	g_return_if_fail (VPN_IS_PASSWORD_DIALOG (dialog));
-
-	priv = VPN_PASSWORD_DIALOG_GET_PRIVATE (dialog);
-
-	show = !!show;
-	if (priv->show_password_secondary != show) {
-		priv->show_password_secondary = show;
-		add_table_rows (dialog);
-	}
-}
-
-void
 vpn_password_dialog_focus_password (VpnPasswordDialog *dialog)
 {
 	VpnPasswordDialogPrivate *priv;
@@ -390,19 +341,6 @@ vpn_password_dialog_focus_password (VpnPasswordDialog *dialog)
 		gtk_widget_grab_focus (priv->password_entry);
 }
 
-void
-vpn_password_dialog_focus_password_secondary (VpnPasswordDialog *dialog)
-{
-	VpnPasswordDialogPrivate *priv;
-
-	g_return_if_fail (dialog != NULL);
-	g_return_if_fail (VPN_IS_PASSWORD_DIALOG (dialog));
-
-	priv = VPN_PASSWORD_DIALOG_GET_PRIVATE (dialog);
-	if (priv->show_password_secondary)
-		gtk_widget_grab_focus (priv->password_entry_secondary);
-}
-
 const char *
 vpn_password_dialog_get_password (VpnPasswordDialog *dialog)
 {
@@ -412,17 +350,6 @@ vpn_password_dialog_get_password (VpnPasswordDialog *dialog)
 
 	priv = VPN_PASSWORD_DIALOG_GET_PRIVATE (dialog);
 	return gtk_entry_get_text (GTK_ENTRY (priv->password_entry));
-}
-
-const char *
-vpn_password_dialog_get_password_secondary (VpnPasswordDialog *dialog)
-{
-	VpnPasswordDialogPrivate *priv;
-
-	g_return_val_if_fail (VPN_IS_PASSWORD_DIALOG (dialog), NULL);
-
-	priv = VPN_PASSWORD_DIALOG_GET_PRIVATE (dialog);
-	return gtk_entry_get_text (GTK_ENTRY (priv->password_entry_secondary));
 }
 
 void vpn_password_dialog_set_password_label (VpnPasswordDialog *dialog,
@@ -439,23 +366,6 @@ void vpn_password_dialog_set_password_label (VpnPasswordDialog *dialog,
 	priv->primary_password_label = g_strdup (label);
 
 	if (priv->show_password)
-		add_table_rows (dialog);
-}
-
-void vpn_password_dialog_set_password_secondary_label (VpnPasswordDialog *dialog,
-                                                       const char *label)
-{
-	VpnPasswordDialogPrivate *priv;
-
-	g_return_if_fail (dialog != NULL);
-	g_return_if_fail (VPN_IS_PASSWORD_DIALOG (dialog));
-
-	priv = VPN_PASSWORD_DIALOG_GET_PRIVATE (dialog);
-
-	g_free (priv->secondary_password_label);
-	priv->secondary_password_label = g_strdup (label);
-
-	if (priv->show_password_secondary)
 		add_table_rows (dialog);
 }
 
