@@ -8,9 +8,9 @@
   <name xml:lang="en">network-manager-iodine</name>
   <shortdesc xml:lang="en">Iodine support for NetworkManager</shortdesc>
 
-  <homepage rdf:resource="http://honk.sigxcpu.org/piki/projects//network-manager-iodine/" />
+  <homepage rdf:resource="http://honk.sigxcpu.org/piki/projects/network-manager-iodine/" />
   <category rdf:resource="http://api.gnome.org/doap-extensions#development" />
-  <download-page rdf:resource="http://download.gnome.org/sources/krb5-auth-dialog/" />
+  <download-page rdf:resource="http://honk.sigxcpu.org/projects/network-manager-iodine/tarballs/" />
 
   <maintainer>
     <foaf:Person>
