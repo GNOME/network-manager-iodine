@@ -13,9 +13,6 @@
       <row>
         <col id="0" translatable="yes">Always ask</col>
       </row>
-      <row>
-        <col id="0" translatable="yes">Not required</col>
-      </row>
     </data>
   </object>
   <object class="GtkVBox" id="iodine-vbox">
