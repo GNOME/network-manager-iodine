@@ -422,6 +422,22 @@ has_user(const char* user)
 	return (getpwnam(user) == NULL) ? FALSE : TRUE;
 }
 
+
+static void
+send_password(gint fd, NMSettingVPN *s_vpn)
+{
+	const char *passwd;
+
+	passwd = nm_setting_vpn_get_secret (s_vpn, NM_IODINE_KEY_PASSWORD);
+	/* Don't send an empty password since this makes iodine block */
+	if (!passwd || !strlen(passwd))
+		passwd = "<none>";
+
+	write (fd, passwd, strlen(passwd));
+	write (fd, "\n", 1);
+}
+
+
 static gint
 nm_iodine_start_iodine_binary(NMIODINEPlugin *plugin,
 										 NMSettingVPN *s_vpn,
@@ -433,7 +449,7 @@ nm_iodine_start_iodine_binary(NMIODINEPlugin *plugin,
 	GSource *iodine_watch;
 	GIOChannel *stderr_channel;
 	gint	stdin_fd, stderr_fd;
-	const char *props_topdomain, *props_fragsize, *props_nameserver, *passwd;
+	const char *props_topdomain, *props_fragsize, *props_nameserver;
 
 	/* Find iodine */
 	iodine_binary = iodine_binary_paths;
@@ -458,12 +474,6 @@ nm_iodine_start_iodine_binary(NMIODINEPlugin *plugin,
 													 NM_IODINE_KEY_NAMESERVER);
 	props_topdomain = nm_setting_vpn_get_data_item (s_vpn,
 													NM_IODINE_KEY_TOPDOMAIN);
-
-	passwd = nm_setting_vpn_get_secret (s_vpn, NM_IODINE_KEY_PASSWORD);
-
-	if (passwd && strlen(passwd))
-		g_setenv("IODINE_PASS", passwd, TRUE);
-
 	iodine_argv = g_ptr_array_new ();
 	g_ptr_array_add (iodine_argv, (gpointer) (*iodine_binary));
 	/* Run in foreground */
@@ -505,7 +515,9 @@ nm_iodine_start_iodine_binary(NMIODINEPlugin *plugin,
 	g_ptr_array_free (iodine_argv, TRUE);
 
 	g_message ("iodine started with pid %d", pid);
-	close(stdin_fd);
+
+	send_password (stdin_fd, s_vpn);
+	close (stdin_fd);
 
 	stderr_channel = g_io_channel_unix_new (stderr_fd);
 	g_io_add_watch(stderr_channel,
