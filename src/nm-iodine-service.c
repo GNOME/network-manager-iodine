@@ -543,7 +543,7 @@ real_connect (NMVPNPlugin   *plugin,
               GError       **error)
 {
 	NMSettingVPN *s_vpn;
-	gint iodine_fd = -1;
+	gint ret = -1;
 
 	s_vpn = NM_SETTING_VPN (nm_connection_get_setting (connection,
 													   NM_TYPE_SETTING_VPN));
@@ -554,9 +554,9 @@ real_connect (NMVPNPlugin   *plugin,
 	if (!nm_iodine_secrets_validate (s_vpn, error))
 		goto out;
 
-	iodine_fd = nm_iodine_start_iodine_binary (NM_IODINE_PLUGIN (plugin),
+	ret = nm_iodine_start_iodine_binary (NM_IODINE_PLUGIN (plugin),
 											   s_vpn, error);
-	if (!iodine_fd)
+	if (!ret)
 		return TRUE;
 
  out:
