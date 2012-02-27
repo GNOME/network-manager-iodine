@@ -52,6 +52,7 @@ G_DEFINE_TYPE (NMIODINEPlugin, nm_iodine_plugin, NM_TYPE_VPN_PLUGIN)
 
 typedef struct {
 	GPid pid;
+	NMVPNPluginFailure failure;
 	GHashTable *ip4config;
 } NMIODINEPluginPrivate;
 
@@ -271,13 +272,23 @@ value_destroy (gpointer data)
 	g_slice_free (GValue, val);
 }
 
-static gboolean
-iodine_parse_stderr_line (const char* line, GHashTable *ip4config)
+static gint
+iodine_parse_stderr_line (NMVPNPlugin *plugin,
+						  const char* line,
+						  GHashTable *ip4config)
 {
-	gchar **split;
+	NMIODINEPluginPrivate *priv = NM_IODINE_PLUGIN_GET_PRIVATE (plugin);
+	gchar **split = NULL;
 	GValue *val;
 	gint len;
-	gint ret = TRUE;
+	gint ret = 1;
+
+	if (g_str_has_prefix(line, "Bad password")) {
+		g_debug ("Login failure");
+		priv->failure = NM_VPN_PLUGIN_FAILURE_LOGIN_FAILED;
+		ret = -1;
+		goto out;
+	}
 
 	split = g_strsplit (line, " ", 0);
 	len = g_strv_length (split);
@@ -340,7 +351,7 @@ iodine_parse_stderr_line (const char* line, GHashTable *ip4config)
 		g_hash_table_insert (ip4config,
 							 NM_VPN_PLUGIN_IP4_CONFIG_PREFIX,
 							 val);
-		ret = FALSE;
+		ret = 0; /* success */
 	} else
 		g_debug("%s", line);
 
@@ -369,7 +380,7 @@ iodine_stderr_cb (GIOChannel *source, GIOCondition condition, gpointer plugin)
 	if (l)
 		line[l-1] = '\0';
 
-	ret = iodine_parse_stderr_line(line, priv->ip4config);
+	ret = iodine_parse_stderr_line(plugin, line, priv->ip4config);
 	if (!ret) {
 		g_debug("Parsing done, sending IP4 config");
 		nm_vpn_plugin_set_ip4_config(plugin, priv->ip4config);
@@ -406,8 +417,10 @@ iodine_watch_cb (GPid pid, gint status, gpointer user_data)
 	waitpid (priv->pid, NULL, WNOHANG);
 	priv->pid = 0;
 
-	/* Must be after data->state is set since signals use data->state */
-	if (error) {
+	if (priv->failure >= 0) {
+		nm_vpn_plugin_failure (NM_VPN_PLUGIN (plugin),
+							   priv->failure);
+	} else if (error) {
 		nm_vpn_plugin_failure (NM_VPN_PLUGIN (plugin),
 							   NM_VPN_PLUGIN_FAILURE_CONNECT_FAILED);
 	}
@@ -634,6 +647,7 @@ nm_iodine_plugin_init (NMIODINEPlugin *plugin)
 											 g_str_equal,
 											 NULL,
 											 value_destroy);
+	priv->failure = -1;
 }
 
 static void
