@@ -1,4 +1,15 @@
 =============
+Version 0.0.3
+=============
+* Pass the password via stdin
+* Distinguish login failures from other errors
+* Drop unused code
+* More flexible build-time warnings [Dan Williams]
+* UI translations:
+	Piotr Drąg (pl)
+* Many thanks to Dan Williams for the review!
+
+=============
 Version 0.0.2
 =============
 * Pass the password via the environment
