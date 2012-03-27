@@ -440,14 +440,19 @@ static void
 send_password(gint fd, NMSettingVPN *s_vpn)
 {
 	const char *passwd;
+	ssize_t ret;
 
 	passwd = nm_setting_vpn_get_secret (s_vpn, NM_IODINE_KEY_PASSWORD);
 	/* Don't send an empty password since this makes iodine block */
 	if (!passwd || !strlen(passwd))
 		passwd = "<none>";
 
-	write (fd, passwd, strlen(passwd));
-	write (fd, "\n", 1);
+	ret = write (fd, passwd, strlen(passwd));
+	if (ret < 0)
+		g_warning("Password write failed");
+	ret = write (fd, "\n", 1);
+	if (ret < 0)
+		g_warning("Password write failed");
 }
 
 
