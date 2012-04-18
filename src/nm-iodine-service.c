@@ -282,7 +282,7 @@ iodine_parse_stderr_line (NMVPNPlugin *plugin,
 	gint ret = 1;
 
 	if (g_str_has_prefix(line, "Bad password")) {
-		g_debug ("Login failure");
+		g_message ("Login failure");
 		priv->failure = NM_VPN_PLUGIN_FAILURE_LOGIN_FAILED;
 		ret = -1;
 		goto out;
@@ -294,7 +294,7 @@ iodine_parse_stderr_line (NMVPNPlugin *plugin,
 		goto out;
 
 	if (g_str_has_prefix(line, "Server tunnel IP is ")) {
-		g_debug("PTP address: %s", split[len-1]);
+		g_message("PTP address: %s", split[len-1]);
 		val = addr_to_gvalue (split[len-1]);
 		if (val)
 			g_hash_table_insert (ip4config,
@@ -306,7 +306,7 @@ iodine_parse_stderr_line (NMVPNPlugin *plugin,
 								 NM_VPN_PLUGIN_IP4_CONFIG_INT_GATEWAY,
 								 val);
 	} else if (g_str_has_prefix(line, "Sending DNS queries for ")) {
-		g_debug("External gw: %s", split[len-1]);
+		g_message("External gw: %s", split[len-1]);
 		val = addr_to_gvalue (split[len-1]);
 		if (val)
 			g_hash_table_insert (ip4config,
@@ -315,28 +315,28 @@ iodine_parse_stderr_line (NMVPNPlugin *plugin,
 	} else if (g_str_has_prefix(line, "Sending raw traffic directly to ")) {
 		/* If the DNS server is directly reachable we need to set it
 		   as external gateway overwriting the above valus */
-		g_debug("Overwrite ext. gw.  address: %s", split[len-1]);
+		g_message("Overwrite ext. gw.  address: %s", split[len-1]);
 		val = addr_to_gvalue (split[len-1]);
 		if (val)
 			g_hash_table_insert (ip4config,
 								 NM_VPN_PLUGIN_IP4_CONFIG_EXT_GATEWAY,
 								 val);
 	} else if (g_str_has_prefix(line, "Setting IP of dns")) {
-		g_debug("Address: %s", split[len-1]);
+		g_message("Address: %s", split[len-1]);
 		val = addr_to_gvalue (split[len-1]);
 		if (val)
 			g_hash_table_insert (ip4config,
 								 NM_VPN_PLUGIN_IP4_CONFIG_ADDRESS,
 								 val);
 	} else if (g_str_has_prefix(line, "Setting MTU of ")) {
-		g_debug("MTU: %s", split[len-1]);
+		g_message("MTU: %s", split[len-1]);
 		val = addr_to_gvalue (split[len-1]);
 		if (val)
 			g_hash_table_insert (ip4config,
 								 NM_VPN_PLUGIN_IP4_CONFIG_MTU,
 								 val);
 	} else if (g_str_has_prefix(line, "Opened dns")) {
-		g_debug("Interface: %s", split[len-1]);
+		g_message("Interface: %s", split[len-1]);
 		val = str_to_gvalue (split[len-1], FALSE);
 		if (val)
 			g_hash_table_insert (ip4config,
@@ -351,7 +351,7 @@ iodine_parse_stderr_line (NMVPNPlugin *plugin,
 							 val);
 		ret = 0; /* success */
 	} else
-		g_debug("%s", line);
+		g_message("%s", line);
 
 out:
 	g_strfreev(split);
@@ -380,7 +380,7 @@ iodine_stderr_cb (GIOChannel *source, GIOCondition condition, gpointer plugin)
 
 	ret = iodine_parse_stderr_line(plugin, line, priv->ip4config);
 	if (!ret) {
-		g_debug("Parsing done, sending IP4 config");
+		g_message("Parsing done, sending IP4 config");
 		nm_vpn_plugin_set_ip4_config(plugin, priv->ip4config);
 
 		g_hash_table_destroy (priv->ip4config);
