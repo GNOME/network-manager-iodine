@@ -69,8 +69,6 @@ static const char *iodine_binary_paths[] =
 	NULL
 };
 
-#define NM_IODINE_HELPER_PATH  LIBEXECDIR"/nm-iodine-service-iodine-helper"
-
 typedef struct {
 	const char *name;
 	GType type;
