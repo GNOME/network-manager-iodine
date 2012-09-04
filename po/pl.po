@@ -4,12 +4,14 @@
 # pomóc w jego rozwijaniu i pielęgnowaniu, napisz do nas:
 # gnomepl@aviary.pl
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+# Piotr Drąg <piotrdrag@gmail.com>, 2012.
+# Aviary.pl <gnomepl@aviary.pl>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: network-manager-iodine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-18 17:28+0100\n"
-"PO-Revision-Date: 2012-02-18 17:30+0100\n"
+"POT-Creation-Date: 2012-09-04 20:09+0200\n"
+"PO-Revision-Date: 2012-09-04 20:10+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -35,16 +37,12 @@ msgstr ""
 msgid "Authenticate VPN"
 msgstr "Uwierzytelnianie VPN"
 
-#: ../auth-dialog/vpn-password-dialog.c:95
-#: ../properties/nm-iodine-dialog.ui.h:9
+#: ../auth-dialog/vpn-password-dialog.c:90
+#: ../properties/nm-iodine-dialog.ui.h:7
 msgid "_Password:"
 msgstr "_Hasło:"
 
-#: ../auth-dialog/vpn-password-dialog.c:97
-msgid "_Secondary Password:"
-msgstr "Hasło _dodatkowe:"
-
-#: ../auth-dialog/vpn-password-dialog.c:239
+#: ../auth-dialog/vpn-password-dialog.c:223
 msgid "Sh_ow passwords"
 msgstr "Wyświ_etlanie haseł"
 
@@ -57,73 +55,69 @@ msgid "Tunnel connections via DNS."
 msgstr "Połączenia tunelowe przez DNS."
 
 #: ../properties/nm-iodine-dialog.ui.h:1
-msgid "<b>General</b>"
-msgstr "<b>Ogólne</b>"
-
-#: ../properties/nm-iodine-dialog.ui.h:2
-msgid "<b>Optional</b>"
-msgstr "<b>Opcjonalne</b>"
-
-#: ../properties/nm-iodine-dialog.ui.h:3
-msgid "Always ask"
-msgstr "Pytanie za każdym razem"
-
-#: ../properties/nm-iodine-dialog.ui.h:4
-msgid "Not required"
-msgstr "Niewymagane"
-
-#: ../properties/nm-iodine-dialog.ui.h:5
 msgid "Saved"
 msgstr "Zapisane"
 
-#: ../properties/nm-iodine-dialog.ui.h:6
-msgid "Show password"
-msgstr "Wyświetlanie hasła"
+#: ../properties/nm-iodine-dialog.ui.h:2
+msgid "Always ask"
+msgstr "Pytanie za każdym razem"
 
-#: ../properties/nm-iodine-dialog.ui.h:7
-msgid "_Fragment Size:"
-msgstr "_Rozmiar fragmentu:"
+#: ../properties/nm-iodine-dialog.ui.h:3
+msgid "<b>General</b>"
+msgstr "<b>Ogólne</b>"
 
-#: ../properties/nm-iodine-dialog.ui.h:8
-msgid "_Nameserver:"
-msgstr "Serwer _nazw:"
-
-#: ../properties/nm-iodine-dialog.ui.h:10
+#: ../properties/nm-iodine-dialog.ui.h:4
 msgid "_Toplevel Domain:"
 msgstr "_Domena najwyższego poziomu:"
 
-#: ../src/nm-iodine-service.c:132
+#: ../properties/nm-iodine-dialog.ui.h:5
+msgid "<b>Optional</b>"
+msgstr "<b>Opcjonalne</b>"
+
+#: ../properties/nm-iodine-dialog.ui.h:6
+msgid "_Nameserver:"
+msgstr "Serwer _nazw:"
+
+#: ../properties/nm-iodine-dialog.ui.h:8
+msgid "_Fragment Size:"
+msgstr "_Rozmiar fragmentu:"
+
+#: ../properties/nm-iodine-dialog.ui.h:9
+msgid "Show password"
+msgstr "Wyświetlanie hasła"
+
+#: ../src/nm-iodine-service.c:131
 #, c-format
 msgid "invalid integer property '%s' or out of range [%d -> %d]"
 msgstr ""
 "nieprawidłowa własność liczby całkowitej \"%s\" lub jest poza zakresem [%d -"
 "> %d]"
 
-#: ../src/nm-iodine-service.c:143
+#: ../src/nm-iodine-service.c:142
 #, c-format
 msgid "invalid boolean property '%s' (not yes or no)"
 msgstr ""
 "nieprawidłowa własność zmiennej logicznej \"%s\" (nie wynosi \"yes\" lub \"no"
 "\")"
 
-#: ../src/nm-iodine-service.c:150
+#: ../src/nm-iodine-service.c:149
 #, c-format
 msgid "unhandled property '%s' type %s"
 msgstr "nieobsługiwana własność \"%s\" typu \"%s\""
 
-#: ../src/nm-iodine-service.c:164
+#: ../src/nm-iodine-service.c:163
 #, c-format
 msgid "property '%s' invalid or not supported"
 msgstr "własność \"%s\" jest nieprawidłowa lub nieobsługiwana"
 
-#: ../src/nm-iodine-service.c:180
+#: ../src/nm-iodine-service.c:179
 msgid "No VPN configuration options."
 msgstr "Brak opcji konfiguracji VPN."
 
-#: ../src/nm-iodine-service.c:199
+#: ../src/nm-iodine-service.c:198
 msgid "No VPN secrets!"
 msgstr "Brak haseł VPN."
 
-#: ../src/nm-iodine-service.c:451
+#: ../src/nm-iodine-service.c:483
 msgid "Could not find iodine binary."
 msgstr "Nie można odnaleźć pliku binarnego iodine."
