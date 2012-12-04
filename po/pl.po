@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: network-manager-iodine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-04 20:09+0200\n"
-"PO-Revision-Date: 2012-09-04 20:10+0200\n"
+"POT-Creation-Date: 2012-12-04 14:59+0100\n"
+"PO-Revision-Date: 2012-12-04 15:00+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -63,16 +63,16 @@ msgid "Always ask"
 msgstr "Pytanie za każdym razem"
 
 #: ../properties/nm-iodine-dialog.ui.h:3
-msgid "<b>General</b>"
-msgstr "<b>Ogólne</b>"
+msgid "General"
+msgstr "Ogólne"
 
 #: ../properties/nm-iodine-dialog.ui.h:4
 msgid "_Toplevel Domain:"
 msgstr "_Domena najwyższego poziomu:"
 
 #: ../properties/nm-iodine-dialog.ui.h:5
-msgid "<b>Optional</b>"
-msgstr "<b>Opcjonalne</b>"
+msgid "Optional"
+msgstr "Opcjonalne"
 
 #: ../properties/nm-iodine-dialog.ui.h:6
 msgid "_Nameserver:"
