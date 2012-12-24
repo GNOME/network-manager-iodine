@@ -6,3 +6,4 @@ program=@LIBEXECDIR@/nm-iodine-service
 [GNOME]
 auth-dialog=nm-iodine-auth-dialog
 properties=libnm-iodine-properties
+supports-external-ui-mode=true
