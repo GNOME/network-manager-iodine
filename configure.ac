@@ -1,6 +1,6 @@
 AC_PREREQ(2.52)
 
-AC_INIT(NetworkManager-iodine, 0.0.3, agx@sigxcpu.org, NetworkManager-iodine)
+AC_INIT(NetworkManager-iodine, 0.0.4, agx@sigxcpu.org, NetworkManager-iodine)
 AM_INIT_AUTOMAKE([subdir-objects no-dist-gzip dist-xz])
 AM_MAINTAINER_MODE
 
