@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: network-manager-iodine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-04 14:59+0100\n"
-"PO-Revision-Date: 2012-12-04 15:00+0100\n"
+"POT-Creation-Date: 2012-12-25 21:26+0100\n"
+"PO-Revision-Date: 2012-12-25 21:27+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -23,19 +23,23 @@ msgstr ""
 "X-Poedit-Language: Polish\n"
 "X-Poedit-Country: Poland\n"
 
-#. Otherwise, we have no saved password, or the password flags indicated
-#. * that the password should never be saved.
-#.
-#: ../auth-dialog/main.c:129
+#: ../auth-dialog/main.c:152
 #, c-format
 msgid "You need to authenticate to access the Virtual Private Network '%s'."
 msgstr ""
 "Aby uzyskać dostęp do wirtualnej sieci prywatnej \"%s\", należy się "
 "uwierzytelnić."
 
-#: ../auth-dialog/main.c:132
+#. Otherwise, we have no saved password, or the password flags indicated
+#. * that the password should never be saved.
+#.
+#: ../auth-dialog/main.c:165 ../auth-dialog/main.c:188
 msgid "Authenticate VPN"
 msgstr "Uwierzytelnianie VPN"
+
+#: ../auth-dialog/main.c:168
+msgid "Password:"
+msgstr "Hasło:"
 
 #: ../auth-dialog/vpn-password-dialog.c:90
 #: ../properties/nm-iodine-dialog.ui.h:7
