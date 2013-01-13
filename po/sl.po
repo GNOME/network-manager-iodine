@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: network-manager-iodine master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=network-manager-iodine&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-12-04 14:01+0000\n"
-"PO-Revision-Date: 2013-01-13 14:50+0100\n"
+"POT-Creation-Date: 2013-01-02 21:33+0000\n"
+"PO-Revision-Date: 2013-01-13 14:54+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -22,17 +22,21 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Generator: Poedit 1.5.4\n"
 
-#. Otherwise, we have no saved password, or the password flags indicated
-#. * that the password should never be saved.
-#.
-#: ../auth-dialog/main.c:129
+#: ../auth-dialog/main.c:152
 #, c-format
 msgid "You need to authenticate to access the Virtual Private Network '%s'."
 msgstr "Za dostop do navideznega zasebnega omrežja '%s' je zahtevana overitev."
 
-#: ../auth-dialog/main.c:132
+#. Otherwise, we have no saved password, or the password flags indicated
+#. * that the password should never be saved.
+#.
+#: ../auth-dialog/main.c:165 ../auth-dialog/main.c:188
 msgid "Authenticate VPN"
 msgstr "Overi VPN"
+
+#: ../auth-dialog/main.c:168
+msgid "Password:"
+msgstr "Geslo:"
 
 #: ../auth-dialog/vpn-password-dialog.c:90
 #: ../properties/nm-iodine-dialog.ui.h:7
