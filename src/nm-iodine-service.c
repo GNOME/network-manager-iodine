@@ -687,7 +687,9 @@ int main (int argc, char *argv[])
 	NMIODINEPlugin *plugin;
 	GMainLoop *main_loop;
 
+#if !GLIB_CHECK_VERSION(2,36,0)
 	g_type_init ();
+#endif
 
 	plugin = nm_iodine_plugin_new ();
 	if (!plugin)
