@@ -43,8 +43,8 @@ typedef struct {
 	GtkWidget *password_entry;
 	GtkWidget *show_passwords_checkbox;
 
-	GtkWidget *table_alignment;
-	GtkWidget *table;
+	GtkWidget *grid_alignment;
+	GtkWidget *grid;
 	GtkSizeGroup *group;
 	
 	char *primary_password_label;
@@ -108,44 +108,44 @@ dialog_close_callback (GtkWidget *widget, gpointer callback_data)
 }
 
 static void
-add_row (GtkWidget *table, int row, const char *label_text, GtkWidget *entry)
+add_row (GtkWidget *grid, int row, const char *label_text, GtkWidget *entry)
 {
 	GtkWidget *label;
 
 	label = gtk_label_new_with_mnemonic (label_text);
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
 
-	gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, row, row + 1);
-	gtk_table_attach_defaults (GTK_TABLE (table), entry, 1, 2, row, row + 1);
+	gtk_grid_attach (GTK_GRID (grid), label, 0, 1, 1, 1);
+	gtk_grid_attach (GTK_GRID (grid), entry, 1, 1, 1, 1);
 
 	gtk_label_set_mnemonic_widget (GTK_LABEL (label), entry);
 }
 
 static void
-remove_child (GtkWidget *child, GtkWidget *table)
+remove_child (GtkWidget *child, GtkWidget *grid)
 {
-	gtk_container_remove (GTK_CONTAINER (table), child);
+	gtk_container_remove (GTK_CONTAINER (grid), child);
 }
 
 static void
-add_table_rows (VpnPasswordDialog *dialog)
+add_grid_rows (VpnPasswordDialog *dialog)
 {
 	VpnPasswordDialogPrivate *priv = VPN_PASSWORD_DIALOG_GET_PRIVATE (dialog);
-	int row;
+	int row = 0;
 	int offset = 0;
 
-	gtk_alignment_set_padding (GTK_ALIGNMENT (priv->table_alignment), 0, 0, offset, 0);
+	gtk_alignment_set_padding (GTK_ALIGNMENT (priv->grid_alignment), 0, 0, offset, 0);
 
 	/* This will not kill the entries, since they are ref:ed */
-	gtk_container_foreach (GTK_CONTAINER (priv->table), (GtkCallback) remove_child, priv->table);
+	gtk_container_foreach (GTK_CONTAINER (priv->grid), (GtkCallback) remove_child, priv->grid);
 	
-	row = 0;
 	if (priv->show_password)
-		add_row (priv->table, row++, priv->primary_password_label, priv->password_entry);
+		add_row (priv->grid, row++, priv->primary_password_label, priv->password_entry);
 
-	gtk_table_attach_defaults (GTK_TABLE (priv->table), priv->show_passwords_checkbox, 1, 2, row, row + 1);
-
-	gtk_widget_show_all (priv->table);
+	gtk_grid_attach (GTK_GRID (priv->grid),
+					 priv->show_passwords_checkbox,
+					 1, 2, 1, 1);
+	gtk_widget_show_all (priv->grid);
 }
 
 static void
@@ -208,21 +208,21 @@ vpn_password_dialog_new (const char *title,
 	                  G_CALLBACK (dialog_close_callback),
 	                  dialog);
 
-	/* The table that holds the captions */
-	priv->table_alignment = gtk_alignment_new (0.0, 0.0, 0.0, 0.0);
+	/* The grid that holds the captions */
+	priv->grid_alignment = gtk_alignment_new (0.0, 0.0, 0.0, 0.0);
 
 	priv->group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
-	priv->table = gtk_table_new (4, 2, FALSE);
-	gtk_table_set_col_spacings (GTK_TABLE (priv->table), 12);
-	gtk_table_set_row_spacings (GTK_TABLE (priv->table), 6);
-	gtk_container_add (GTK_CONTAINER (priv->table_alignment), priv->table);
+	priv->grid = gtk_grid_new ();
+	gtk_grid_set_column_spacing (GTK_GRID (priv->grid), 12);
+	gtk_grid_set_row_spacing (GTK_GRID (priv->grid), 6);
+	gtk_container_add (GTK_CONTAINER (priv->grid_alignment), priv->grid);
 
 	priv->password_entry = gtk_entry_new ();
 
 	priv->show_passwords_checkbox = gtk_check_button_new_with_mnemonic (_("Sh_ow passwords"));
 
-	/* We want to hold on to these during the table rearrangement */
+	/* We want to hold on to these during the grid rearrangement */
 	g_object_ref_sink (priv->password_entry);
 	g_object_ref_sink (priv->show_passwords_checkbox);
 	
@@ -236,7 +236,7 @@ vpn_password_dialog_new (const char *title,
 	                  G_CALLBACK (show_passwords_toggled_cb),
 	                  dialog);
 
-	add_table_rows (VPN_PASSWORD_DIALOG (dialog));
+	add_grid_rows (VPN_PASSWORD_DIALOG (dialog));
 
 	/* Adds some eye-candy to the dialog */
 #if GTK_CHECK_VERSION (3,1,6)
@@ -263,7 +263,7 @@ vpn_password_dialog_new (const char *title,
 		gtk_label_set_max_width_chars (message_label, 35);
 		gtk_size_group_add_widget (priv->group, GTK_WIDGET (message_label));
 		gtk_box_pack_start (GTK_BOX (main_vbox), GTK_WIDGET (message_label), FALSE, FALSE, 0);
-		gtk_size_group_add_widget (priv->group, priv->table_alignment);
+		gtk_size_group_add_widget (priv->group, priv->grid_alignment);
 	}
 
 #if GTK_CHECK_VERSION (3,1,6)
@@ -272,7 +272,7 @@ vpn_password_dialog_new (const char *title,
 	vbox = gtk_vbox_new (FALSE, 6);
 #endif
 	gtk_box_pack_start (GTK_BOX (main_vbox), vbox, FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (vbox), priv->table_alignment, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (vbox), priv->grid_alignment, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (hbox), main_vbox, FALSE, FALSE, 0);
 	gtk_box_pack_start (content, hbox, FALSE, FALSE, 0);
 	gtk_widget_show_all (GTK_WIDGET (content));
@@ -321,7 +321,7 @@ vpn_password_dialog_set_show_password (VpnPasswordDialog *dialog, gboolean show)
 	show = !!show;
 	if (priv->show_password != show) {
 		priv->show_password = show;
-		add_table_rows (dialog);
+		add_grid_rows (dialog);
 	}
 }
 
@@ -363,6 +363,6 @@ void vpn_password_dialog_set_password_label (VpnPasswordDialog *dialog,
 	priv->primary_password_label = g_strdup (label);
 
 	if (priv->show_password)
-		add_table_rows (dialog);
+		add_grid_rows (dialog);
 }
 
