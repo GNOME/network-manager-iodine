@@ -1,0 +1,121 @@
+# German translation for network-manager-iodine.
+# Copyright (C) 2013 network-manager-iodine's COPYRIGHT HOLDER
+# This file is distributed under the same license as the network-manager-iodine package.
+# Christian Kirbach <Christian.Kirbach@gmail.com>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: network-manager-iodine master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=network-manager-iodine&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2013-05-11 15:04+0000\n"
+"PO-Revision-Date: 2013-06-04 16:44+0100\n"
+"Last-Translator: Christian Kirbach <christian.kirbach@gmail.com>\n"
+"Language-Team: German <gnome-de@gnome.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.5\n"
+
+#: ../auth-dialog/main.c:152
+#, fuzzy, c-format
+msgid "You need to authenticate to access the Virtual Private Network '%s'."
+msgstr ""
+"Sie müssen sich für den Zugriff auf das virtuelle private Netz %s "
+"legitimieren."
+
+#. Otherwise, we have no saved password, or the password flags indicated
+#. * that the password should never be saved.
+#.
+#: ../auth-dialog/main.c:165 ../auth-dialog/main.c:188
+#, fuzzy
+msgid "Authenticate VPN"
+msgstr "Für VPN authentifizieren"
+
+#: ../auth-dialog/main.c:168
+msgid "Password:"
+msgstr "Passwort:"
+
+#: ../auth-dialog/vpn-password-dialog.c:90
+#: ../properties/nm-iodine-dialog.ui.h:7
+msgid "_Password:"
+msgstr "_Passwort:"
+
+#: ../auth-dialog/vpn-password-dialog.c:223
+msgid "Sh_ow passwords"
+msgstr "Passwörter _zeigen"
+
+#: ../properties/nm-iodine.c:46
+msgid "Iodine DNS Tunnel"
+msgstr "Iodine DNS-Tunnel"
+
+#: ../properties/nm-iodine.c:47
+msgid "Tunnel connections via DNS."
+msgstr "Tunnelverbindung via DNS."
+
+#: ../properties/nm-iodine-dialog.ui.h:1
+msgid "Saved"
+msgstr "Gespeichert"
+
+#: ../properties/nm-iodine-dialog.ui.h:2
+msgid "Always ask"
+msgstr "Immer nachfragen"
+
+#: ../properties/nm-iodine-dialog.ui.h:3
+msgid "General"
+msgstr "Allgemein"
+
+#: ../properties/nm-iodine-dialog.ui.h:4
+msgid "_Toplevel Domain:"
+msgstr "_Oberste Domäne:"
+
+#: ../properties/nm-iodine-dialog.ui.h:5
+msgid "Optional"
+msgstr "Optional"
+
+#: ../properties/nm-iodine-dialog.ui.h:6
+msgid "_Nameserver:"
+msgstr ""
+
+#: ../properties/nm-iodine-dialog.ui.h:8
+msgid "_Fragment Size:"
+msgstr "_Fragmentgröße:"
+
+#: ../properties/nm-iodine-dialog.ui.h:9
+msgid "Show password"
+msgstr "Passwort zeigen"
+
+#: ../src/nm-iodine-service.c:131
+#, c-format
+msgid "invalid integer property '%s' or out of range [%d -> %d]"
+msgstr ""
+"Ungültige Ganzzahl-Eigenschaft »%s« oder außerhalb des Bereichs [%d -> %d]"
+
+#: ../src/nm-iodine-service.c:142
+#, c-format
+msgid "invalid boolean property '%s' (not yes or no)"
+msgstr "Ungültige boolesche Eigenschaft »%s« (nicht »yes« oder »no«)"
+
+#: ../src/nm-iodine-service.c:149
+#, c-format
+msgid "unhandled property '%s' type %s"
+msgstr "Unbehandelte Eigenschaft »%s« des Typs %s"
+
+#: ../src/nm-iodine-service.c:163
+#, c-format
+msgid "property '%s' invalid or not supported"
+msgstr "Eigenschaft »%s« ist ungültig oder wird nicht unterstützt"
+
+#: ../src/nm-iodine-service.c:179
+msgid "No VPN configuration options."
+msgstr "Keine VPN-Konfigurationsoptionen."
+
+#: ../src/nm-iodine-service.c:198
+msgid "No VPN secrets!"
+msgstr "Keine VPN-Geheimnisse!"
+
+#: ../src/nm-iodine-service.c:483
+msgid "Could not find iodine binary."
+msgstr "iodine-Binärdatei konnte nicht gefunden werden."
