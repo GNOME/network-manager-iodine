@@ -1,0 +1,116 @@
+# Indonesian translation for network-manager-iodine.
+# Copyright (C) 2013 network-manager-iodine's COPYRIGHT HOLDER
+# This file is distributed under the same license as the network-manager-iodine package.
+# Andika Triwidada <andika@gmail.com>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: network-manager-iodine master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=network-manager-iodine&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2013-09-20 10:15+0000\n"
+"PO-Revision-Date: 2013-10-14 08:02+0700\n"
+"Last-Translator: Andika Triwidada <andika@gmail.com>\n"
+"Language-Team: Indonesian <gnome@i15n.org>\n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+
+#: ../auth-dialog/main.c:152
+#, c-format
+msgid "You need to authenticate to access the Virtual Private Network '%s'."
+msgstr "Anda perlu otentikasi untuk mengakses Virtual Private Network '%s'."
+
+#. Otherwise, we have no saved password, or the password flags indicated
+#. * that the password should never be saved.
+#.
+#: ../auth-dialog/main.c:165 ../auth-dialog/main.c:188
+msgid "Authenticate VPN"
+msgstr "Otentikasi VPN"
+
+#: ../auth-dialog/main.c:168
+msgid "Password:"
+msgstr "Sandi:"
+
+#: ../auth-dialog/vpn-password-dialog.c:90
+#: ../properties/nm-iodine-dialog.ui.h:7
+msgid "_Password:"
+msgstr "_Sandi:"
+
+#: ../auth-dialog/vpn-password-dialog.c:223
+msgid "Sh_ow passwords"
+msgstr "Ta_mpilkan sandi"
+
+#: ../properties/nm-iodine.c:46
+msgid "Iodine DNS Tunnel"
+msgstr "Tunnel DNS Iodine"
+
+#: ../properties/nm-iodine.c:47
+msgid "Tunnel connections via DNS."
+msgstr "Menembuskan koneksi melalui DNS."
+
+#: ../properties/nm-iodine-dialog.ui.h:1
+msgid "Saved"
+msgstr "Disimpan"
+
+#: ../properties/nm-iodine-dialog.ui.h:2
+msgid "Always ask"
+msgstr "Selalu tanya"
+
+#: ../properties/nm-iodine-dialog.ui.h:3
+msgid "General"
+msgstr "Umum"
+
+#: ../properties/nm-iodine-dialog.ui.h:4
+msgid "_Toplevel Domain:"
+msgstr "Domain Aras Punca_k:"
+
+#: ../properties/nm-iodine-dialog.ui.h:5
+msgid "Optional"
+msgstr "Opsional"
+
+#: ../properties/nm-iodine-dialog.ui.h:6
+msgid "_Nameserver:"
+msgstr "_Nameserver:"
+
+#: ../properties/nm-iodine-dialog.ui.h:8
+msgid "_Fragment Size:"
+msgstr "Ukuran _Fragmen:"
+
+#: ../properties/nm-iodine-dialog.ui.h:9
+msgid "Show password"
+msgstr "Tampilkan sandi"
+
+#: ../src/nm-iodine-service.c:131
+#, c-format
+msgid "invalid integer property '%s' or out of range [%d -> %d]"
+msgstr "properti integer '%s' tak valid atau di luar jangkauan [%d -> %d]"
+
+#: ../src/nm-iodine-service.c:142
+#, c-format
+msgid "invalid boolean property '%s' (not yes or no)"
+msgstr "properti bool '%s' tak valid (bukan yes atau no)"
+
+#: ../src/nm-iodine-service.c:149
+#, c-format
+msgid "unhandled property '%s' type %s"
+msgstr "properti '%s' tak ditangani bertipe %s"
+
+#: ../src/nm-iodine-service.c:163
+#, c-format
+msgid "property '%s' invalid or not supported"
+msgstr "properti '%s' tak valid atau tak didukung"
+
+#: ../src/nm-iodine-service.c:179
+msgid "No VPN configuration options."
+msgstr "Tak ada opsi konfigurasi VPN."
+
+#: ../src/nm-iodine-service.c:198
+msgid "No VPN secrets!"
+msgstr "Tak ada rahasia VPN!"
+
+#: ../src/nm-iodine-service.c:483
+msgid "Could not find iodine binary."
+msgstr "Tak bisa temukan biner iodine."
