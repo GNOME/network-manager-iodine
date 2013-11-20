@@ -2,15 +2,15 @@
 # Copyright (C) 2012 network-manager-iodine's COPYRIGHT HOLDER
 # This file is distributed under the same license as the network-manager-iodine package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2012.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2012, 2013.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: network-manager-iodine master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=network-manager-iodine&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-12-25 12:35+0000\n"
-"PO-Revision-Date: 2012-12-26 11:30+0100\n"
+"POT-Creation-Date: 2013-11-03 21:20+0000\n"
+"PO-Revision-Date: 2013-11-20 13:47+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -33,7 +33,6 @@ msgid "Authenticate VPN"
 msgstr "Autenticar VPN"
 
 #: ../auth-dialog/main.c:168
-#| msgid "_Password:"
 msgid "Password:"
 msgstr "Contraseña:"
 
@@ -42,9 +41,22 @@ msgstr "Contraseña:"
 msgid "_Password:"
 msgstr "C_ontraseña:"
 
+#: ../auth-dialog/vpn-password-dialog.c:187
+msgid "_Cancel"
+msgstr "_Cancelar"
+
+#: ../auth-dialog/vpn-password-dialog.c:188
+msgid "_Ok"
+msgstr "_Aceptar"
+
 #: ../auth-dialog/vpn-password-dialog.c:223
 msgid "Sh_ow passwords"
 msgstr "M_ostrar contraseñas"
+
+#: ../auth-dialog/vpn-password-dialog.c:248
+#| msgid "Show password"
+msgid "dialog-password"
+msgstr "diálogo de contraseña"
 
 #: ../properties/nm-iodine.c:46
 msgid "Iodine DNS Tunnel"
