@@ -1,15 +1,15 @@
 # Lithuanian translation for network-manager-iodine.
 # Copyright (C) 2013 network-manager-iodine's COPYRIGHT HOLDER
 # This file is distributed under the same license as the network-manager-iodine package.
-# Aurimas Černius <aurisc4@gmail.com>, 2013.
+# Aurimas Černius <aurisc4@gmail.com>, 2013, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: network-manager-iodine master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=network-manager-iodine&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-07-15 04:38+0000\n"
-"PO-Revision-Date: 2013-08-17 00:52+0300\n"
+"POT-Creation-Date: 2013-12-19 15:55+0000\n"
+"PO-Revision-Date: 2014-03-02 22:48+0200\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -42,9 +42,22 @@ msgstr "Slaptažodis:"
 msgid "_Password:"
 msgstr "Sla_ptažodis:"
 
+#: ../auth-dialog/vpn-password-dialog.c:187
+msgid "_Cancel"
+msgstr "_Atsisakyti"
+
+#: ../auth-dialog/vpn-password-dialog.c:188
+msgid "_Ok"
+msgstr "_Gerai"
+
 #: ../auth-dialog/vpn-password-dialog.c:223
 msgid "Sh_ow passwords"
 msgstr "R_odyti slaptažodžius"
+
+#: ../auth-dialog/vpn-password-dialog.c:248
+#| msgid "Show password"
+msgid "dialog-password"
+msgstr "dialog-password"
 
 #: ../properties/nm-iodine.c:46
 msgid "Iodine DNS Tunnel"
