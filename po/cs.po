@@ -2,22 +2,23 @@
 # Copyright (C) 2013 network-manager-iodine's COPYRIGHT HOLDER
 # This file is distributed under the same license as the network-manager-iodine package.
 # Marek Černocký <marek@manet.cz>, 2013.
+# Zdeněk Hataš <zdenek.hatas@gmail.com>, 2013, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: network-manager-iodine master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=network-manager-iodine&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-01-13 13:55+0000\n"
-"PO-Revision-Date: 2013-01-27 23:15+0100\n"
-"Last-Translator: Marek Černocký <marek@manet.cz>\n"
+"POT-Creation-Date: 2014-03-09 11:07+0000\n"
+"PO-Revision-Date: 2014-03-09 15:59+0100\n"
+"Last-Translator: Zdeněk Hataš <zdenek.hatas@gmail.com>\n"
 "Language-Team: čeština <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Gtranslator 2.91.6\n"
+"X-Generator: Poedit 1.5.4\n"
 
 #: ../auth-dialog/main.c:152
 #, c-format
@@ -41,9 +42,21 @@ msgstr "Heslo:"
 msgid "_Password:"
 msgstr "_Heslo:"
 
+#: ../auth-dialog/vpn-password-dialog.c:187
+msgid "_Cancel"
+msgstr "_Zrušit"
+
+#: ../auth-dialog/vpn-password-dialog.c:188
+msgid "_Ok"
+msgstr "_Budiž"
+
 #: ../auth-dialog/vpn-password-dialog.c:223
 msgid "Sh_ow passwords"
 msgstr "Z_obrazovat hesla"
+
+#: ../auth-dialog/vpn-password-dialog.c:248
+msgid "dialog-password"
+msgstr "dialog-password"
 
 #: ../properties/nm-iodine.c:46
 msgid "Iodine DNS Tunnel"
