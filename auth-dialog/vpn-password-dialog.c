@@ -173,7 +173,7 @@ vpn_password_dialog_new (const char *title,
 	GtkWidget *vbox;
 	GtkWidget *main_vbox;
 	GtkWidget *dialog_icon;
-	GtkBox *content, *action_area;
+	GtkBox *content;
 
 	dialog = gtk_widget_new (VPN_TYPE_PASSWORD_DIALOG, NULL);
 	if (!dialog)
@@ -190,13 +190,6 @@ vpn_password_dialog_new (const char *title,
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
 
 	content = GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog)));
-	action_area = GTK_BOX (gtk_dialog_get_action_area (GTK_DIALOG (dialog)));
-
-	/* Setup the dialog */
-	gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
-	gtk_box_set_spacing (content, 2); /* 2 * 5 + 2 = 12 */
-	gtk_container_set_border_width (GTK_CONTAINER (action_area), 5);
-	gtk_box_set_spacing (action_area, 6);
 
  	gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
 	gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
