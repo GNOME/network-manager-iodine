@@ -1,15 +1,15 @@
 # Indonesian translation for network-manager-iodine.
 # Copyright (C) 2013 network-manager-iodine's COPYRIGHT HOLDER
 # This file is distributed under the same license as the network-manager-iodine package.
-# Andika Triwidada <andika@gmail.com>, 2013.
+# Andika Triwidada <andika@gmail.com>, 2013, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: network-manager-iodine master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=network-manager-iodine&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-09-20 10:15+0000\n"
-"PO-Revision-Date: 2013-10-14 08:02+0700\n"
+"POT-Creation-Date: 2014-03-09 20:36+0000\n"
+"PO-Revision-Date: 2014-03-30 10:37+0700\n"
 "Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <gnome@i15n.org>\n"
 "Language: id\n"
@@ -38,6 +38,14 @@ msgstr "Sandi:"
 #: ../properties/nm-iodine-dialog.ui.h:7
 msgid "_Password:"
 msgstr "_Sandi:"
+
+#: ../auth-dialog/vpn-password-dialog.c:187
+msgid "_Cancel"
+msgstr "_Batal"
+
+#: ../auth-dialog/vpn-password-dialog.c:188
+msgid "_Ok"
+msgstr "_Ok"
 
 #: ../auth-dialog/vpn-password-dialog.c:223
 msgid "Sh_ow passwords"
