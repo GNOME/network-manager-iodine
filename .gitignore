@@ -18,6 +18,7 @@ POTFILES
 stamp-*
 .deps
 .libs
+TAGS
 autom4te.cache
 intltool-*
 po/*.gmo
