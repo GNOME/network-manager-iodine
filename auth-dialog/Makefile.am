@@ -6,7 +6,7 @@ nm_iodine_auth_dialog_CPPFLAGS = \
 	$(NM_CFLAGS) \
 	$(GTHREAD_CFLAGS) \
 	$(GTK_CFLAGS) \
-        $(GNOMEKEYRING_CFLAGS) \
+        $(LIBSECRET_CFLAGS) \
 	-DICONDIR=\""$(datadir)/pixmaps"\" \
 	-DBINDIR=\""$(bindir)"\" \
 	-DG_DISABLE_DEPRECATED \
@@ -24,7 +24,7 @@ nm_iodine_auth_dialog_SOURCES = \
 nm_iodine_auth_dialog_LDADD = \
 	$(GTK_LIBS) \
 	$(NM_LIBS) \
-        $(GNOMEKEYRING_LIBS)
+        $(LIBSECRET_LIBS)
 
 CLEANFILES = *~
 
