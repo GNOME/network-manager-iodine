@@ -36,10 +36,9 @@
 
 #include <nm-setting-vpn.h>
 #include <nm-vpn-plugin-utils.h>
+#include <nm-vpn-password-dialog.h>
 
 #include "src/nm-iodine-service.h"
-
-#include "vpn-password-dialog.h"
 
 #define KEYRING_UUID_TAG "connection-uuid"
 #define KEYRING_SN_TAG "setting-name"
@@ -132,7 +131,7 @@ get_secrets (const char *vpn_uuid,
              char **out_pw,
              NMSettingSecretFlags pw_flags)
 {
-	VpnPasswordDialog *dialog;
+	NMAVpnPasswordDialog *dialog;
 	char *prompt, *pw = NULL;
 	const char *new_password = NULL;
 	gboolean success = FALSE;
@@ -202,18 +201,18 @@ get_secrets (const char *vpn_uuid,
 	/* Otherwise, we have no saved password, or the password flags indicated
 	 * that the password should never be saved.
 	 */
-	dialog = (VpnPasswordDialog *) \
-		vpn_password_dialog_new (_("Authenticate VPN"), prompt, NULL);
-
+	dialog = NMA_VPN_PASSWORD_DIALOG (
+	            nma_vpn_password_dialog_new (_("Authenticate VPN"), prompt, NULL));
+	nma_vpn_password_dialog_set_show_password_secondary (dialog, FALSE);
 	/* pre-fill dialog with the password */
 	if (pw && !(pw_flags & NM_SETTING_SECRET_FLAG_NOT_SAVED))
-		vpn_password_dialog_set_password (dialog, pw);
+		nma_vpn_password_dialog_set_password (dialog, pw);
 
 	gtk_widget_show (GTK_WIDGET (dialog));
 
-	if (vpn_password_dialog_run_and_block (dialog)) {
+	if (nma_vpn_password_dialog_run_and_block (dialog)) {
 
-		new_password = vpn_password_dialog_get_password (dialog);
+		new_password = nma_vpn_password_dialog_get_password (dialog);
 		if (new_password) {
 			*out_pw = g_strdup (new_password);
 			success = TRUE;

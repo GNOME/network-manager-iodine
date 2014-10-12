@@ -7,6 +7,7 @@ nm_iodine_auth_dialog_CPPFLAGS = \
 	$(GTHREAD_CFLAGS) \
 	$(GTK_CFLAGS) \
         $(LIBSECRET_CFLAGS) \
+        $(NMGTK_CFLAGS) \
 	-DICONDIR=\""$(datadir)/pixmaps"\" \
 	-DBINDIR=\""$(bindir)"\" \
 	-DG_DISABLE_DEPRECATED \
@@ -17,13 +18,12 @@ nm_iodine_auth_dialog_CPPFLAGS = \
 
 nm_iodine_auth_dialog_SOURCES = \
 	main.c \
-	vpn-password-dialog.c \
-	vpn-password-dialog.h \
 	$(NULL)
 
 nm_iodine_auth_dialog_LDADD = \
 	$(GTK_LIBS) \
 	$(NM_LIBS) \
+	$(NMGTK_LIBS) \
         $(LIBSECRET_LIBS)
 
 CLEANFILES = *~
