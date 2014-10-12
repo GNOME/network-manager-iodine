@@ -1,4 +1,15 @@
 =============
+Version 0.0.5
+=============
+* Use libsecret
+* Use libmm-gtk
+
+=============
+Version 0.0.4
+=============
+* Add external ui support
+
+=============
 Version 0.0.3
 =============
 * Pass the password via stdin
