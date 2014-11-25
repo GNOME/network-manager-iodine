@@ -153,7 +153,6 @@ export (NMVpnPluginUiInterface *iface,
         NMConnection *connection,
         GError **error)
 {
-	NMSettingConnection *s_con;
 	NMSettingVPN *s_vpn;
 	const char *value;
 	const char *topdomain = NULL;
@@ -168,11 +167,7 @@ export (NMVpnPluginUiInterface *iface,
 		return FALSE;
 	}
 
-	s_con = NM_SETTING_CONNECTION (nm_connection_get_setting
-								   (connection, NM_TYPE_SETTING_CONNECTION));
-
-	s_vpn = (NMSettingVPN *) nm_connection_get_setting (connection,
-														NM_TYPE_SETTING_VPN);
+	s_vpn = nm_connection_get_setting_vpn (connection);
 
 	value = nm_setting_vpn_get_data_item (s_vpn, NM_IODINE_KEY_TOPDOMAIN);
 	if (value && strlen (value))
@@ -197,7 +192,7 @@ export (NMVpnPluginUiInterface *iface,
 			 "Topdomain=%s\n"
 			 "Nameserver=%s\n"
 			 "Fragsize=%s\n",
-			 /* Description */ nm_setting_connection_get_id (s_con),
+			 /* Description */ nm_connection_get_id (connection),
 			 /* Topdomain */   topdomain,
 			 /* Nameserver */  nameserver,
 			 /* Fragsize */    fragsize);
@@ -425,8 +420,7 @@ init_plugin_ui (IodinePluginUiWidget *self,
 	GtkWidget *widget;
 	const char *value;
 
-	s_vpn = (NMSettingVPN *) nm_connection_get_setting (connection,
-														NM_TYPE_SETTING_VPN);
+	s_vpn = nm_connection_get_setting_vpn (connection);
 
 	priv->group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 

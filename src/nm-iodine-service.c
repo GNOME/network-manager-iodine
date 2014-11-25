@@ -561,8 +561,7 @@ real_connect (NMVPNPlugin   *plugin,
 	NMSettingVPN *s_vpn;
 	gint ret = -1;
 
-	s_vpn = NM_SETTING_VPN (nm_connection_get_setting (connection,
-													   NM_TYPE_SETTING_VPN));
+	s_vpn = nm_connection_get_setting_vpn (connection);
 	g_assert (s_vpn);
 	if (!nm_iodine_properties_validate (s_vpn, error))
 		goto out;
@@ -591,8 +590,7 @@ real_need_secrets (NMVPNPlugin   *plugin,
 	g_return_val_if_fail (NM_IS_VPN_PLUGIN (plugin), FALSE);
 	g_return_val_if_fail (NM_IS_CONNECTION (connection), FALSE);
 
-	s_vpn = NM_SETTING_VPN (nm_connection_get_setting (connection,
-													   NM_TYPE_SETTING_VPN));
+	s_vpn = nm_connection_get_setting_vpn (connection);
 	if (!s_vpn) {
         	g_set_error (error,
 		             NM_VPN_PLUGIN_ERROR,
