@@ -52,24 +52,12 @@ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package])
 IT_PROG_INTLTOOL([0.35])
 AM_GLIB_GNU_GETTEXT
 
-PKG_CHECK_MODULES(GTHREAD, gthread-2.0)
-AC_SUBST(GTHREAD_CFLAGS)
-AC_SUBST(GTHREAD_LIBS)
-
-PKG_CHECK_MODULES(DBUS, dbus-glib-1 >= 0.74)
-AC_SUBST(DBUS_CFLAGS)
-AC_SUBST(DBUS_LIBS)
-
 if test x"$with_gnome" != xno; then
 	gtk3_req=2.91.4
 	PKG_CHECK_MODULES(GTK, gtk+-3.0 > $gtk3_req, ,
 	                  [PKG_CHECK_MODULES(GTK, gtk+-2.0 > $gtk2_req)])
-	AC_SUBST(GTK_CFLAGS)
-	AC_SUBST(GTK_LIBS)
 
         PKG_CHECK_MODULES(LIBSECRET, libsecret-1)
-        AC_SUBST(LIBSECRET_CFLAGS)
-        AC_SUBST(LIBSECRET_LIBS)
 fi
 
 PKG_CHECK_MODULES(NM,
@@ -77,12 +65,8 @@ PKG_CHECK_MODULES(NM,
                   libnm-util >= 0.9.2
                   libnm-glib  >= 0.9.2
                   libnm-glib-vpn >= 0.9.2)
-AC_SUBST(NM_CFLAGS)
-AC_SUBST(NM_LIBS)
 
 PKG_CHECK_MODULES(NMGTK, libnm-gtk >= 0.9.9.0)
-AC_SUBST(NMGTK_CFLAGS)
-AC_SUBST(NMGTK_LIBS)
 
 NM_COMPILER_WARNINGS
 

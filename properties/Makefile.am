@@ -10,7 +10,6 @@ ui_DATA = nm-iodine-dialog.ui
 
 libnm_iodine_properties_la_CFLAGS =                	\
         $(GTK_CFLAGS)                                   \
-        $(GCONF_CFLAGS)                                 \
         $(NM_CFLAGS)                        		\
         -DICONDIR=\""$(datadir)/pixmaps"\"              \
         -DUIDIR=\""$(uidir)"\"                          \
@@ -22,7 +21,6 @@ libnm_iodine_properties_la_CFLAGS =                	\
 
 libnm_iodine_properties_la_LIBADD = \
         $(GTK_LIBS) \
-        $(GCONF_LIBS) \
         $(NM_LIBS)
 
 libnm_iodine_properties_la_LDFLAGS =      \

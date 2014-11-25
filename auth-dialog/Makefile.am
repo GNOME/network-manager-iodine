@@ -1,10 +1,7 @@
-INCLUDES = -I${top_srcdir}
-
 libexec_PROGRAMS = nm-iodine-auth-dialog
 
 nm_iodine_auth_dialog_CPPFLAGS = \
 	$(NM_CFLAGS) \
-	$(GTHREAD_CFLAGS) \
 	$(GTK_CFLAGS) \
         $(LIBSECRET_CFLAGS) \
         $(NMGTK_CFLAGS) \
