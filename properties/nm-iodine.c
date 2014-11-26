@@ -38,7 +38,7 @@
 #include <nm-setting-connection.h>
 #include <nm-setting-ip4-config.h>
 
-#include "../src/nm-iodine-service.h"
+#include "nm-iodine-service-defines.h"
 #include "nm-iodine.h"
 
 #define IODINE_PLUGIN_NAME    _("Iodine DNS Tunnel")

@@ -24,21 +24,14 @@
 #include <glib.h>
 #include <nm-vpn-plugin.h>
 
+#include "nm-iodine-service-defines.h"
+
 #define NM_TYPE_IODINE_PLUGIN            (nm_iodine_plugin_get_type ())
 #define NM_IODINE_PLUGIN(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), NM_TYPE_IODINE_PLUGIN, NMIodinePlugin))
 #define NM_IODINE_PLUGIN_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), NM_TYPE_IODINE_PLUGIN, NMIodinePluginClass))
 #define NM_IS_IODINE_PLUGIN(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), NM_TYPE_IODINE_PLUGIN))
 #define NM_IS_IODINE_PLUGIN_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((obj), NM_TYPE_IODINE_PLUGIN))
 #define NM_IODINE_PLUGIN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), NM_TYPE_IODINE_PLUGIN, NMIodinePluginClass))
-
-#define NM_DBUS_SERVICE_IODINE    "org.freedesktop.NetworkManager.iodine"
-#define NM_DBUS_INTERFACE_IODINE  "org.freedesktop.NetworkManager.iodine"
-#define NM_DBUS_PATH_IODINE       "/org/freedesktop/NetworkManager/iodine"
-
-#define NM_IODINE_KEY_TOPDOMAIN "topdomain"
-#define NM_IODINE_KEY_NAMESERVER "nameserver"
-#define NM_IODINE_KEY_FRAGSIZE "fragsize"
-#define NM_IODINE_KEY_PASSWORD "password"
 
 typedef struct {
 	NMVPNPlugin parent;

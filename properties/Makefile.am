@@ -11,6 +11,7 @@ ui_DATA = nm-iodine-dialog.ui
 libnm_iodine_properties_la_CFLAGS =                	\
         $(GTK_CFLAGS)                                   \
         $(NM_CFLAGS)                        		\
+	-I$(top_srcdir)/src				\
         -DICONDIR=\""$(datadir)/pixmaps"\"              \
         -DUIDIR=\""$(uidir)"\"                          \
         -DG_DISABLE_DEPRECATED                          \

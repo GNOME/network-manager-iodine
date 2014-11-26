@@ -15,8 +15,8 @@ libexec_PROGRAMS = \
 
 nm_iodine_service_SOURCES = \
 	nm-iodine-service.c \
-	nm-iodine-service.h
-
+	nm-iodine-service.h \
+	nm-iodine-service-defines.h
 
 nm_iodine_service_LDADD = \
 	$(NM_LIBS)
