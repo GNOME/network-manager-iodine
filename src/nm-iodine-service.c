@@ -48,15 +48,15 @@
 #define NM_IODINE_USER "nm-iodine"
 #define NM_IODINE_RUNDIR LOCALSTATEDIR "/run/" NM_IODINE_USER
 
-G_DEFINE_TYPE (NMIODINEPlugin, nm_iodine_plugin, NM_TYPE_VPN_PLUGIN)
+G_DEFINE_TYPE (NMIodinePlugin, nm_iodine_plugin, NM_TYPE_VPN_PLUGIN)
 
 typedef struct {
 	GPid pid;
 	NMVPNPluginFailure failure;
 	GHashTable *ip4config;
-} NMIODINEPluginPrivate;
+} NMIodinePluginPrivate;
 
-#define NM_IODINE_PLUGIN_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), NM_TYPE_IODINE_PLUGIN, NMIODINEPluginPrivate))
+#define NM_IODINE_PLUGIN_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), NM_TYPE_IODINE_PLUGIN, NMIodinePluginPrivate))
 
 static const char *iodine_binary_paths[] =
 {
@@ -275,7 +275,7 @@ iodine_parse_stderr_line (NMVPNPlugin *plugin,
 						  const char* line,
 						  GHashTable *ip4config)
 {
-	NMIODINEPluginPrivate *priv = NM_IODINE_PLUGIN_GET_PRIVATE (plugin);
+	NMIodinePluginPrivate *priv = NM_IODINE_PLUGIN_GET_PRIVATE (plugin);
 	gchar **split = NULL;
 	GValue *val;
 	gint len;
@@ -366,7 +366,7 @@ iodine_stderr_cb (GIOChannel *source, GIOCondition condition, gpointer plugin)
 	GError *err = NULL;
 	gchar *line;
 	gint ret, l;
-	NMIODINEPluginPrivate *priv = NM_IODINE_PLUGIN_GET_PRIVATE (plugin);
+	NMIodinePluginPrivate *priv = NM_IODINE_PLUGIN_GET_PRIVATE (plugin);
 
 	status = g_io_channel_read_line (source, &line, NULL, NULL, &err);
 	if (status != G_IO_STATUS_NORMAL) {
@@ -394,8 +394,8 @@ iodine_stderr_cb (GIOChannel *source, GIOCondition condition, gpointer plugin)
 static void
 iodine_watch_cb (GPid pid, gint status, gpointer user_data)
 {
-	NMIODINEPlugin *plugin = NM_IODINE_PLUGIN (user_data);
-	NMIODINEPluginPrivate *priv = NM_IODINE_PLUGIN_GET_PRIVATE (plugin);
+	NMIodinePlugin *plugin = NM_IODINE_PLUGIN (user_data);
+	NMIodinePluginPrivate *priv = NM_IODINE_PLUGIN_GET_PRIVATE (plugin);
 	guint error = 0;
 
 	if (WIFEXITED (status)) {
@@ -455,7 +455,7 @@ send_password(gint fd, NMSettingVPN *s_vpn)
 
 
 static gint
-nm_iodine_start_iodine_binary(NMIODINEPlugin *plugin,
+nm_iodine_start_iodine_binary(NMIodinePlugin *plugin,
 										 NMSettingVPN *s_vpn,
 										 GError **error)
 {
@@ -626,7 +626,7 @@ static gboolean
 real_disconnect (NMVPNPlugin *plugin,
 				 GError **err)
 {
-	NMIODINEPluginPrivate *priv = NM_IODINE_PLUGIN_GET_PRIVATE (plugin);
+	NMIodinePluginPrivate *priv = NM_IODINE_PLUGIN_GET_PRIVATE (plugin);
 
 	if (priv->pid) {
 		if (kill (priv->pid, SIGTERM) == 0)
@@ -642,9 +642,9 @@ real_disconnect (NMVPNPlugin *plugin,
 }
 
 static void
-nm_iodine_plugin_init (NMIODINEPlugin *plugin)
+nm_iodine_plugin_init (NMIodinePlugin *plugin)
 {
-	NMIODINEPluginPrivate *priv = NM_IODINE_PLUGIN_GET_PRIVATE (plugin);
+	NMIodinePluginPrivate *priv = NM_IODINE_PLUGIN_GET_PRIVATE (plugin);
 
 	priv->ip4config = g_hash_table_new_full (g_str_hash,
 											 g_str_equal,
@@ -654,12 +654,12 @@ nm_iodine_plugin_init (NMIODINEPlugin *plugin)
 }
 
 static void
-nm_iodine_plugin_class_init (NMIODINEPluginClass *iodine_class)
+nm_iodine_plugin_class_init (NMIodinePluginClass *iodine_class)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (iodine_class);
 	NMVPNPluginClass *parent_class = NM_VPN_PLUGIN_CLASS (iodine_class);
 
-	g_type_class_add_private (object_class, sizeof (NMIODINEPluginPrivate));
+	g_type_class_add_private (object_class, sizeof (NMIodinePluginPrivate));
 
 	/* virtual methods */
 	parent_class->connect    = real_connect;
@@ -667,24 +667,24 @@ nm_iodine_plugin_class_init (NMIODINEPluginClass *iodine_class)
 	parent_class->disconnect = real_disconnect;
 }
 
-NMIODINEPlugin *
+NMIodinePlugin *
 nm_iodine_plugin_new (void)
 {
-	return (NMIODINEPlugin *) g_object_new (NM_TYPE_IODINE_PLUGIN,
+	return (NMIodinePlugin *) g_object_new (NM_TYPE_IODINE_PLUGIN,
 								   NM_VPN_PLUGIN_DBUS_SERVICE_NAME,
 											NM_DBUS_SERVICE_IODINE,
 								   NULL);
 }
 
 static void
-quit_mainloop (NMIODINEPlugin *plugin, gpointer user_data)
+quit_mainloop (NMIodinePlugin *plugin, gpointer user_data)
 {
 	g_main_loop_quit ((GMainLoop *) user_data);
 }
 
 int main (int argc, char *argv[])
 {
-	NMIODINEPlugin *plugin;
+	NMIodinePlugin *plugin;
 	GMainLoop *main_loop;
 
 #if !GLIB_CHECK_VERSION(2,36,0)
