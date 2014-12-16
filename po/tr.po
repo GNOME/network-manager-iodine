@@ -1,0 +1,111 @@
+# Turkish translation for network-manager-iodine.
+# Copyright (C) 2014 network-manager-iodine's COPYRIGHT HOLDER
+# This file is distributed under the same license as the network-manager-iodine package.
+# Necdet Yücel <necdetyucel@gmail.com>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: network-manager-iodine master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=network-manager-iodine&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-12-04 11:11+0000\n"
+"PO-Revision-Date: 2014-12-01 22:29+0000\n"
+"Last-Translator: Necdet Yücel <necdetyucel@gmail.com>\n"
+"Language-Team: Turkish <gnome-turk@gnome.org>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Pootle 2.5.1.1\n"
+"X-POOTLE-MTIME: 1417472997.000000\n"
+
+#: ../auth-dialog/main.c:169
+#, c-format
+msgid "You need to authenticate to access the Virtual Private Network '%s'."
+msgstr ""
+"'%s' Sanal Özel Ağına erişmek için kimlik kanıtlaması yapmanız gerekir."
+
+#: ../auth-dialog/main.c:182 ../auth-dialog/main.c:205
+msgid "Authenticate VPN"
+msgstr "VPN Kimlik Kanıtlaması"
+
+#: ../auth-dialog/main.c:185
+msgid "Password:"
+msgstr "Parola:"
+
+#: ../properties/nm-iodine.c:46
+msgid "Iodine DNS Tunnel"
+msgstr "Iodine DNS Tuneli"
+
+#: ../properties/nm-iodine.c:47
+msgid "Tunnel connections via DNS."
+msgstr "Bağlantıları DNS ile tünelle."
+
+#: ../properties/nm-iodine-dialog.ui.h:1
+msgid "Saved"
+msgstr "Kaydedildi"
+
+#: ../properties/nm-iodine-dialog.ui.h:2
+msgid "Always ask"
+msgstr "Her zaman sor"
+
+#: ../properties/nm-iodine-dialog.ui.h:3
+msgid "General"
+msgstr "Genel"
+
+#: ../properties/nm-iodine-dialog.ui.h:4
+msgid "_Toplevel Domain:"
+msgstr "_Üst Düzey Alan:"
+
+#: ../properties/nm-iodine-dialog.ui.h:5
+msgid "Optional"
+msgstr "İsteğe bağlı"
+
+#: ../properties/nm-iodine-dialog.ui.h:6
+msgid "_Nameserver:"
+msgstr "_Alan Adı Sunucusu:"
+
+#: ../properties/nm-iodine-dialog.ui.h:7
+msgid "_Password:"
+msgstr "_Parola:"
+
+#: ../properties/nm-iodine-dialog.ui.h:8
+msgid "_Fragment Size:"
+msgstr "Parça _Boyutu:"
+
+#: ../properties/nm-iodine-dialog.ui.h:9
+msgid "Show password"
+msgstr "Parolayı göster"
+
+#: ../src/nm-iodine-service.c:131
+#, c-format
+msgid "invalid integer property '%s' or out of range [%d -> %d]"
+msgstr "'%s' geçersiz bir tamsayı veya sınırların dışında [%d -> %d]"
+
+#: ../src/nm-iodine-service.c:142
+#, c-format
+msgid "invalid boolean property '%s' (not yes or no)"
+msgstr "'%s' geçersiz bir mantıksal sabit (evet veya hayır değil)"
+
+#: ../src/nm-iodine-service.c:149
+#, c-format
+msgid "unhandled property '%s' type %s"
+msgstr "tanınmayan özellik '%s' tür %s"
+
+#: ../src/nm-iodine-service.c:163
+#, c-format
+msgid "property '%s' invalid or not supported"
+msgstr "'%s' özelliği geçersiz veya desteklenmiyor"
+
+#: ../src/nm-iodine-service.c:179
+msgid "No VPN configuration options."
+msgstr "VPN yapılandırma seçeneği bulunamadı."
+
+#: ../src/nm-iodine-service.c:198
+msgid "No VPN secrets!"
+msgstr "VPN gizli bilgisi yok!"
+
+#: ../src/nm-iodine-service.c:483
+msgid "Could not find iodine binary."
+msgstr "Iodine çalıştırılabilir dosyası bulunamadı."
