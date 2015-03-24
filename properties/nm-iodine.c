@@ -76,6 +76,24 @@ typedef struct {
 	gboolean window_added;
 } IodinePluginUiWidgetPrivate;
 
+typedef enum {
+	NM_IODINE_IMPORT_EXPORT_ERROR_UNKNOWN = 0,
+	NM_IODINE_IMPORT_EXPORT_ERROR_NOT_IODINE,
+	NM_IODINE_IMPORT_EXPORT_ERROR_BAD_DATA,
+} NMIodineImportError;
+
+#define NM_IODINE_IMPORT_EXPORT_ERROR nm_iodine_import_export_error_quark ()
+
+static GQuark
+nm_iodine_import_export_error_quark (void)
+{
+	static GQuark quark = 0;
+
+	if (G_UNLIKELY (quark == 0))
+		quark = g_quark_from_static_string ("nm-iodine-import-export-error-quark");
+	return quark;
+}
+
 static NMConnection *
 import (NMVpnPluginUiInterface *iface, const char *path, GError **error)
 {
@@ -92,8 +110,8 @@ import (NMVpnPluginUiInterface *iface, const char *path, GError **error)
 
 	if (!g_key_file_load_from_file (keyfile, path, flags, error)) {
 		g_set_error (error,
-					 0,
-					 0,
+					 NM_IODINE_IMPORT_EXPORT_ERROR,
+					 NM_IODINE_IMPORT_EXPORT_ERROR_NOT_IODINE,
 					 "does not look like a %s VPN connection (parse failed)",
 					 IODINE_PLUGIN_NAME);
 		return NULL;
@@ -119,8 +137,8 @@ import (NMVpnPluginUiInterface *iface, const char *path, GError **error)
 		nm_setting_vpn_add_data_item (s_vpn, NM_IODINE_KEY_TOPDOMAIN, buf);
 	} else {
 		g_set_error (error,
-					 0,
-					 0,
+					 NM_IODINE_IMPORT_EXPORT_ERROR,
+					 NM_IODINE_IMPORT_EXPORT_ERROR_NOT_IODINE,
 					 "does not look like a %s VPN connection "
 					 "(no top level domain)",
 					 IODINE_PLUGIN_NAME);
@@ -163,7 +181,10 @@ export (NMVpnPluginUiInterface *iface,
 
 	f = fopen (path, "w");
 	if (!f) {
-		g_set_error (error, 0, 0, "could not open file for writing");
+		g_set_error (error,
+		             NM_IODINE_IMPORT_EXPORT_ERROR,
+		             NM_IODINE_IMPORT_EXPORT_ERROR_UNKNOWN,
+		             "could not open file for writing");
 		return FALSE;
 	}
 
@@ -173,8 +194,10 @@ export (NMVpnPluginUiInterface *iface,
 	if (value && strlen (value))
 		topdomain = value;
 	else {
-		g_set_error (error, 0, 0,
-					 "connection was incomplete (missing top level domain)");
+		g_set_error (error,
+		             NM_IODINE_IMPORT_EXPORT_ERROR,
+		             NM_IODINE_IMPORT_EXPORT_ERROR_UNKNOWN,
+		             "connection was incomplete (missing top level domain)");
 		goto done;
 	}
 
