@@ -51,21 +51,19 @@
 
 /************** plugin class **************/
 
-static void iodine_plugin_ui_interface_init (NMVpnPluginUiInterface
-											 *iface_class);
+static void iodine_plugin_ui_interface_init (NMVpnPluginUiInterface *iface_class);
 
 G_DEFINE_TYPE_EXTENDED (IodinePluginUi, iodine_plugin_ui, G_TYPE_OBJECT, 0,
-						G_IMPLEMENT_INTERFACE (NM_TYPE_VPN_PLUGIN_UI_INTERFACE,
-											   iodine_plugin_ui_interface_init))
+                        G_IMPLEMENT_INTERFACE (NM_TYPE_VPN_PLUGIN_UI_INTERFACE,
+                                               iodine_plugin_ui_interface_init))
 
 /************** UI widget class **************/
 
-static void iodine_plugin_ui_widget_interface_init (NMVpnPluginUiWidgetInterface
-													*iface_class);
+static void iodine_plugin_ui_widget_interface_init (NMVpnPluginUiWidgetInterface *iface_class);
 
 G_DEFINE_TYPE_EXTENDED (IodinePluginUiWidget, iodine_plugin_ui_widget,G_TYPE_OBJECT, 0,
-						G_IMPLEMENT_INTERFACE (NM_TYPE_VPN_PLUGIN_UI_WIDGET_INTERFACE,
-											   iodine_plugin_ui_widget_interface_init))
+                        G_IMPLEMENT_INTERFACE (NM_TYPE_VPN_PLUGIN_UI_WIDGET_INTERFACE,
+                                               iodine_plugin_ui_widget_interface_init))
 
 #define IODINE_PLUGIN_UI_WIDGET_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), IODINE_TYPE_PLUGIN_UI_WIDGET, IodinePluginUiWidgetPrivate))
 
@@ -110,10 +108,10 @@ import (NMVpnPluginUiInterface *iface, const char *path, GError **error)
 
 	if (!g_key_file_load_from_file (keyfile, path, flags, error)) {
 		g_set_error (error,
-					 NM_IODINE_IMPORT_EXPORT_ERROR,
-					 NM_IODINE_IMPORT_EXPORT_ERROR_NOT_IODINE,
-					 "does not look like a %s VPN connection (parse failed)",
-					 IODINE_PLUGIN_NAME);
+		             NM_IODINE_IMPORT_EXPORT_ERROR,
+		             NM_IODINE_IMPORT_EXPORT_ERROR_NOT_IODINE,
+		             "does not look like a %s VPN connection (parse failed)",
+		             IODINE_PLUGIN_NAME);
 		return NULL;
 	}
 
@@ -123,9 +121,9 @@ import (NMVpnPluginUiInterface *iface, const char *path, GError **error)
 
 	s_vpn = NM_SETTING_VPN (nm_setting_vpn_new ());
 	g_object_set (s_vpn,
-				  NM_SETTING_VPN_SERVICE_TYPE,
-				  NM_DBUS_SERVICE_IODINE,
-				  NULL);
+	              NM_SETTING_VPN_SERVICE_TYPE,
+	              NM_DBUS_SERVICE_IODINE,
+	              NULL);
 	nm_connection_add_setting (connection, NM_SETTING (s_vpn));
 
 	s_ip4 = NM_SETTING_IP4_CONFIG (nm_setting_ip4_config_new ());
@@ -137,11 +135,11 @@ import (NMVpnPluginUiInterface *iface, const char *path, GError **error)
 		nm_setting_vpn_add_data_item (s_vpn, NM_IODINE_KEY_TOPDOMAIN, buf);
 	} else {
 		g_set_error (error,
-					 NM_IODINE_IMPORT_EXPORT_ERROR,
-					 NM_IODINE_IMPORT_EXPORT_ERROR_NOT_IODINE,
-					 "does not look like a %s VPN connection "
-					 "(no top level domain)",
-					 IODINE_PLUGIN_NAME);
+		             NM_IODINE_IMPORT_EXPORT_ERROR,
+		             NM_IODINE_IMPORT_EXPORT_ERROR_NOT_IODINE,
+		             "does not look like a %s VPN connection "
+		             "(no top level domain)",
+		             IODINE_PLUGIN_NAME);
 		g_object_unref (connection);
 		return NULL;
 	}
@@ -210,15 +208,15 @@ export (NMVpnPluginUiInterface *iface,
 		fragsize = value;
 
 	fprintf (f,
-			 "[iodine]\n"
-			 "Description=%s\n"
-			 "Topdomain=%s\n"
-			 "Nameserver=%s\n"
-			 "Fragsize=%s\n",
-			 /* Description */ nm_connection_get_id (connection),
-			 /* Topdomain */   topdomain,
-			 /* Nameserver */  nameserver,
-			 /* Fragsize */    fragsize);
+	         "[iodine]\n"
+	         "Description=%s\n"
+	         "Topdomain=%s\n"
+	         "Nameserver=%s\n"
+	         "Fragsize=%s\n",
+	         /* Description */ nm_connection_get_id (connection),
+	         /* Topdomain */   topdomain,
+	         /* Nameserver */  nameserver,
+	         /* Fragsize */    fragsize);
 
 	success = TRUE;
 
@@ -272,8 +270,7 @@ check_validity (IodinePluginUiWidget *self, GError **error)
 	GtkWidget *widget;
 	const char *str;
 
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-												 "topdomain_entry"));
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "topdomain_entry"));
 	str = gtk_entry_get_text (GTK_ENTRY (widget));
 	if (!str || !strlen (str)) {
 		g_set_error (error,
@@ -317,16 +314,16 @@ setup_password_widget (IodinePluginUiWidget *self,
 		value = nm_setting_vpn_get_secret (s_vpn, secret_name);
 		gtk_entry_set_text (GTK_ENTRY (widget), value ? value : "");
 		nm_setting_get_secret_flags (NM_SETTING (s_vpn),
-									 secret_name,
-									 &secret_flags,
-									 NULL);
+		                             secret_name,
+		                             &secret_flags,
+		                             NULL);
 	}
 
 	secret_flags &= ~(NM_SETTING_SECRET_FLAG_NOT_SAVED |
-					  NM_SETTING_SECRET_FLAG_NOT_REQUIRED);
+	                  NM_SETTING_SECRET_FLAG_NOT_REQUIRED);
 	g_object_set_data (G_OBJECT (widget),
-					   "flags",
-					   GUINT_TO_POINTER (secret_flags));
+	                   "flags",
+	                   GUINT_TO_POINTER (secret_flags));
 
 	g_signal_connect (widget, "changed", G_CALLBACK (stuff_changed_cb), self);
 }
@@ -334,15 +331,13 @@ setup_password_widget (IodinePluginUiWidget *self,
 static void
 show_toggled_cb (GtkCheckButton *button, IodinePluginUiWidget *self)
 {
-	IodinePluginUiWidgetPrivate *priv = \
-		IODINE_PLUGIN_UI_WIDGET_GET_PRIVATE (self);
+	IodinePluginUiWidgetPrivate *priv = IODINE_PLUGIN_UI_WIDGET_GET_PRIVATE (self);
 	GtkWidget *widget;
 	gboolean visible;
 
 	visible = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
 
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-												 "password_entry"));
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "password_entry"));
 	g_assert (widget);
 	gtk_entry_set_visibility (GTK_ENTRY (widget), visible);
 }
@@ -351,12 +346,10 @@ static void
 pw_type_combo_changed_cb (GtkWidget *combo, gpointer user_data)
 {
 	IodinePluginUiWidget *self = IODINE_PLUGIN_UI_WIDGET (user_data);
-	IodinePluginUiWidgetPrivate *priv = \
-		IODINE_PLUGIN_UI_WIDGET_GET_PRIVATE (self);
+	IodinePluginUiWidgetPrivate *priv = IODINE_PLUGIN_UI_WIDGET_GET_PRIVATE (self);
 	GtkWidget *entry;
 
-	entry = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-												"password_entry"));
+	entry = GTK_WIDGET (gtk_builder_get_object (priv->builder, "password_entry"));
 	g_assert (entry);
 
 	/* If the user chose "Not required", desensitize and clear the correct
@@ -383,8 +376,7 @@ init_one_pw_combo (IodinePluginUiWidget *self,
                    const char *secret_key,
                    const char *entry_name)
 {
-	IodinePluginUiWidgetPrivate *priv = \
-		IODINE_PLUGIN_UI_WIDGET_GET_PRIVATE (self);
+	IodinePluginUiWidgetPrivate *priv = IODINE_PLUGIN_UI_WIDGET_GET_PRIVATE (self);
 	int active = -1;
 	GtkWidget *widget;
 	GtkListStore *store;
@@ -406,9 +398,9 @@ init_one_pw_combo (IodinePluginUiWidget *self,
 
 	if (s_vpn)
 		nm_setting_get_secret_flags (NM_SETTING (s_vpn),
-									 secret_key,
-									 &pw_flags,
-									 NULL);
+		                             secret_key,
+		                             &pw_flags,
+		                             NULL);
 	if ((active < 0)
 	    && !(pw_flags & NM_SETTING_SECRET_FLAG_NOT_SAVED)
 	    && !(pw_flags & NM_SETTING_SECRET_FLAG_NOT_REQUIRED)) {
@@ -423,22 +415,21 @@ init_one_pw_combo (IodinePluginUiWidget *self,
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, combo_name));
 	g_assert (widget);
-	gtk_combo_box_set_active (GTK_COMBO_BOX (widget), 
-							  active < 0 ? default_idx : active);
+	gtk_combo_box_set_active (GTK_COMBO_BOX (widget),
+	                          active < 0 ? default_idx : active);
 
 	pw_type_combo_changed_cb (widget, self);
 	g_signal_connect (G_OBJECT (widget),
-					  "changed",
-					  G_CALLBACK (pw_type_combo_changed_cb), self);
+	                  "changed",
+	                  G_CALLBACK (pw_type_combo_changed_cb), self);
 }
 
 static gboolean
 init_plugin_ui (IodinePluginUiWidget *self,
-				NMConnection *connection,
-				GError **error)
+                NMConnection *connection,
+                GError **error)
 {
-	IodinePluginUiWidgetPrivate *priv = \
-		IODINE_PLUGIN_UI_WIDGET_GET_PRIVATE (self);
+	IodinePluginUiWidgetPrivate *priv = IODINE_PLUGIN_UI_WIDGET_GET_PRIVATE (self);
 	NMSettingVPN *s_vpn;
 	GtkWidget *widget;
 	const char *value;
@@ -447,8 +438,7 @@ init_plugin_ui (IodinePluginUiWidget *self,
 
 	priv->group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-												 "topdomain_entry"));
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "topdomain_entry"));
 	if (!widget)
 		return FALSE;
 	gtk_size_group_add_widget (priv->group, widget);
@@ -458,11 +448,10 @@ init_plugin_ui (IodinePluginUiWidget *self,
 			gtk_entry_set_text (GTK_ENTRY (widget), value);
 	}
 	g_signal_connect (G_OBJECT (widget),
-					  "changed",
-					  G_CALLBACK (stuff_changed_cb), self);
+	                  "changed",
+	                  G_CALLBACK (stuff_changed_cb), self);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-												 "nameserver_entry"));
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "nameserver_entry"));
 	if (!widget)
 		return FALSE;
 	gtk_size_group_add_widget (priv->group, widget);
@@ -472,11 +461,10 @@ init_plugin_ui (IodinePluginUiWidget *self,
 			gtk_entry_set_text (GTK_ENTRY (widget), value);
 	}
 	g_signal_connect (G_OBJECT (widget),
-					  "changed",
-					  G_CALLBACK (stuff_changed_cb), self);
+	                  "changed",
+	                  G_CALLBACK (stuff_changed_cb), self);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-												 "fragsize_entry"));
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "fragsize_entry"));
 	if (!widget)
 		return FALSE;
 	if (s_vpn) {
@@ -485,19 +473,18 @@ init_plugin_ui (IodinePluginUiWidget *self,
 			gtk_entry_set_text (GTK_ENTRY (widget), value);
 	}
 	g_signal_connect (G_OBJECT (widget),
-					  "changed",
-					  G_CALLBACK (stuff_changed_cb), self);
+	                  "changed",
+	                  G_CALLBACK (stuff_changed_cb), self);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-												 "show_passwords_checkbutton"));
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "show_passwords_checkbutton"));
 	g_signal_connect (G_OBJECT (widget), "toggled",
 	                  (GCallback) show_toggled_cb,
 	                  self);
 
 	setup_password_widget (self,
-						   "password_entry",
-						   s_vpn,
-						   NM_IODINE_KEY_PASSWORD);
+	                       "password_entry",
+	                       s_vpn,
+	                       NM_IODINE_KEY_PASSWORD);
 
 	init_one_pw_combo (self,
 	                   s_vpn,
@@ -520,7 +507,7 @@ static void
 save_password_and_flags (NMSettingVPN *s_vpn,
                          GtkBuilder *builder,
                          const char *entry_name,
-						 const char *combo_name,
+                         const char *combo_name,
                          const char *secret_key)
 {
 	NMSettingSecretFlags flags = NM_SETTING_SECRET_FLAG_NONE;
@@ -560,8 +547,7 @@ update_connection (NMVpnPluginUiWidgetInterface *iface,
                    GError **error)
 {
 	IodinePluginUiWidget *self = IODINE_PLUGIN_UI_WIDGET (iface);
-	IodinePluginUiWidgetPrivate *priv = \
-		IODINE_PLUGIN_UI_WIDGET_GET_PRIVATE (self);
+	IodinePluginUiWidgetPrivate *priv = IODINE_PLUGIN_UI_WIDGET_GET_PRIVATE (self);
 	NMSettingVPN *s_vpn;
 	GtkWidget *widget;
 	char *str;
@@ -571,36 +557,33 @@ update_connection (NMVpnPluginUiWidgetInterface *iface,
 
 	s_vpn = NM_SETTING_VPN (nm_setting_vpn_new ());
 	g_object_set (s_vpn, NM_SETTING_VPN_SERVICE_TYPE,
-				  NM_DBUS_SERVICE_IODINE,
-				  NULL);
+	              NM_DBUS_SERVICE_IODINE,
+	              NULL);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-												 "topdomain_entry"));
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "topdomain_entry"));
 	g_assert(widget);
 	str = (char *) gtk_entry_get_text (GTK_ENTRY (widget));
 	if (str && strlen (str))
 		nm_setting_vpn_add_data_item (s_vpn, NM_IODINE_KEY_TOPDOMAIN, str);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-												 "nameserver_entry"));
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "nameserver_entry"));
 	g_assert(widget);
 	str = (char *) gtk_entry_get_text (GTK_ENTRY (widget));
 	if (str && strlen (str))
 		nm_setting_vpn_add_data_item (s_vpn, NM_IODINE_KEY_NAMESERVER, str);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-												 "fragsize_entry"));
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "fragsize_entry"));
 	g_assert(widget);
 	str = (char *) gtk_entry_get_text (GTK_ENTRY (widget));
 	if (str && strlen (str))
 		nm_setting_vpn_add_data_item (s_vpn, NM_IODINE_KEY_FRAGSIZE, str);
 
-  	/* User password and flags */
+	/* User password and flags */
 	save_password_and_flags (s_vpn,
-							 priv->builder,
-							 "password_entry",
-							 "pass_type_combo",
-							 NM_IODINE_KEY_PASSWORD);
+	                         priv->builder,
+	                         "password_entry",
+	                         "pass_type_combo",
+	                         NM_IODINE_KEY_PASSWORD);
 
 	nm_connection_add_setting (connection, NM_SETTING (s_vpn));
 	return TRUE;
@@ -621,7 +604,7 @@ nm_vpn_plugin_ui_widget_interface_new (NMConnection *connection, GError **error)
 
 	if (!object) {
 		g_set_error (error, IODINE_PLUGIN_UI_ERROR, 0,
-					 "could not create iodine object");
+		             "could not create iodine object");
 		return NULL;
 	}
 
@@ -642,11 +625,10 @@ nm_vpn_plugin_ui_widget_interface_new (NMConnection *connection, GError **error)
 	}
 	g_free (ui_file);
 
-	priv->widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-													   "iodine-vbox"));
+	priv->widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "iodine-vbox"));
 	if (!priv->widget) {
 		g_set_error (error, IODINE_PLUGIN_UI_ERROR, 0,
-					 "could not load UI widget");
+		             "could not load UI widget");
 		g_object_unref (object);
 		return NULL;
 	}
@@ -711,15 +693,15 @@ get_capabilities (NMVpnPluginUiInterface *iface)
 
 static NMVpnPluginUiWidgetInterface *
 ui_factory (NMVpnPluginUiInterface *iface,
-			NMConnection *connection,
-			GError **error)
+            NMConnection *connection,
+            GError **error)
 {
 	return nm_vpn_plugin_ui_widget_interface_new (connection, error);
 }
 
 static void
 get_property (GObject *object, guint prop_id,
-			  GValue *value, GParamSpec *pspec)
+              GValue *value, GParamSpec *pspec)
 {
 	switch (prop_id) {
 	case NM_VPN_PLUGIN_UI_INTERFACE_PROP_NAME:
@@ -745,16 +727,16 @@ iodine_plugin_ui_class_init (IodinePluginUiClass *req_class)
 	object_class->get_property = get_property;
 
 	g_object_class_override_property (object_class,
-									  NM_VPN_PLUGIN_UI_INTERFACE_PROP_NAME,
-									  NM_VPN_PLUGIN_UI_INTERFACE_NAME);
+	                                  NM_VPN_PLUGIN_UI_INTERFACE_PROP_NAME,
+	                                  NM_VPN_PLUGIN_UI_INTERFACE_NAME);
 
 	g_object_class_override_property (object_class,
-									  NM_VPN_PLUGIN_UI_INTERFACE_PROP_DESC,
-									  NM_VPN_PLUGIN_UI_INTERFACE_DESC);
+	                                  NM_VPN_PLUGIN_UI_INTERFACE_PROP_DESC,
+	                                  NM_VPN_PLUGIN_UI_INTERFACE_DESC);
 
 	g_object_class_override_property (object_class,
-									  NM_VPN_PLUGIN_UI_INTERFACE_PROP_SERVICE,
-									  NM_VPN_PLUGIN_UI_INTERFACE_SERVICE);
+	                                  NM_VPN_PLUGIN_UI_INTERFACE_PROP_SERVICE,
+	                                  NM_VPN_PLUGIN_UI_INTERFACE_SERVICE);
 }
 
 static void
@@ -778,6 +760,5 @@ nm_vpn_plugin_ui_factory (GError **error)
 	if (error)
 		g_return_val_if_fail (*error == NULL, NULL);
 
-	return NM_VPN_PLUGIN_UI_INTERFACE (g_object_new (IODINE_TYPE_PLUGIN_UI,
-													 NULL));
+	return NM_VPN_PLUGIN_UI_INTERFACE (g_object_new (IODINE_TYPE_PLUGIN_UI, NULL));
 }

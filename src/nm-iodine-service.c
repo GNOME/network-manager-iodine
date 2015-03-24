@@ -129,7 +129,7 @@ validate_one_property (const char *key, const char *value, gpointer user_data)
 			             NM_VPN_PLUGIN_ERROR,
 			             NM_VPN_PLUGIN_ERROR_BAD_ARGUMENTS,
 			             _("invalid integer property '%s' or out of range "
-						   "[%d -> %d]"),
+			               "[%d -> %d]"),
 			             key, prop.int_min, prop.int_max);
 			break;
 		case G_TYPE_BOOLEAN:
@@ -153,7 +153,7 @@ validate_one_property (const char *key, const char *value, gpointer user_data)
 	}
 
 	/* Did not find the property from valid_properties or the type did not
-      match */
+	   match */
 	if (!info->table[i].name && strncmp(key, "form:", 5)) {
 		g_warning ("property '%s' unknown", key);
 		if (0)
@@ -213,12 +213,12 @@ str_to_gvalue (const char *str, gboolean try_convert)
 
 	if (!g_utf8_validate (str, -1, NULL)) {
 		if (try_convert && !(str = g_convert (str,
-											  -1,
-											  "ISO-8859-1",
-											  "UTF-8",
-											  NULL,
-											  NULL,
-											  NULL)))
+		                                      -1,
+		                                      "ISO-8859-1",
+		                                      "UTF-8",
+		                                      NULL,
+		                                      NULL,
+		                                      NULL)))
 			str = g_convert (str, -1, "C", "UTF-8", NULL, NULL, NULL);
 		if (!str)
 			/* Invalid */
@@ -272,8 +272,8 @@ value_destroy (gpointer data)
 
 static gint
 iodine_parse_stderr_line (NMVPNPlugin *plugin,
-						  const char* line,
-						  GHashTable *ip4config)
+                          const char* line,
+                          GHashTable *ip4config)
 {
 	NMIodinePluginPrivate *priv = NM_IODINE_PLUGIN_GET_PRIVATE (plugin);
 	gchar **split = NULL;
@@ -298,20 +298,20 @@ iodine_parse_stderr_line (NMVPNPlugin *plugin,
 		val = addr_to_gvalue (split[len-1]);
 		if (val)
 			g_hash_table_insert (ip4config,
-								 NM_VPN_PLUGIN_IP4_CONFIG_PTP,
-								 val);
+			                     NM_VPN_PLUGIN_IP4_CONFIG_PTP,
+			                     val);
 		val = addr_to_gvalue (split[len-1]);
 		if (val)
 			g_hash_table_insert (ip4config,
-								 NM_VPN_PLUGIN_IP4_CONFIG_INT_GATEWAY,
-								 val);
+			                     NM_VPN_PLUGIN_IP4_CONFIG_INT_GATEWAY,
+			                     val);
 	} else if (g_str_has_prefix(line, "Sending DNS queries for ")) {
 		g_message("External gw: %s", split[len-1]);
 		val = addr_to_gvalue (split[len-1]);
 		if (val)
 			g_hash_table_insert (ip4config,
-								 NM_VPN_PLUGIN_IP4_CONFIG_EXT_GATEWAY,
-								 val);
+			                     NM_VPN_PLUGIN_IP4_CONFIG_EXT_GATEWAY,
+			                     val);
 	} else if (g_str_has_prefix(line, "Sending raw traffic directly to ")) {
 		/* If the DNS server is directly reachable we need to set it
 		   as external gateway overwriting the above valus */
@@ -319,36 +319,36 @@ iodine_parse_stderr_line (NMVPNPlugin *plugin,
 		val = addr_to_gvalue (split[len-1]);
 		if (val)
 			g_hash_table_insert (ip4config,
-								 NM_VPN_PLUGIN_IP4_CONFIG_EXT_GATEWAY,
-								 val);
+			                     NM_VPN_PLUGIN_IP4_CONFIG_EXT_GATEWAY,
+			                     val);
 	} else if (g_str_has_prefix(line, "Setting IP of dns")) {
 		g_message("Address: %s", split[len-1]);
 		val = addr_to_gvalue (split[len-1]);
 		if (val)
 			g_hash_table_insert (ip4config,
-								 NM_VPN_PLUGIN_IP4_CONFIG_ADDRESS,
-								 val);
+			                     NM_VPN_PLUGIN_IP4_CONFIG_ADDRESS,
+			                     val);
 	} else if (g_str_has_prefix(line, "Setting MTU of ")) {
 		g_message("MTU: %s", split[len-1]);
 		val = addr_to_gvalue (split[len-1]);
 		if (val)
 			g_hash_table_insert (ip4config,
-								 NM_VPN_PLUGIN_IP4_CONFIG_MTU,
-								 val);
+			                     NM_VPN_PLUGIN_IP4_CONFIG_MTU,
+			                     val);
 	} else if (g_str_has_prefix(line, "Opened dns")) {
 		g_message("Interface: %s", split[len-1]);
 		val = str_to_gvalue (split[len-1], FALSE);
 		if (val)
 			g_hash_table_insert (ip4config,
-								 NM_VPN_PLUGIN_IP4_CONFIG_TUNDEV,
-								 val);
+			                     NM_VPN_PLUGIN_IP4_CONFIG_TUNDEV,
+			                     val);
 	} else if (g_str_has_prefix(line,
-								"Connection setup complete, "
-								"transmitting data.")) {
+		                    "Connection setup complete, "
+		                    "transmitting data.")) {
 		val = uint_to_gvalue(27);
 		g_hash_table_insert (ip4config,
-							 NM_VPN_PLUGIN_IP4_CONFIG_PREFIX,
-							 val);
+		                     NM_VPN_PLUGIN_IP4_CONFIG_PREFIX,
+		                     val);
 		ret = 0; /* success */
 	} else
 		g_message("%s", line);
@@ -416,15 +416,12 @@ iodine_watch_cb (GPid pid, gint status, gpointer user_data)
 	priv->pid = 0;
 
 	if (priv->failure >= 0) {
-		nm_vpn_plugin_failure (NM_VPN_PLUGIN (plugin),
-							   priv->failure);
+		nm_vpn_plugin_failure (NM_VPN_PLUGIN (plugin), priv->failure);
 	} else if (error) {
-		nm_vpn_plugin_failure (NM_VPN_PLUGIN (plugin),
-							   NM_VPN_PLUGIN_FAILURE_CONNECT_FAILED);
+		nm_vpn_plugin_failure (NM_VPN_PLUGIN (plugin), NM_VPN_PLUGIN_FAILURE_CONNECT_FAILED);
 	}
 
-	nm_vpn_plugin_set_state (NM_VPN_PLUGIN (plugin),
-							 NM_VPN_SERVICE_STATE_STOPPED);
+	nm_vpn_plugin_set_state (NM_VPN_PLUGIN (plugin), NM_VPN_SERVICE_STATE_STOPPED);
 }
 
 static gboolean
@@ -455,16 +452,16 @@ send_password(gint fd, NMSettingVPN *s_vpn)
 
 
 static gint
-nm_iodine_start_iodine_binary(NMIodinePlugin *plugin,
-										 NMSettingVPN *s_vpn,
-										 GError **error)
+nm_iodine_start_iodine_binary (NMIodinePlugin *plugin,
+                               NMSettingVPN *s_vpn,
+                               GError **error)
 {
-	GPid	pid;
+	GPid pid;
 	const char **iodine_binary = NULL;
 	GPtrArray *iodine_argv;
 	GSource *iodine_watch;
 	GIOChannel *stderr_channel;
-	gint	stdin_fd, stderr_fd;
+	gint stdin_fd, stderr_fd;
 	const char *props_topdomain, *props_fragsize, *props_nameserver;
 
 	/* Find iodine */
@@ -484,12 +481,9 @@ nm_iodine_start_iodine_binary(NMIodinePlugin *plugin,
 		return -1;
 	}
 
-	props_fragsize = nm_setting_vpn_get_data_item (s_vpn,
-												   NM_IODINE_KEY_FRAGSIZE);
-	props_nameserver = nm_setting_vpn_get_data_item (s_vpn,
-													 NM_IODINE_KEY_NAMESERVER);
-	props_topdomain = nm_setting_vpn_get_data_item (s_vpn,
-													NM_IODINE_KEY_TOPDOMAIN);
+	props_fragsize = nm_setting_vpn_get_data_item (s_vpn, NM_IODINE_KEY_FRAGSIZE);
+	props_nameserver = nm_setting_vpn_get_data_item (s_vpn, NM_IODINE_KEY_NAMESERVER);
+	props_topdomain = nm_setting_vpn_get_data_item (s_vpn, NM_IODINE_KEY_TOPDOMAIN);
 	iodine_argv = g_ptr_array_new ();
 	g_ptr_array_add (iodine_argv, (gpointer) (*iodine_binary));
 	/* Run in foreground */
@@ -521,9 +515,9 @@ nm_iodine_start_iodine_binary(NMIodinePlugin *plugin,
 	g_ptr_array_add (iodine_argv, NULL);
 
 	if (!g_spawn_async_with_pipes (NULL, (char **) iodine_argv->pdata, NULL,
-								   G_SPAWN_DO_NOT_REAP_CHILD,
-								   NULL, NULL,
-								   &pid, &stdin_fd, NULL, &stderr_fd, error)) {
+	                               G_SPAWN_DO_NOT_REAP_CHILD,
+	                               NULL, NULL,
+	                               &pid, &stdin_fd, NULL, &stderr_fd, error)) {
 		g_ptr_array_free (iodine_argv, TRUE);
 		g_warning ("iodine failed to start. error: '%s'", (*error)->message);
 		return -1;
@@ -537,16 +531,16 @@ nm_iodine_start_iodine_binary(NMIodinePlugin *plugin,
 
 	stderr_channel = g_io_channel_unix_new (stderr_fd);
 	g_io_add_watch(stderr_channel,
-				   G_IO_IN,
-				   iodine_stderr_cb,
-				   plugin);
+	               G_IO_IN,
+	               iodine_stderr_cb,
+	               plugin);
 
 	NM_IODINE_PLUGIN_GET_PRIVATE (plugin)->pid = pid;
 	iodine_watch = g_child_watch_source_new (pid);
 	g_source_set_callback (iodine_watch,
-						   (GSourceFunc) iodine_watch_cb,
-						   plugin,
-						   NULL);
+	                       (GSourceFunc) iodine_watch_cb,
+	                       plugin,
+	                       NULL);
 	g_source_attach (iodine_watch, NULL);
 	g_source_unref (iodine_watch);
 
@@ -569,8 +563,7 @@ real_connect (NMVPNPlugin   *plugin,
 	if (!nm_iodine_secrets_validate (s_vpn, error))
 		goto out;
 
-	ret = nm_iodine_start_iodine_binary (NM_IODINE_PLUGIN (plugin),
-											   s_vpn, error);
+	ret = nm_iodine_start_iodine_binary (NM_IODINE_PLUGIN (plugin), s_vpn, error);
 	if (!ret)
 		return TRUE;
 
@@ -580,8 +573,7 @@ real_connect (NMVPNPlugin   *plugin,
 
 static gboolean
 real_need_secrets (NMVPNPlugin   *plugin,
-
-				   NMConnection  *connection,
+                   NMConnection  *connection,
                    char         **setting_name,
                    GError       **error)
 {
@@ -592,12 +584,12 @@ real_need_secrets (NMVPNPlugin   *plugin,
 
 	s_vpn = nm_connection_get_setting_vpn (connection);
 	if (!s_vpn) {
-        	g_set_error (error,
+		g_set_error (error,
 		             NM_VPN_PLUGIN_ERROR,
 		             NM_VPN_PLUGIN_ERROR_CONNECTION_INVALID,
 		             "%s",
-		             "Could not process the request because the VPN"
-					 "connection settings were invalid.");
+		             "Could not process the request because the VPN "
+		             "connection settings were invalid.");
 		return FALSE;
 	}
 
@@ -621,8 +613,7 @@ ensure_killed (gpointer data)
 }
 
 static gboolean
-real_disconnect (NMVPNPlugin *plugin,
-				 GError **err)
+real_disconnect (NMVPNPlugin *plugin, GError **err)
 {
 	NMIodinePluginPrivate *priv = NM_IODINE_PLUGIN_GET_PRIVATE (plugin);
 
@@ -645,9 +636,9 @@ nm_iodine_plugin_init (NMIodinePlugin *plugin)
 	NMIodinePluginPrivate *priv = NM_IODINE_PLUGIN_GET_PRIVATE (plugin);
 
 	priv->ip4config = g_hash_table_new_full (g_str_hash,
-											 g_str_equal,
-											 NULL,
-											 value_destroy);
+	                                         g_str_equal,
+	                                         NULL,
+	                                         value_destroy);
 	priv->failure = -1;
 }
 
@@ -669,9 +660,9 @@ NMIodinePlugin *
 nm_iodine_plugin_new (void)
 {
 	return (NMIodinePlugin *) g_object_new (NM_TYPE_IODINE_PLUGIN,
-								   NM_VPN_PLUGIN_DBUS_SERVICE_NAME,
-											NM_DBUS_SERVICE_IODINE,
-								   NULL);
+	                                        NM_VPN_PLUGIN_DBUS_SERVICE_NAME,
+	                                        NM_DBUS_SERVICE_IODINE,
+	                                        NULL);
 }
 
 static void
@@ -696,8 +687,8 @@ int main (int argc, char *argv[])
 	main_loop = g_main_loop_new (NULL, FALSE);
 
 	g_signal_connect (plugin, "quit",
-					  G_CALLBACK (quit_mainloop),
-					  main_loop);
+	                  G_CALLBACK (quit_mainloop),
+	                  main_loop);
 
 	g_main_loop_run (main_loop);
 
