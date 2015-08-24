@@ -58,6 +58,8 @@ if test x"$with_gnome" != xno; then
 	                  [PKG_CHECK_MODULES(GTK, gtk+-2.0 > $gtk2_req)])
 
         PKG_CHECK_MODULES(LIBSECRET, libsecret-1)
+
+	PKG_CHECK_MODULES(NMGTK, libnm-gtk >= 0.9.9.0)
 fi
 
 PKG_CHECK_MODULES(NM,
@@ -65,8 +67,6 @@ PKG_CHECK_MODULES(NM,
                   libnm-util >= 0.9.2
                   libnm-glib  >= 0.9.2
                   libnm-glib-vpn >= 0.9.2)
-
-PKG_CHECK_MODULES(NMGTK, libnm-gtk >= 0.9.9.0)
 
 NM_COMPILER_WARNINGS
 
