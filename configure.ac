@@ -64,10 +64,10 @@ if test x"$with_gnome" != xno; then
 fi
 
 PKG_CHECK_MODULES(LIBNM_GLIB,
-                  NetworkManager >= 0.9.2
-                  libnm-util >= 0.9.2
-                  libnm-glib  >= 0.9.2
-                  libnm-glib-vpn >= 0.9.2)
+                  NetworkManager >= 1.1.0
+                  libnm-util >= 1.1.0
+                  libnm-glib  >= 1.1.0
+                  libnm-glib-vpn >= 1.1.0)
 
 PKG_CHECK_MODULES(LIBNM, libnm >= 1.1.0)
 LIBNM_CFLAGS="$LIBNM_CFLAGS -DNM_VERSION_MIN_REQUIRED=NM_VERSION_1_2"
