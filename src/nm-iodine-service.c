@@ -40,20 +40,22 @@
 #include <pwd.h>
 #include <grp.h>
 #include <glib/gi18n.h>
+#include <arpa/inet.h>
 
-#include <nm-setting-vpn.h>
+#include <NetworkManager.h>
+#include <nm-vpn-service-plugin.h>
 #include "nm-iodine-service.h"
 #include "nm-utils.h"
 
 #define NM_IODINE_USER "nm-iodine"
 #define NM_IODINE_RUNDIR LOCALSTATEDIR "/run/" NM_IODINE_USER
 
-G_DEFINE_TYPE (NMIodinePlugin, nm_iodine_plugin, NM_TYPE_VPN_PLUGIN)
+G_DEFINE_TYPE (NMIodinePlugin, nm_iodine_plugin, NM_TYPE_VPN_SERVICE_PLUGIN)
 
 typedef struct {
 	GPid pid;
-	NMVPNPluginFailure failure;
-	GHashTable *ip4config;
+	NMVpnPluginFailure failure;
+	GVariantBuilder ip4config;
 } NMIodinePluginPrivate;
 
 #define NM_IODINE_PLUGIN_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), NM_TYPE_IODINE_PLUGIN, NMIodinePluginPrivate))
@@ -166,7 +168,7 @@ validate_one_property (const char *key, const char *value, gpointer user_data)
 }
 
 static gboolean
-nm_iodine_properties_validate (NMSettingVPN *s_vpn, GError **error)
+nm_iodine_properties_validate (NMSettingVpn *s_vpn, GError **error)
 {
 	ValidateInfo info = { &valid_properties[0], error, FALSE };
 
@@ -185,7 +187,7 @@ nm_iodine_properties_validate (NMSettingVPN *s_vpn, GError **error)
 
 
 static gboolean
-nm_iodine_secrets_validate (NMSettingVPN *s_vpn, GError **error)
+nm_iodine_secrets_validate (NMSettingVpn *s_vpn, GError **error)
 {
 	ValidateInfo info = { &valid_secrets[0], error, FALSE };
 
@@ -202,11 +204,9 @@ nm_iodine_secrets_validate (NMSettingVPN *s_vpn, GError **error)
 	return *error ? FALSE : TRUE;
 }
 
-static GValue *
-str_to_gvalue (const char *str, gboolean try_convert)
+static GVariant *
+str_to_gvariant (const char *str, gboolean try_convert)
 {
-	GValue *val;
-
 	/* Empty */
 	if (!str || strlen (str) < 1)
 		return NULL;
@@ -225,29 +225,11 @@ str_to_gvalue (const char *str, gboolean try_convert)
 			return NULL;
 	}
 
-	val = g_slice_new0 (GValue);
-	g_value_init (val, G_TYPE_STRING);
-	g_value_set_string (val, str);
-	return val;
+	return g_variant_new_string (str);
 }
 
-static GValue *
-uint_to_gvalue (guint32 num)
-{
-	GValue *val;
-
-	if (num == 0)
-		return NULL;
-
-	val = g_slice_new0 (GValue);
-	g_value_init (val, G_TYPE_UINT);
-	g_value_set_uint (val, num);
-
-	return val;
-}
-
-static GValue *
-addr_to_gvalue (const char *str)
+static GVariant *
+addr4_to_gvariant (const char *str)
 {
 	struct in_addr	temp_addr;
 
@@ -258,26 +240,16 @@ addr_to_gvalue (const char *str)
 	if (inet_pton (AF_INET, str, &temp_addr) <= 0)
 		return NULL;
 
-	return uint_to_gvalue (temp_addr.s_addr);
-}
-
-static void
-value_destroy (gpointer data)
-{
-	GValue *val = (GValue *) data;
-
-	g_value_unset (val);
-	g_slice_free (GValue, val);
+	return g_variant_new_uint32 (temp_addr.s_addr);
 }
 
 static gint
-iodine_parse_stderr_line (NMVPNPlugin *plugin,
-                          const char* line,
-                          GHashTable *ip4config)
+iodine_parse_stderr_line (NMVpnServicePlugin *plugin,
+                          const char* line)
 {
 	NMIodinePluginPrivate *priv = NM_IODINE_PLUGIN_GET_PRIVATE (plugin);
 	gchar **split = NULL;
-	GValue *val;
+	GVariant *val;
 	gint len;
 	gint ret = 1;
 
@@ -295,60 +267,60 @@ iodine_parse_stderr_line (NMVPNPlugin *plugin,
 
 	if (g_str_has_prefix(line, "Server tunnel IP is ")) {
 		g_message("PTP address: %s", split[len-1]);
-		val = addr_to_gvalue (split[len-1]);
+		val = addr4_to_gvariant (split[len-1]);
 		if (val)
-			g_hash_table_insert (ip4config,
-			                     NM_VPN_PLUGIN_IP4_CONFIG_PTP,
-			                     val);
-		val = addr_to_gvalue (split[len-1]);
+			g_variant_builder_add (&priv->ip4config, "{sv}",
+			                       NM_VPN_PLUGIN_IP4_CONFIG_PTP,
+			                       val);
+		val = addr4_to_gvariant (split[len-1]);
 		if (val)
-			g_hash_table_insert (ip4config,
-			                     NM_VPN_PLUGIN_IP4_CONFIG_INT_GATEWAY,
-			                     val);
+			g_variant_builder_add (&priv->ip4config, "{sv}",
+			                       NM_VPN_PLUGIN_IP4_CONFIG_INT_GATEWAY,
+			                       val);
 	} else if (g_str_has_prefix(line, "Sending DNS queries for ")) {
 		g_message("External gw: %s", split[len-1]);
-		val = addr_to_gvalue (split[len-1]);
+		val = addr4_to_gvariant (split[len-1]);
 		if (val)
-			g_hash_table_insert (ip4config,
-			                     NM_VPN_PLUGIN_IP4_CONFIG_EXT_GATEWAY,
-			                     val);
+			g_variant_builder_add (&priv->ip4config, "{sv}",
+			                       NM_VPN_PLUGIN_IP4_CONFIG_EXT_GATEWAY,
+			                       val);
 	} else if (g_str_has_prefix(line, "Sending raw traffic directly to ")) {
 		/* If the DNS server is directly reachable we need to set it
 		   as external gateway overwriting the above valus */
 		g_message("Overwrite ext. gw.  address: %s", split[len-1]);
-		val = addr_to_gvalue (split[len-1]);
+		val = addr4_to_gvariant (split[len-1]);
 		if (val)
-			g_hash_table_insert (ip4config,
-			                     NM_VPN_PLUGIN_IP4_CONFIG_EXT_GATEWAY,
-			                     val);
+			g_variant_builder_add (&priv->ip4config, "{sv}",
+			                       NM_VPN_PLUGIN_IP4_CONFIG_EXT_GATEWAY,
+			                       val);
 	} else if (g_str_has_prefix(line, "Setting IP of dns")) {
 		g_message("Address: %s", split[len-1]);
-		val = addr_to_gvalue (split[len-1]);
+		val = addr4_to_gvariant (split[len-1]);
 		if (val)
-			g_hash_table_insert (ip4config,
-			                     NM_VPN_PLUGIN_IP4_CONFIG_ADDRESS,
-			                     val);
+			g_variant_builder_add (&priv->ip4config, "{sv}",
+			                       NM_VPN_PLUGIN_IP4_CONFIG_ADDRESS,
+			                       val);
 	} else if (g_str_has_prefix(line, "Setting MTU of ")) {
 		g_message("MTU: %s", split[len-1]);
-		val = addr_to_gvalue (split[len-1]);
+		val = addr4_to_gvariant (split[len-1]);
 		if (val)
-			g_hash_table_insert (ip4config,
-			                     NM_VPN_PLUGIN_IP4_CONFIG_MTU,
-			                     val);
+			g_variant_builder_add (&priv->ip4config, "{sv}",
+			                       NM_VPN_PLUGIN_IP4_CONFIG_MTU,
+			                       val);
 	} else if (g_str_has_prefix(line, "Opened dns")) {
 		g_message("Interface: %s", split[len-1]);
-		val = str_to_gvalue (split[len-1], FALSE);
+		val = str_to_gvariant (split[len-1], FALSE);
 		if (val)
-			g_hash_table_insert (ip4config,
-			                     NM_VPN_PLUGIN_IP4_CONFIG_TUNDEV,
-			                     val);
+			g_variant_builder_add (&priv->ip4config, "{sv}",
+			                       NM_VPN_PLUGIN_IP4_CONFIG_TUNDEV,
+			                       val);
 	} else if (g_str_has_prefix(line,
 		                    "Connection setup complete, "
 		                    "transmitting data.")) {
-		val = uint_to_gvalue(27);
-		g_hash_table_insert (ip4config,
-		                     NM_VPN_PLUGIN_IP4_CONFIG_PREFIX,
-		                     val);
+		val = g_variant_new_uint32 (27);
+		g_variant_builder_add (&priv->ip4config, "{sv}",
+		                       NM_VPN_PLUGIN_IP4_CONFIG_PREFIX,
+		                       val);
 		ret = 0; /* success */
 	} else
 		g_message("%s", line);
@@ -378,13 +350,11 @@ iodine_stderr_cb (GIOChannel *source, GIOCondition condition, gpointer plugin)
 	if (l)
 		line[l-1] = '\0';
 
-	ret = iodine_parse_stderr_line(plugin, line, priv->ip4config);
+	ret = iodine_parse_stderr_line(plugin, line);
 	if (!ret) {
 		g_message("Parsing done, sending IP4 config");
-		nm_vpn_plugin_set_ip4_config(plugin, priv->ip4config);
-
-		g_hash_table_destroy (priv->ip4config);
-		priv->ip4config = NULL;
+		nm_vpn_service_plugin_set_ip4_config(plugin,
+		                                     g_variant_builder_end (&priv->ip4config));
 	}
 	g_free (line);
 	return TRUE;
@@ -416,12 +386,12 @@ iodine_watch_cb (GPid pid, gint status, gpointer user_data)
 	priv->pid = 0;
 
 	if (priv->failure >= 0) {
-		nm_vpn_plugin_failure (NM_VPN_PLUGIN (plugin), priv->failure);
+		nm_vpn_service_plugin_failure (NM_VPN_SERVICE_PLUGIN (plugin), priv->failure);
 	} else if (error) {
-		nm_vpn_plugin_failure (NM_VPN_PLUGIN (plugin), NM_VPN_PLUGIN_FAILURE_CONNECT_FAILED);
+		nm_vpn_service_plugin_failure (NM_VPN_SERVICE_PLUGIN (plugin), NM_VPN_PLUGIN_FAILURE_CONNECT_FAILED);
 	}
 
-	nm_vpn_plugin_set_state (NM_VPN_PLUGIN (plugin), NM_VPN_SERVICE_STATE_STOPPED);
+	nm_vpn_service_plugin_set_state (NM_VPN_SERVICE_PLUGIN (plugin), NM_VPN_SERVICE_STATE_STOPPED);
 }
 
 static gboolean
@@ -432,7 +402,7 @@ has_user(const char* user)
 
 
 static void
-send_password(gint fd, NMSettingVPN *s_vpn)
+send_password(gint fd, NMSettingVpn *s_vpn)
 {
 	const char *passwd;
 	ssize_t ret;
@@ -453,7 +423,7 @@ send_password(gint fd, NMSettingVPN *s_vpn)
 
 static gint
 nm_iodine_start_iodine_binary (NMIodinePlugin *plugin,
-                               NMSettingVPN *s_vpn,
+                               NMSettingVpn *s_vpn,
                                GError **error)
 {
 	GPid pid;
@@ -548,11 +518,11 @@ nm_iodine_start_iodine_binary (NMIodinePlugin *plugin,
 }
 
 static gboolean
-real_connect (NMVPNPlugin   *plugin,
-              NMConnection  *connection,
-              GError       **error)
+real_connect (NMVpnServicePlugin *plugin,
+              NMConnection *connection,
+              GError **error)
 {
-	NMSettingVPN *s_vpn;
+	NMSettingVpn *s_vpn;
 	gint ret = -1;
 
 	s_vpn = nm_connection_get_setting_vpn (connection);
@@ -572,21 +542,21 @@ real_connect (NMVPNPlugin   *plugin,
 }
 
 static gboolean
-real_need_secrets (NMVPNPlugin   *plugin,
-                   NMConnection  *connection,
-                   char         **setting_name,
-                   GError       **error)
+real_need_secrets (NMVpnServicePlugin *plugin,
+                   NMConnection *connection,
+                   const char **setting_name,
+                   GError **error)
 {
-	NMSettingVPN *s_vpn;
+	NMSettingVpn *s_vpn;
 
-	g_return_val_if_fail (NM_IS_VPN_PLUGIN (plugin), FALSE);
+	g_return_val_if_fail (NM_IS_VPN_SERVICE_PLUGIN (plugin), FALSE);
 	g_return_val_if_fail (NM_IS_CONNECTION (connection), FALSE);
 
 	s_vpn = nm_connection_get_setting_vpn (connection);
 	if (!s_vpn) {
 		g_set_error (error,
 		             NM_VPN_PLUGIN_ERROR,
-		             NM_VPN_PLUGIN_ERROR_CONNECTION_INVALID,
+		             NM_VPN_PLUGIN_ERROR_INVALID_CONNECTION,
 		             "%s",
 		             "Could not process the request because the VPN "
 		             "connection settings were invalid.");
@@ -613,7 +583,7 @@ ensure_killed (gpointer data)
 }
 
 static gboolean
-real_disconnect (NMVPNPlugin *plugin, GError **err)
+real_disconnect (NMVpnServicePlugin *plugin, GError **err)
 {
 	NMIodinePluginPrivate *priv = NM_IODINE_PLUGIN_GET_PRIVATE (plugin);
 
@@ -635,10 +605,7 @@ nm_iodine_plugin_init (NMIodinePlugin *plugin)
 {
 	NMIodinePluginPrivate *priv = NM_IODINE_PLUGIN_GET_PRIVATE (plugin);
 
-	priv->ip4config = g_hash_table_new_full (g_str_hash,
-	                                         g_str_equal,
-	                                         NULL,
-	                                         value_destroy);
+	g_variant_builder_init (&priv->ip4config, G_VARIANT_TYPE_VARDICT);
 	priv->failure = -1;
 }
 
@@ -646,7 +613,7 @@ static void
 nm_iodine_plugin_class_init (NMIodinePluginClass *iodine_class)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (iodine_class);
-	NMVPNPluginClass *parent_class = NM_VPN_PLUGIN_CLASS (iodine_class);
+	NMVpnServicePluginClass *parent_class = NM_VPN_SERVICE_PLUGIN_CLASS (iodine_class);
 
 	g_type_class_add_private (object_class, sizeof (NMIodinePluginPrivate));
 
@@ -660,7 +627,7 @@ NMIodinePlugin *
 nm_iodine_plugin_new (void)
 {
 	return (NMIodinePlugin *) g_object_new (NM_TYPE_IODINE_PLUGIN,
-	                                        NM_VPN_PLUGIN_DBUS_SERVICE_NAME,
+	                                        NM_VPN_SERVICE_PLUGIN_DBUS_SERVICE_NAME,
 	                                        NM_DBUS_SERVICE_IODINE,
 	                                        NULL);
 }
