@@ -3,8 +3,8 @@ libexec_PROGRAMS = nm-iodine-auth-dialog
 nm_iodine_auth_dialog_CPPFLAGS = \
 	$(GTK_CFLAGS) \
         $(LIBSECRET_CFLAGS) \
-	$(LIBNM_GLIB_CFLAGS) \
-	$(LIBNM_GTK_CFLAGS) \
+	$(LIBNM_CFLAGS) \
+	$(LIBNMA_CFLAGS) \
 	-DICONDIR=\""$(datadir)/pixmaps"\" \
 	-DBINDIR=\""$(bindir)"\" \
 	-DG_DISABLE_DEPRECATED \
@@ -19,8 +19,8 @@ nm_iodine_auth_dialog_SOURCES = \
 
 nm_iodine_auth_dialog_LDADD = \
 	$(GTK_LIBS) \
-	$(LIBNM_GLIB_LIBS) \
-	$(LIBNM_GTK_LIBS) \
+	$(LIBNM_LIBS) \
+	$(LIBNMA_LIBS) \
         $(LIBSECRET_LIBS)
 
 CLEANFILES = *~
