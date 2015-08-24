@@ -13,7 +13,7 @@ ui_DATA = nm-iodine-dialog.ui
 
 common_CFLAGS =                                         \
         $(GTK_CFLAGS)                                   \
-        $(NM_CFLAGS)                        		\
+        $(LIBNM_GLIB_CFLAGS)                            \
 	-I$(top_srcdir)/src				\
         -DICONDIR=\""$(datadir)/pixmaps"\"              \
         -DUIDIR=\""$(uidir)"\"                          \
@@ -32,11 +32,11 @@ libnm_iodine_properties_la_CFLAGS =                     \
 
 libnm_vpn_plugin_iodine_la_LIBADD =                     \
         $(GTK_LIBS)                                     \
-        $(NM_LIBS)
+        $(LIBNM_GLIB_LIBS)
 
 libnm_iodine_properties_la_LIBADD =                     \
         $(GTK_LIBS)                                     \
-        $(NM_LIBS)
+        $(LIBNM_GLIB_LIBS)
 
 libnm_vpn_plugin_iodine_la_LDFLAGS =                    \
         -avoid-version

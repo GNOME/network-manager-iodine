@@ -59,14 +59,19 @@ if test x"$with_gnome" != xno; then
 
         PKG_CHECK_MODULES(LIBSECRET, libsecret-1)
 
-	PKG_CHECK_MODULES(NMGTK, libnm-gtk >= 0.9.9.0)
+	PKG_CHECK_MODULES(LIBNM_GTK, libnm-gtk >= 0.9.9.0)
+	PKG_CHECK_MODULES(LIBNMA, libnma >= 1.1.0)
 fi
 
-PKG_CHECK_MODULES(NM,
+PKG_CHECK_MODULES(LIBNM_GLIB,
                   NetworkManager >= 0.9.2
                   libnm-util >= 0.9.2
                   libnm-glib  >= 0.9.2
                   libnm-glib-vpn >= 0.9.2)
+
+PKG_CHECK_MODULES(LIBNM, libnm >= 1.1.0)
+LIBNM_CFLAGS="$LIBNM_CFLAGS -DNM_VERSION_MIN_REQUIRED=NM_VERSION_1_2"
+LIBNM_CFLAGS="$LIBNM_CFLAGS -DNM_VERSION_MAX_ALLOWED=NM_VERSION_1_2"
 
 NM_COMPILER_WARNINGS
 
