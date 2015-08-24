@@ -1,14 +1,17 @@
 plugindir = $(libdir)/NetworkManager
-plugin_LTLIBRARIES = libnm-iodine-properties.la
+plugin_LTLIBRARIES = libnm-vpn-plugin-iodine.la libnm-iodine-properties.la
 
-libnm_iodine_properties_la_SOURCES = \
-	nm-iodine.c \
-	nm-iodine.h
+libnm_vpn_plugin_iodine_la_SOURCES =                    \
+        nm-iodine.c \
+        nm-iodine.h
+
+libnm_iodine_properties_la_SOURCES =                    \
+        $(libnm_vpn_plugin_iodine_la_SOURCES)
 
 uidir = $(datadir)/gnome-vpn-properties/iodine
 ui_DATA = nm-iodine-dialog.ui
 
-libnm_iodine_properties_la_CFLAGS =                	\
+common_CFLAGS =                                         \
         $(GTK_CFLAGS)                                   \
         $(NM_CFLAGS)                        		\
 	-I$(top_srcdir)/src				\
@@ -20,12 +23,26 @@ libnm_iodine_properties_la_CFLAGS =                	\
         -DGNOMELOCALEDIR=\"$(datadir)/locale\"		\
         -DVERSION=\"$(VERSION)\"
 
-libnm_iodine_properties_la_LIBADD = \
-        $(GTK_LIBS) \
+libnm_vpn_plugin_iodine_la_CFLAGS =                     \
+        $(common_CFLAGS)
+
+libnm_iodine_properties_la_CFLAGS =                     \
+        -DNM_IODINE_OLD                                 \
+        $(common_CFLAGS)
+
+libnm_vpn_plugin_iodine_la_LIBADD =                     \
+        $(GTK_LIBS)                                     \
         $(NM_LIBS)
 
-libnm_iodine_properties_la_LDFLAGS =      \
+libnm_iodine_properties_la_LIBADD =                     \
+        $(GTK_LIBS)                                     \
+        $(NM_LIBS)
+
+libnm_vpn_plugin_iodine_la_LDFLAGS =                    \
         -avoid-version
+
+libnm_iodine_properties_la_LDFLAGS =                    \
+        $(libnm_vpn_plugin_iodine_la_LDFLAGS)
 
 CLEANFILES = *.bak *~
 
