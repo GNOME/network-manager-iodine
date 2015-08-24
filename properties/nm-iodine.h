@@ -24,46 +24,46 @@
 
 #include <glib-object.h>
 
-#define IODINE_TYPE_PLUGIN_UI            (iodine_plugin_ui_get_type ())
-#define IODINE_PLUGIN_UI(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), IODINE_TYPE_PLUGIN_UI, IodinePluginUi))
-#define IODINE_PLUGIN_UI_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), IODINE_TYPE_PLUGIN_UI, IodinePluginUiClass))
-#define IODINE_IS_PLUGIN_UI(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), IODINE_TYPE_PLUGIN_UI))
-#define IODINE_IS_PLUGIN_UI_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), IODINE_TYPE_PLUGIN_UI))
-#define IODINE_PLUGIN_UI_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), IODINE_TYPE_PLUGIN_UI, IodinePluginUiClass))
+#define IODINE_TYPE_EDITOR_PLUGIN            (iodine_editor_plugin_get_type ())
+#define IODINE_EDITOR_PLUGIN(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), IODINE_TYPE_EDITOR_PLUGIN, IodineEditorPlugin))
+#define IODINE_EDITOR_PLUGIN_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), IODINE_TYPE_EDITOR_PLUGIN, IodineEditorPluginClass))
+#define IODINE_IS_EDITOR_PLUGIN(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), IODINE_TYPE_EDITOR_PLUGIN))
+#define IODINE_IS_EDITOR_PLUGIN_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), IODINE_TYPE_EDITOR_PLUGIN))
+#define IODINE_EDITOR_PLUGIN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), IODINE_TYPE_EDITOR_PLUGIN, IodineEditorPluginClass))
 
-typedef struct _IodinePluginUi IodinePluginUi;
-typedef struct _IodinePluginUiClass IodinePluginUiClass;
+typedef struct _IodineEditorPlugin IodineEditorPlugin;
+typedef struct _IodineEditorPluginClass IodineEditorPluginClass;
 
-struct _IodinePluginUi {
+struct _IodineEditorPlugin {
 	GObject parent;
 };
 
-struct _IodinePluginUiClass {
+struct _IodineEditorPluginClass {
 	GObjectClass parent;
 };
 
-GType iodine_plugin_ui_get_type (void);
+GType iodine_editor_plugin_get_type (void);
 
 
-#define IODINE_TYPE_PLUGIN_UI_WIDGET            (iodine_plugin_ui_widget_get_type ())
-#define IODINE_PLUGIN_UI_WIDGET(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), IODINE_TYPE_PLUGIN_UI_WIDGET, IodinePluginUiWidget))
-#define IODINE_PLUGIN_UI_WIDGET_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), IODINE_TYPE_PLUGIN_UI_WIDGET, IodinePluginUiWidgetClass))
-#define IODINE_IS_PLUGIN_UI_WIDGET(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), IODINE_TYPE_PLUGIN_UI_WIDGET))
-#define IODINE_IS_PLUGIN_UI_WIDGET_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), IODINE_TYPE_PLUGIN_UI_WIDGET))
-#define IODINE_PLUGIN_UI_WIDGET_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), IODINE_TYPE_PLUGIN_UI_WIDGET, IodinePluginUiWidgetClass))
+#define IODINE_TYPE_EDITOR            (iodine_editor_get_type ())
+#define IODINE_EDITOR(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), IODINE_TYPE_EDITOR, IodineEditor))
+#define IODINE_EDITOR_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), IODINE_TYPE_EDITOR, IodineEditorClass))
+#define IODINE_IS_EDITOR(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), IODINE_TYPE_EDITOR))
+#define IODINE_IS_EDITOR_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), IODINE_TYPE_EDITOR))
+#define IODINE_EDITOR_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), IODINE_TYPE_EDITOR, IodineEditorClass))
 
-typedef struct _IodinePluginUiWidget IodinePluginUiWidget;
-typedef struct _IodinePluginUiWidgetClass IodinePluginUiWidgetClass;
+typedef struct _IodineEditor IodineEditor;
+typedef struct _IodineEditorClass IodineEditorClass;
 
-struct _IodinePluginUiWidget {
+struct _IodineEditor {
 	GObject parent;
 };
 
-struct _IodinePluginUiWidgetClass {
+struct _IodineEditorClass {
 	GObjectClass parent;
 };
 
-GType iodine_plugin_ui_widget_get_type (void);
+GType iodine_editor_get_type (void);
 
 #endif	/* _NM_IODINE_H_ */
 
