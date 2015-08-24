@@ -1,5 +1,8 @@
 plugindir = $(libdir)/NetworkManager
-plugin_LTLIBRARIES = libnm-vpn-plugin-iodine.la libnm-iodine-properties.la
+plugin_LTLIBRARIES = libnm-vpn-plugin-iodine.la
+if WITH_LIBNM_GLIB
+plugin_LTLIBRARIES += libnm-iodine-properties.la
+endif
 
 libnm_vpn_plugin_iodine_la_SOURCES =                    \
         nm-iodine.c \
