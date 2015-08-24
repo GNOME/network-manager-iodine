@@ -17,7 +17,9 @@ nmvpnservicedir = $(sysconfdir)/NetworkManager/VPN
 nmvpnservice_DATA = nm-iodine-service.name
 
 nm-iodine-service.name: $(srcdir)/nm-iodine-service.name.in
-	sed -e 's|[@]LIBEXECDIR[@]|$(libexecdir)|g' $< >$@
+	sed -e 's|[@]LIBEXECDIR[@]|$(libexecdir)|g' \
+	    -e 's|[@]PLUGINDIR[@]|$(libdir)/NetworkManager|g' \
+	    $< >$@
 
 DISTCHECK_CONFIGURE_FLAGS = --enable-more-warnings=yes
 
