@@ -22,7 +22,8 @@
 #define NM_IODINE_PLUGIN_H
 
 #include <glib.h>
-#include <nm-vpn-plugin.h>
+#include <NetworkManager.h>
+#include <nm-vpn-service-plugin.h>
 
 #include "nm-iodine-service-defines.h"
 
@@ -34,11 +35,11 @@
 #define NM_IODINE_PLUGIN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), NM_TYPE_IODINE_PLUGIN, NMIodinePluginClass))
 
 typedef struct {
-	NMVPNPlugin parent;
+	NMVpnServicePlugin parent;
 } NMIodinePlugin;
 
 typedef struct {
-	NMVPNPluginClass parent;
+	NMVpnServicePluginClass parent;
 } NMIodinePluginClass;
 
 GType nm_iodine_plugin_get_type (void);
