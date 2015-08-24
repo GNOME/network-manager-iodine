@@ -41,11 +41,17 @@
 #include <nm-setting-ip4-config.h>
 
 #define nm_simple_connection_new nm_connection_new
+
+#define IODINE_PLUGIN_UI_ERROR                     NM_SETTING_VPN_ERROR
+#define IODINE_PLUGIN_UI_ERROR_INVALID_PROPERTY    NM_SETTING_VPN_ERROR_INVALID_PROPERTY
  
-#else /* !NM_OPENVPN_OLD */
+#else /* !NM_IODINE_OLD */
 
 #include <NetworkManager.h>
 #include <nma-ui-utils.h>
+
+#define IODINE_PLUGIN_UI_ERROR                     NM_CONNECTION_ERROR
+#define IODINE_PLUGIN_UI_ERROR_INVALID_PROPERTY    NM_CONNECTION_ERROR_INVALID_PROPERTY
 #endif
 
 #include "nm-iodine-service-defines.h"
@@ -240,43 +246,6 @@ export (NMVpnEditorPlugin *iface,
 done:
 	fclose (f);
 	return success;
-}
-
-GQuark
-iodine_plugin_ui_error_quark (void)
-{
-	static GQuark error_quark = 0;
-
-	if (G_UNLIKELY (error_quark == 0))
-		error_quark = g_quark_from_static_string ("iodine-plugin-ui-error-quark");
-
-	return error_quark;
-}
-
-/* This should really be standard. */
-#define ENUM_ENTRY(NAME, DESC) { NAME, "" #NAME "", DESC }
-
-GType
-iodine_plugin_ui_error_get_type (void)
-{
-	static GType etype = 0;
-
-	if (etype == 0) {
-		static const GEnumValue values[] = {
-			/* Unknown error. */
-			ENUM_ENTRY (IODINE_PLUGIN_UI_ERROR_UNKNOWN,
-						"UnknownError"),
-			/* The specified property was invalid. */
-			ENUM_ENTRY (IODINE_PLUGIN_UI_ERROR_INVALID_PROPERTY,
-						"InvalidProperty"),
-			/* The specified property was missing and is required. */
-			ENUM_ENTRY (IODINE_PLUGIN_UI_ERROR_MISSING_PROPERTY,
-						"MissingProperty"),
-			{ 0, 0, 0 }
-		};
-		etype = g_enum_register_static ("IodinePluginUiError", values);
-	}
-	return etype;
 }
 
 static gboolean

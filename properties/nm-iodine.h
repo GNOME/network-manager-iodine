@@ -24,20 +24,6 @@
 
 #include <glib-object.h>
 
-typedef enum
-{
-	IODINE_PLUGIN_UI_ERROR_UNKNOWN = 0,
-	IODINE_PLUGIN_UI_ERROR_INVALID_PROPERTY,
-	IODINE_PLUGIN_UI_ERROR_MISSING_PROPERTY
-} IodinePluginUiError;
-
-
-GQuark iodine_plugin_ui_error_quark (void);
-#define IODINE_PLUGIN_UI_ERROR iodine_plugin_ui_error_quark ()
-
-#define IODINE_TYPE_PLUGIN_UI_ERROR (iodine_plugin_ui_error_get_type ()) 
-GType iodine_plugin_ui_error_get_type (void);
-
 #define IODINE_TYPE_PLUGIN_UI            (iodine_plugin_ui_get_type ())
 #define IODINE_PLUGIN_UI(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), IODINE_TYPE_PLUGIN_UI, IodinePluginUi))
 #define IODINE_PLUGIN_UI_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), IODINE_TYPE_PLUGIN_UI, IodinePluginUiClass))
