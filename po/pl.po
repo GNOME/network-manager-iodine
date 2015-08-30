@@ -4,14 +4,14 @@
 # pomóc w jego rozwijaniu i pielęgnowaniu, napisz do nas:
 # gnomepl@aviary.pl
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-# Piotr Drąg <piotrdrag@gmail.com>, 2012-2013.
-# Aviary.pl <gnomepl@aviary.pl>, 2012-2013.
+# Piotr Drąg <piotrdrag@gmail.com>, 2012-2015.
+# Aviary.pl <gnomepl@aviary.pl>, 2012-2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: network-manager-iodine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-07 00:20+0100\n"
-"PO-Revision-Date: 2013-11-07 00:21+0100\n"
+"POT-Creation-Date: 2015-08-30 17:23+0200\n"
+"PO-Revision-Date: 2015-08-30 17:24+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -23,50 +23,26 @@ msgstr ""
 "X-Poedit-Language: Polish\n"
 "X-Poedit-Country: Poland\n"
 
-#: ../auth-dialog/main.c:152
+#: ../auth-dialog/main.c:169
 #, c-format
 msgid "You need to authenticate to access the Virtual Private Network '%s'."
 msgstr ""
-"Aby uzyskać dostęp do wirtualnej sieci prywatnej \"%s\", należy się "
+"Aby uzyskać dostęp do wirtualnej sieci prywatnej „%s”, należy się "
 "uwierzytelnić."
 
-#. Otherwise, we have no saved password, or the password flags indicated
-#. * that the password should never be saved.
-#.
-#: ../auth-dialog/main.c:165 ../auth-dialog/main.c:188
+#: ../auth-dialog/main.c:182 ../auth-dialog/main.c:205
 msgid "Authenticate VPN"
 msgstr "Uwierzytelnianie VPN"
 
-#: ../auth-dialog/main.c:168
+#: ../auth-dialog/main.c:185
 msgid "Password:"
 msgstr "Hasło:"
 
-#: ../auth-dialog/vpn-password-dialog.c:90
-#: ../properties/nm-iodine-dialog.ui.h:7
-msgid "_Password:"
-msgstr "_Hasło:"
-
-#: ../auth-dialog/vpn-password-dialog.c:187
-msgid "_Cancel"
-msgstr "_Anuluj"
-
-#: ../auth-dialog/vpn-password-dialog.c:188
-msgid "_Ok"
-msgstr "_OK"
-
-#: ../auth-dialog/vpn-password-dialog.c:223
-msgid "Sh_ow passwords"
-msgstr "Wyświ_etlanie haseł"
-
-#: ../auth-dialog/vpn-password-dialog.c:248
-msgid "dialog-password"
-msgstr "Okno dialogowe hasła"
-
-#: ../properties/nm-iodine.c:46
+#: ../properties/nm-iodine.c:44
 msgid "Iodine DNS Tunnel"
 msgstr "Tunel DNS Iodine"
 
-#: ../properties/nm-iodine.c:47
+#: ../properties/nm-iodine.c:45
 msgid "Tunnel connections via DNS."
 msgstr "Połączenia tunelowe przez DNS."
 
@@ -94,6 +70,10 @@ msgstr "Opcjonalne"
 msgid "_Nameserver:"
 msgstr "Serwer _nazw:"
 
+#: ../properties/nm-iodine-dialog.ui.h:7
+msgid "_Password:"
+msgstr "_Hasło:"
+
 #: ../properties/nm-iodine-dialog.ui.h:8
 msgid "_Fragment Size:"
 msgstr "_Rozmiar fragmentu:"
@@ -106,25 +86,24 @@ msgstr "Wyświetlanie hasła"
 #, c-format
 msgid "invalid integer property '%s' or out of range [%d -> %d]"
 msgstr ""
-"nieprawidłowa własność liczby całkowitej \"%s\" lub jest poza zakresem [%d -"
-"> %d]"
+"nieprawidłowa własność liczby całkowitej „%s” lub jest poza zakresem [%d -> "
+"%d]"
 
 #: ../src/nm-iodine-service.c:142
 #, c-format
 msgid "invalid boolean property '%s' (not yes or no)"
 msgstr ""
-"nieprawidłowa własność zmiennej logicznej \"%s\" (nie wynosi \"yes\" lub \"no"
-"\")"
+"nieprawidłowa własność zmiennej logicznej „%s” (nie wynosi „yes” lub „no”)"
 
 #: ../src/nm-iodine-service.c:149
 #, c-format
 msgid "unhandled property '%s' type %s"
-msgstr "nieobsługiwana własność \"%s\" typu \"%s\""
+msgstr "nieobsługiwana własność „%s” typu „%s”"
 
 #: ../src/nm-iodine-service.c:163
 #, c-format
 msgid "property '%s' invalid or not supported"
-msgstr "własność \"%s\" jest nieprawidłowa lub nieobsługiwana"
+msgstr "własność „%s” jest nieprawidłowa lub nieobsługiwana"
 
 #: ../src/nm-iodine-service.c:179
 msgid "No VPN configuration options."
@@ -134,6 +113,6 @@ msgstr "Brak opcji konfiguracji VPN."
 msgid "No VPN secrets!"
 msgstr "Brak haseł VPN."
 
-#: ../src/nm-iodine-service.c:483
+#: ../src/nm-iodine-service.c:480
 msgid "Could not find iodine binary."
 msgstr "Nie można odnaleźć pliku binarnego iodine."
