@@ -624,14 +624,14 @@ nm_iodine_plugin_class_init (NMIodinePluginClass *iodine_class)
 }
 
 NMIodinePlugin *
-nm_iodine_plugin_new (void)
+nm_iodine_plugin_new (const char *bus_name)
 {
 	NMIodinePlugin *plugin;
 	GError *error = NULL;
 
 	plugin = (NMIodinePlugin *) g_initable_new (NM_TYPE_IODINE_PLUGIN, NULL, &error,
 	                                            NM_VPN_SERVICE_PLUGIN_DBUS_SERVICE_NAME,
-	                                            NM_DBUS_SERVICE_IODINE,
+	                                            bus_name,
 	                                            NULL);
 
 	if (!plugin) {
@@ -652,12 +652,20 @@ int main (int argc, char *argv[])
 {
 	NMIodinePlugin *plugin;
 	GMainLoop *main_loop;
+	gchar *bus_name = NM_DBUS_SERVICE_IODINE;
 
 #if !GLIB_CHECK_VERSION(2,36,0)
 	g_type_init ();
 #endif
 
-	plugin = nm_iodine_plugin_new ();
+	if (argc == 3 && !strcmp (argv[1], "--bus-name"))
+		bus_name = argv[2];
+	else if (argc != 1) {
+		g_printerr ("Usage: %s [--bus-name <bus-name>]\n", argv[0]);
+		exit (EXIT_FAILURE);
+	}
+
+	plugin = nm_iodine_plugin_new (bus_name);
 	if (!plugin)
 		exit (EXIT_FAILURE);
 

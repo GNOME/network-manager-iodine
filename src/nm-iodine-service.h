@@ -44,6 +44,6 @@ typedef struct {
 
 GType nm_iodine_plugin_get_type (void);
 
-NMIodinePlugin *nm_iodine_plugin_new (void);
+NMIodinePlugin *nm_iodine_plugin_new (const char *bus_name);
 
 #endif /* NM_IODINE_PLUGIN_H */

@@ -2,6 +2,7 @@
 name=iodine
 service=org.freedesktop.NetworkManager.iodine
 program=@LIBEXECDIR@/nm-iodine-service
+supports-multiple-connections=true
 
 [libnm]
 plugin=@PLUGINDIR@/libnm-vpn-plugin-iodine.so
