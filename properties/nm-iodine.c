@@ -59,7 +59,7 @@
 
 #define IODINE_PLUGIN_NAME    _("Iodine DNS Tunnel")
 #define IODINE_PLUGIN_DESC    _("Tunnel connections via DNS.")
-#define IODINE_PLUGIN_SERVICE NM_DBUS_SERVICE_IODINE
+#define IODINE_PLUGIN_SERVICE NM_VPN_SERVICE_TYPE_IODINE
 
 #define PW_TYPE_SAVE   0
 #define PW_TYPE_ASK    1
@@ -145,7 +145,7 @@ import (NMVpnEditorPlugin *iface, const char *path, GError **error)
 	s_vpn = NM_SETTING_VPN (nm_setting_vpn_new ());
 	g_object_set (s_vpn,
 	              NM_SETTING_VPN_SERVICE_TYPE,
-	              NM_DBUS_SERVICE_IODINE,
+	              NM_VPN_SERVICE_TYPE_IODINE,
 	              NULL);
 	nm_connection_add_setting (connection, NM_SETTING (s_vpn));
 
@@ -543,7 +543,7 @@ update_connection (NMVpnEditor *iface,
 
 	s_vpn = NM_SETTING_VPN (nm_setting_vpn_new ());
 	g_object_set (s_vpn, NM_SETTING_VPN_SERVICE_TYPE,
-	              NM_DBUS_SERVICE_IODINE,
+	              NM_VPN_SERVICE_TYPE_IODINE,
 	              NULL);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "topdomain_entry"));

@@ -21,6 +21,8 @@
 #ifndef NM_IODINE_SERVICE_DEFINES_H
 #define NM_IODINE_SERVICE_DEFINES_H
 
+#define NM_VPN_SERVICE_TYPE_IODINE    "org.freedesktop.NetworkManager.iodine"
+
 #define NM_DBUS_SERVICE_IODINE    "org.freedesktop.NetworkManager.iodine"
 #define NM_DBUS_INTERFACE_IODINE  "org.freedesktop.NetworkManager.iodine"
 #define NM_DBUS_PATH_IODINE       "/org/freedesktop/NetworkManager/iodine"
