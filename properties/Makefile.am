@@ -19,11 +19,7 @@ common_CFLAGS =                                         \
 	-I$(top_srcdir)/src				\
         -DICONDIR=\""$(datadir)/pixmaps"\"              \
         -DUIDIR=\""$(uidir)"\"                          \
-        -DG_DISABLE_DEPRECATED                          \
-        -DGDK_DISABLE_DEPRECATED                        \
-        -DGNOME_DISABLE_DEPRECATED                      \
-        -DGNOMELOCALEDIR=\"$(datadir)/locale\"		\
-        -DVERSION=\"$(VERSION)\"
+        -DGNOMELOCALEDIR=\"$(datadir)/locale\"
 
 libnm_vpn_plugin_iodine_la_CFLAGS =                     \
         $(LIBNM_CFLAGS)                                 \
