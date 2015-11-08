@@ -1,0 +1,110 @@
+# Portuguese translation for network-manager-iodine.
+# Copyright (C) 2015 network-manager-iodine's COPYRIGHT HOLDER
+# This file is distributed under the same license as the network-manager-iodine package.
+# Tiago S. <almosthumane@portugalmail.pt>, 2015.
+# Pedro Albuquerque <palbuquerque73@gmail.com>, 2015.
+msgid ""
+msgstr ""
+"Project-Id-Version: network-manager-iodine master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product"
+"=network-manager-iodine&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2015-10-31 01:46+0000\n"
+"PO-Revision-Date: 2015-11-08 08:39+0100\n"
+"Last-Translator: Pedro Albuquerque <palbuquerque73@gmail.com>\n"
+"Language-Team: Pedro Albuquerque\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Virtaal 0.7.1\n"
+"X-Project-Style: gnome\n"
+
+#: ../auth-dialog/main.c:169
+#, c-format
+msgid "You need to authenticate to access the Virtual Private Network '%s'."
+msgstr "Tem de se autenticar para aceder à rede privada virtual(VPN) '%s'."
+
+#: ../auth-dialog/main.c:182 ../auth-dialog/main.c:205
+msgid "Authenticate VPN"
+msgstr "Autenticação VPN"
+
+#: ../auth-dialog/main.c:185
+msgid "Password:"
+msgstr "Senha:"
+
+#: ../properties/nm-iodine.c:44
+msgid "Iodine DNS Tunnel"
+msgstr "Túnel DNS Iodine"
+
+#: ../properties/nm-iodine.c:45
+msgid "Tunnel connections via DNS."
+msgstr "Ligações em túnel via DNS."
+
+#: ../properties/nm-iodine-dialog.ui.h:1
+msgid "Saved"
+msgstr "Gravado"
+
+#: ../properties/nm-iodine-dialog.ui.h:2
+msgid "Always ask"
+msgstr "Perguntar sempre"
+
+#: ../properties/nm-iodine-dialog.ui.h:3
+msgid "General"
+msgstr "Geral"
+
+#: ../properties/nm-iodine-dialog.ui.h:4
+msgid "_Toplevel Domain:"
+msgstr "Domínio de _Topo:"
+
+#: ../properties/nm-iodine-dialog.ui.h:5
+msgid "Optional"
+msgstr "Opcional"
+
+#: ../properties/nm-iodine-dialog.ui.h:6
+msgid "_Nameserver:"
+msgstr "Servidor de _Nomes:"
+
+#: ../properties/nm-iodine-dialog.ui.h:7
+msgid "_Password:"
+msgstr "_Senha:"
+
+#: ../properties/nm-iodine-dialog.ui.h:8
+msgid "_Fragment Size:"
+msgstr "Tamanho do _Fragmento:"
+
+#: ../properties/nm-iodine-dialog.ui.h:9
+msgid "Show password"
+msgstr "Mostrar senha"
+
+#: ../src/nm-iodine-service.c:131
+#, c-format
+msgid "invalid integer property '%s' or out of range [%d -> %d]"
+msgstr "propriedade inteira \"%s\" inválida ou fora dos limites [%d -> %d]"
+
+#: ../src/nm-iodine-service.c:142
+#, c-format
+msgid "invalid boolean property '%s' (not yes or no)"
+msgstr "propriedade booliana \"%s\" inválida (não é sim ou não)"
+
+#: ../src/nm-iodine-service.c:149
+#, c-format
+msgid "unhandled property '%s' type %s"
+msgstr "propriedade não gerida \"%s\" tipo %s"
+
+#: ../src/nm-iodine-service.c:163
+#, c-format
+msgid "property '%s' invalid or not supported"
+msgstr "propriedade \"%s\" inválida ou não suportada"
+
+#: ../src/nm-iodine-service.c:179
+msgid "No VPN configuration options."
+msgstr "Sem opções de configuração VPN."
+
+#: ../src/nm-iodine-service.c:198
+msgid "No VPN secrets!"
+msgstr "Sem segredos VPN!"
+
+#: ../src/nm-iodine-service.c:480
+msgid "Could not find iodine binary."
+msgstr "Impossível encontrar um binário iodine."
