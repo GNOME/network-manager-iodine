@@ -1,0 +1,107 @@
+# Catalan translation for network-manager-iodine.
+# Copyright (C) 2016 network-manager-iodine's COPYRIGHT HOLDER
+# This file is distributed under the same license as the network-manager-iodine package.
+# Walter Garcia-Fontes <walter.garcia@upf.edu>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: network-manager-iodine master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=network-manager-iodine&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2016-01-06 01:57+0000\n"
+"PO-Revision-Date: 2016-01-06 08:56+0100\n"
+"Last-Translator: Walter Garcia-Fontes <walter.garcia@upf.edu>\n"
+"Language-Team: Catalan <gnome@llistes.softcatala.org>\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../auth-dialog/main.c:169
+#, c-format
+msgid "You need to authenticate to access the Virtual Private Network '%s'."
+msgstr "Heu d'autentificar-vos per accedir la xarxa privada virtual «%s»."
+
+#: ../auth-dialog/main.c:182 ../auth-dialog/main.c:205
+msgid "Authenticate VPN"
+msgstr "Autentifica la VPN"
+
+#: ../auth-dialog/main.c:185
+msgid "Password:"
+msgstr "Contrasenya:"
+
+#: ../properties/nm-iodine.c:44
+msgid "Iodine DNS Tunnel"
+msgstr "Túnel DNS Iodine"
+
+#: ../properties/nm-iodine.c:45
+msgid "Tunnel connections via DNS."
+msgstr "Connexions de túnel a través de DNS."
+
+#: ../properties/nm-iodine-dialog.ui.h:1
+msgid "Saved"
+msgstr "Desat"
+
+#: ../properties/nm-iodine-dialog.ui.h:2
+msgid "Always ask"
+msgstr "Pregunta sempre"
+
+#: ../properties/nm-iodine-dialog.ui.h:3
+msgid "General"
+msgstr "General"
+
+#: ../properties/nm-iodine-dialog.ui.h:4
+msgid "_Toplevel Domain:"
+msgstr "Domini de nivell _superior:"
+
+#: ../properties/nm-iodine-dialog.ui.h:5
+msgid "Optional"
+msgstr "Opcional"
+
+#: ../properties/nm-iodine-dialog.ui.h:6
+msgid "_Nameserver:"
+msgstr "Servidor de _noms:"
+
+#: ../properties/nm-iodine-dialog.ui.h:7
+msgid "_Password:"
+msgstr "_Contrasenya:"
+
+#: ../properties/nm-iodine-dialog.ui.h:8
+msgid "_Fragment Size:"
+msgstr "Mida del _fragment:"
+
+#: ../properties/nm-iodine-dialog.ui.h:9
+msgid "Show password"
+msgstr "Mostra la contrasenya"
+
+#: ../src/nm-iodine-service.c:131
+#, c-format
+msgid "invalid integer property '%s' or out of range [%d -> %d]"
+msgstr "propietat d'enter «%s» no vàlida o fora de rang [%d -> %d]"
+
+#: ../src/nm-iodine-service.c:142
+#, c-format
+msgid "invalid boolean property '%s' (not yes or no)"
+msgstr "propietat booleana «%s» no vàlida (no és sí o no)"
+
+#: ../src/nm-iodine-service.c:149
+#, c-format
+msgid "unhandled property '%s' type %s"
+msgstr "propietat «%s» o gestionada de tipus %s"
+
+#: ../src/nm-iodine-service.c:163
+#, c-format
+msgid "property '%s' invalid or not supported"
+msgstr "propietat «%s» no vàlida o sense suport"
+
+#: ../src/nm-iodine-service.c:179
+msgid "No VPN configuration options."
+msgstr "No hi ha opcions de configuració de la VPN"
+
+#: ../src/nm-iodine-service.c:198
+msgid "No VPN secrets!"
+msgstr "No hi ha secrets de la VPN!"
+
+#: ../src/nm-iodine-service.c:480
+msgid "Could not find iodine binary."
+msgstr "No s'ha pogut trobar el binari iodine."
