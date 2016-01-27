@@ -635,21 +635,23 @@ int main (int argc, char *argv[])
 	GMainLoop *main_loop;
 	gchar *bus_name = NM_DBUS_SERVICE_IODINE;
 	GError *error = NULL;
+	gboolean watch_peer = FALSE;
 
 #if !GLIB_CHECK_VERSION(2,36,0)
 	g_type_init ();
 #endif
 
-	if (argc == 3 && !strcmp (argv[1], "--bus-name"))
+	if (argc == 3 && !strcmp (argv[1], "--bus-name")) {
 		bus_name = argv[2];
-	else if (argc != 1) {
+		watch_peer = TRUE;
+	} else if (argc != 1) {
 		g_printerr ("Usage: %s [--bus-name <bus-name>]\n", argv[0]);
 		exit (EXIT_FAILURE);
 	}
 
 	plugin = (NMIodinePlugin *) g_initable_new (NM_TYPE_IODINE_PLUGIN, NULL, &error,
-	                                            NM_VPN_SERVICE_PLUGIN_DBUS_SERVICE_NAME,
-	                                            bus_name,
+	                                            NM_VPN_SERVICE_PLUGIN_DBUS_SERVICE_NAME, bus_name,
+	                                            NM_VPN_SERVICE_PLUGIN_DBUS_WATCH_PEER, watch_peer,
 	                                            NULL);
 
 	if (!plugin) {
