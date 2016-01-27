@@ -623,25 +623,6 @@ nm_iodine_plugin_class_init (NMIodinePluginClass *iodine_class)
 	parent_class->disconnect = real_disconnect;
 }
 
-NMIodinePlugin *
-nm_iodine_plugin_new (const char *bus_name)
-{
-	NMIodinePlugin *plugin;
-	GError *error = NULL;
-
-	plugin = (NMIodinePlugin *) g_initable_new (NM_TYPE_IODINE_PLUGIN, NULL, &error,
-	                                            NM_VPN_SERVICE_PLUGIN_DBUS_SERVICE_NAME,
-	                                            bus_name,
-	                                            NULL);
-
-	if (!plugin) {
-		g_warning ("Failed to initialize a plugin instance: %s", error->message);
-		g_error_free (error);
-	}
-
-	return plugin;
-}
-
 static void
 quit_mainloop (NMIodinePlugin *plugin, gpointer user_data)
 {
@@ -653,6 +634,7 @@ int main (int argc, char *argv[])
 	NMIodinePlugin *plugin;
 	GMainLoop *main_loop;
 	gchar *bus_name = NM_DBUS_SERVICE_IODINE;
+	GError *error = NULL;
 
 #if !GLIB_CHECK_VERSION(2,36,0)
 	g_type_init ();
@@ -665,9 +647,16 @@ int main (int argc, char *argv[])
 		exit (EXIT_FAILURE);
 	}
 
-	plugin = nm_iodine_plugin_new (bus_name);
-	if (!plugin)
+	plugin = (NMIodinePlugin *) g_initable_new (NM_TYPE_IODINE_PLUGIN, NULL, &error,
+	                                            NM_VPN_SERVICE_PLUGIN_DBUS_SERVICE_NAME,
+	                                            bus_name,
+	                                            NULL);
+
+	if (!plugin) {
+		g_warning ("Failed to initialize a plugin instance: %s", error->message);
+		g_error_free (error);
 		exit (EXIT_FAILURE);
+	}
 
 	main_loop = g_main_loop_new (NULL, FALSE);
 
