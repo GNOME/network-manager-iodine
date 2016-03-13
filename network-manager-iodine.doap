@@ -10,7 +10,7 @@
 
   <homepage rdf:resource="http://honk.sigxcpu.org/piki/projects/network-manager-iodine/" />
   <category rdf:resource="http://api.gnome.org/doap-extensions#development" />
-  <download-page rdf:resource="http://honk.sigxcpu.org/projects/network-manager-iodine/tarballs/" />
+  <download-page rdf:resource="https://download.gnome.org/sources/NetworkManager-iodine/" />
 
   <maintainer>
     <foaf:Person>
