@@ -7,9 +7,11 @@
 
   <name xml:lang="en">network-manager-iodine</name>
   <shortdesc xml:lang="en">Iodine support for NetworkManager</shortdesc>
+  <description>Provides connections via DNS tunnels using NetworkManager and Iodine.</description>
 
   <homepage rdf:resource="http://honk.sigxcpu.org/piki/projects/network-manager-iodine/" />
-  <category rdf:resource="http://api.gnome.org/doap-extensions#development" />
+  <category rdf:resource="http://api.gnome.org/doap-extensions#infrastructure" />
+  <programming-language>C</programming-language>
   <download-page rdf:resource="https://download.gnome.org/sources/NetworkManager-iodine/" />
 
   <maintainer>
