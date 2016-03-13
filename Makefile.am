@@ -13,11 +13,18 @@ endif
 dbusservicedir = $(sysconfdir)/dbus-1/system.d
 dbusservice_DATA = nm-iodine-service.conf
 
-nmvpnservicedir = $(sysconfdir)/NetworkManager/VPN
+nmvpnservicedir = $(NM_VPN_SERVICE_DIR)
 nmvpnservice_DATA = nm-iodine-service.name
 
+if WITH_LIBNM_GLIB
+nmvpnoldservicedir = $(sysconfdir)/NetworkManager/VPN
+nmvpnoldservice_DATA = nm-iodine-service.name
+endif
+
 nm-iodine-service.name: $(srcdir)/nm-iodine-service.name.in
-	sed -e 's|[@]LIBEXECDIR[@]|$(libexecdir)|g' $< >$@
+	sed -e 's|[@]LIBEXECDIR[@]|$(libexecdir)|g' \
+	    -e 's|[@]PLUGINDIR[@]|$(libdir)/NetworkManager|g' \
+	    $< >$@
 
 DISTCHECK_CONFIGURE_FLAGS = --enable-more-warnings=yes
 

@@ -1,5 +1,5 @@
 AM_CPPFLAGS = \
-	$(NM_CFLAGS) \
+	$(LIBNM_CFLAGS) \
 	-DG_DISABLE_DEPRECATED \
 	-DBINDIR=\"$(bindir)\" \
 	-DPREFIX=\""$(prefix)"\" \
@@ -19,6 +19,6 @@ nm_iodine_service_SOURCES = \
 	nm-iodine-service-defines.h
 
 nm_iodine_service_LDADD = \
-	$(NM_LIBS)
+	$(LIBNM_LIBS)
 
 CLEANFILES = *~

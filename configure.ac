@@ -1,6 +1,6 @@
 AC_PREREQ(2.52)
 
-AC_INIT(NetworkManager-iodine, 0.0.5, agx@sigxcpu.org, NetworkManager-iodine)
+AC_INIT(NetworkManager-iodine, 1.1.0, agx@sigxcpu.org, NetworkManager-iodine)
 AM_INIT_AUTOMAKE([subdir-objects no-dist-gzip dist-xz])
 AM_MAINTAINER_MODE
 
@@ -45,6 +45,9 @@ AM_CONDITIONAL(WITH_GNOME, test x"$with_gnome" != xno)
 AC_ARG_WITH(authdlg, AS_HELP_STRING([--without-authdlg], [Build NetworkManager-iodine without authentication dialog]))
 AM_CONDITIONAL(WITH_AUTHDLG, test x"$with_authdlg" != xno)
 
+AC_ARG_WITH(libnm-glib, AS_HELP_STRING([--without-libnm-glib], [Build NetworkManager-iodine without libnm-glib comatibility]))
+AM_CONDITIONAL(WITH_LIBNM_GLIB, test x"$with_libnm_glib" != xno)
+
 GETTEXT_PACKAGE=NetworkManager-iodine
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package])
@@ -57,16 +60,26 @@ if test x"$with_gnome" != xno; then
 	PKG_CHECK_MODULES(GTK, gtk+-3.0 > $gtk3_req, ,
 	                  [PKG_CHECK_MODULES(GTK, gtk+-2.0 > $gtk2_req)])
 
+	PKG_CHECK_MODULES(LIBNMA, libnma >= 1.1.0)
         PKG_CHECK_MODULES(LIBSECRET, libsecret-1)
+
+	if test x"$with_libnm_glib" != xno; then
+		PKG_CHECK_MODULES(LIBNM_GTK, libnm-gtk >= 0.9.9.0)
+		PKG_CHECK_MODULES(LIBNM_GLIB,
+		                  NetworkManager >= 1.1.0
+		                  libnm-util >= 1.1.0
+		                  libnm-glib  >= 1.1.0
+		                  libnm-glib-vpn >= 1.1.0)
+	fi
+
 fi
 
-PKG_CHECK_MODULES(NM,
-                  NetworkManager >= 0.9.2
-                  libnm-util >= 0.9.2
-                  libnm-glib  >= 0.9.2
-                  libnm-glib-vpn >= 0.9.2)
+PKG_CHECK_MODULES(LIBNM, libnm >= 1.1.0)
+LIBNM_CFLAGS="$LIBNM_CFLAGS -DNM_VERSION_MIN_REQUIRED=NM_VERSION_1_2"
+LIBNM_CFLAGS="$LIBNM_CFLAGS -DNM_VERSION_MAX_ALLOWED=NM_VERSION_1_2"
 
-PKG_CHECK_MODULES(NMGTK, libnm-gtk >= 0.9.9.0)
+NM_VPN_SERVICE_DIR=`$PKG_CONFIG pkg-config --define-variable prefix='\${prefix}' --variable vpnservicedir libnm`
+AC_SUBST(NM_VPN_SERVICE_DIR)
 
 NM_COMPILER_WARNINGS
 
