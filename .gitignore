@@ -21,12 +21,14 @@ stamp-*
 TAGS
 autom4te.cache
 intltool-*
+po/NetworkManager-iodine.pot
 po/*.gmo
 po/.intltool-merge-cache
 m4/gtk-doc.m4
 m4/intltool.m4
 m4/libtool.m4
 m4/lt*.m4
+network-manager-iodine.appdata.xml
 
 nm-iodine-service.name
 src/nm-iodine-service
