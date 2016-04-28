@@ -28,7 +28,7 @@ m4/gtk-doc.m4
 m4/intltool.m4
 m4/libtool.m4
 m4/lt*.m4
-network-manager-iodine.appdata.xml
+network-manager-iodine.metainfo.xml
 
 nm-iodine-service.name
 src/nm-iodine-service

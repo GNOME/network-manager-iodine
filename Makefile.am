@@ -33,7 +33,7 @@ endif
 
 appdatadir = $(datadir)/appdata
 appdata_DATA = $(appdata_in_files:.xml.in=.xml)
-appdata_in_files = appdata/network-manager-iodine.appdata.xml.in
+appdata_in_files = appdata/network-manager-iodine.metainfo.xml.in
 @INTLTOOL_XML_RULE@
 
 nm-iodine-service.name: $(srcdir)/nm-iodine-service.name.in
