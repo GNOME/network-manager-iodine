@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: network-manager-iodine master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=network-manager-iodine&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-10-12 11:29+0000\n"
-"PO-Revision-Date: 2016-01-01 21:58+0100\n"
+"POT-Creation-Date: 2016-04-23 07:06+0000\n"
+"PO-Revision-Date: 2016-08-04 13:13+0200\n"
 "Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -18,7 +18,33 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.6\n"
+"X-Generator: Poedit 1.8.8\n"
+
+#: ../appdata/network-manager-iodine.appdata.xml.in.h:1
+#: ../properties/nm-iodine.c:60
+msgid "Iodine DNS Tunnel"
+msgstr "Iodine DNS-Tunnel"
+
+#: ../appdata/network-manager-iodine.appdata.xml.in.h:2
+msgid "Client for Iodine DNS Tunnel"
+msgstr "Client für Iodine DNS-Tunnel"
+
+#: ../appdata/network-manager-iodine.appdata.xml.in.h:3
+msgid "Support for tunnelling IP traffic via DNS using Iodine."
+msgstr ""
+"Unterstützung für die Tunnelung des IP-Verkehrs über DNS mittels Iodine."
+
+#: ../appdata/network-manager-iodine.appdata.xml.in.h:4
+msgid ""
+"This is useful to get useful connectivity in cases where Internet access is "
+"severely filtered."
+msgstr ""
+"Dies ist nützlich, um brauchbare Verbindungen in solchen Fällen aufzubauen, "
+"wenn der Internetzugriff sehr stark durch Filter eingeschränkt ist."
+
+#: ../appdata/network-manager-iodine.appdata.xml.in.h:5
+msgid "Guido Günther"
+msgstr "Guido Günther"
 
 #: ../auth-dialog/main.c:169
 #, c-format
@@ -35,11 +61,7 @@ msgstr "VPN legitimieren"
 msgid "Password:"
 msgstr "Passwort:"
 
-#: ../properties/nm-iodine.c:46
-msgid "Iodine DNS Tunnel"
-msgstr "Iodine DNS-Tunnel"
-
-#: ../properties/nm-iodine.c:47
+#: ../properties/nm-iodine.c:61
 msgid "Tunnel connections via DNS."
 msgstr "Tunnelverbindung via DNS."
 
@@ -79,36 +101,36 @@ msgstr "_Fragmentgröße:"
 msgid "Show password"
 msgstr "Passwort zeigen"
 
-#: ../src/nm-iodine-service.c:131
+#: ../src/nm-iodine-service.c:133
 #, c-format
 msgid "invalid integer property '%s' or out of range [%d -> %d]"
 msgstr ""
 "Ungültige Ganzzahl-Eigenschaft »%s« oder außerhalb des Bereichs [%d -> %d]"
 
-#: ../src/nm-iodine-service.c:142
+#: ../src/nm-iodine-service.c:144
 #, c-format
 msgid "invalid boolean property '%s' (not yes or no)"
 msgstr "Ungültige boolesche Eigenschaft »%s« (nicht »yes« oder »no«)"
 
-#: ../src/nm-iodine-service.c:149
+#: ../src/nm-iodine-service.c:151
 #, c-format
 msgid "unhandled property '%s' type %s"
 msgstr "Unbehandelte Eigenschaft »%s« des Typs %s"
 
-#: ../src/nm-iodine-service.c:163
+#: ../src/nm-iodine-service.c:165
 #, c-format
 msgid "property '%s' invalid or not supported"
 msgstr "Eigenschaft »%s« ist ungültig oder wird nicht unterstützt"
 
-#: ../src/nm-iodine-service.c:179
+#: ../src/nm-iodine-service.c:181
 msgid "No VPN configuration options."
 msgstr "Keine VPN-Konfigurationsoptionen."
 
-#: ../src/nm-iodine-service.c:198
+#: ../src/nm-iodine-service.c:200
 msgid "No VPN secrets!"
 msgstr "Keine VPN-Geheimnisse!"
 
-#: ../src/nm-iodine-service.c:483
+#: ../src/nm-iodine-service.c:450
 msgid "Could not find iodine binary."
 msgstr "iodine-Binärdatei konnte nicht gefunden werden."
 
