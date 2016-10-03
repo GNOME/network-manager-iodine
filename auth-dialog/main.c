@@ -167,7 +167,7 @@ get_secrets (const char *vpn_uuid,
 	}
 
 	prompt = g_strdup_printf (_("You need to authenticate to access the "
-								"Virtual Private Network '%s'."), vpn_name);
+								"Virtual Private Network “%s”."), vpn_name);
 
 	/* In external_ui mode, we don't actually show the dialog.
 	 *Instead we pass back everything that is needed to build it */
