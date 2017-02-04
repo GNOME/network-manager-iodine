@@ -392,6 +392,9 @@ iodine_watch_cb (GPid pid, gint status, gpointer user_data)
 	} else {
 		nm_vpn_service_plugin_disconnect (NM_VPN_SERVICE_PLUGIN (plugin), NULL);
 	}
+
+	g_variant_builder_clear(&priv->ip4config);
+	priv->failure = -1;
 }
 
 static gboolean
@@ -523,7 +526,10 @@ real_connect (NMVpnServicePlugin *plugin,
               GError **error)
 {
 	NMSettingVpn *s_vpn;
+	NMIodinePluginPrivate *priv = NM_IODINE_PLUGIN_GET_PRIVATE (plugin);
 	gint ret = -1;
+
+	g_variant_builder_init(&priv->ip4config, G_VARIANT_TYPE_VARDICT);
 
 	s_vpn = nm_connection_get_setting_vpn (connection);
 	g_assert (s_vpn);
@@ -538,6 +544,7 @@ real_connect (NMVpnServicePlugin *plugin,
 		return TRUE;
 
  out:
+	g_variant_builder_clear(&priv->ip4config);
 	return FALSE;
 }
 
@@ -605,7 +612,6 @@ nm_iodine_plugin_init (NMIodinePlugin *plugin)
 {
 	NMIodinePluginPrivate *priv = NM_IODINE_PLUGIN_GET_PRIVATE (plugin);
 
-	g_variant_builder_init (&priv->ip4config, G_VARIANT_TYPE_VARDICT);
 	priv->failure = -1;
 }
 
