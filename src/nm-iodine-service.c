@@ -250,6 +250,7 @@ iodine_parse_stderr_line (NMVpnServicePlugin *plugin,
 	NMIodinePluginPrivate *priv = NM_IODINE_PLUGIN_GET_PRIVATE (plugin);
 	gchar **split = NULL;
 	GVariant *val;
+	long int mtu;
 	gint len;
 	gint ret = 1;
 
@@ -321,15 +322,21 @@ iodine_parse_stderr_line (NMVpnServicePlugin *plugin,
 			return -1;
 		}
 	} else if (g_str_has_prefix(line, "Setting MTU of ")) {
-		g_message("MTU: %s", split[len-1]);
-		val = addr4_to_gvariant (split[len-1]);
-		if (val) {
-			g_variant_builder_add (&priv->ip4config, "{sv}",
-			                       NM_VPN_PLUGIN_IP4_CONFIG_MTU,
-			                       val);
+		errno = 0;
+		mtu = strtol (split[len-1], NULL, 10);
+		if (errno || mtu < 0 || mtu > 20000) {
+			g_warning("Ignoring invalid tunnel MTU '%s'", split[len-1]);
 		} else {
-			g_warning("Could not set MTU");
-			return -1;
+			g_message("MTU: %s", split[len-1]);
+			val = g_variant_new_uint32 ((guint32) mtu);
+			if (val) {
+				g_variant_builder_add (&priv->ip4config, "{sv}",
+									   NM_VPN_PLUGIN_IP4_CONFIG_MTU,
+									   val);
+			} else {
+				g_warning("Could not set MTU");
+				return -1;
+			}
 		}
 	} else if (g_str_has_prefix(line, "Opened dns")) {
 		g_message("Interface: %s", split[len-1]);
