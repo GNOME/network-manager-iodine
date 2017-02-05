@@ -396,6 +396,11 @@ iodine_stderr_cb (GIOChannel *source, GIOCondition condition, gpointer plugin)
 		g_message("Parsing done, sending IP4 config");
 		nm_vpn_service_plugin_set_ip4_config(plugin,
 		                                     g_variant_builder_end (&priv->ip4config));
+	} else if (ret < 0) {
+		nm_vpn_service_plugin_failure (NM_VPN_SERVICE_PLUGIN (plugin),
+									   NM_VPN_PLUGIN_FAILURE_BAD_IP_CONFIG);
+		g_variant_builder_end (&priv->ip4config);
+		return FALSE;
 	}
 	g_free (line);
 	return TRUE;
