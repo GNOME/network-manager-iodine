@@ -16,7 +16,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * Copyright © 2012 Guido Günther <agx@sigxcpu.org>
+ * Copyright © 2012,2017 Guido Günther <agx@sigxcpu.org>
  *
  * Based on network-manager-{openconnect,pptp}
  */
@@ -341,8 +341,14 @@ iodine_stderr_cb (GIOChannel *source, GIOCondition condition, gpointer plugin)
 	NMIodinePluginPrivate *priv = NM_IODINE_PLUGIN_GET_PRIVATE (plugin);
 
 	status = g_io_channel_read_line (source, &line, NULL, NULL, &err);
-	if (status != G_IO_STATUS_NORMAL) {
-		g_warning ("Fetching data failed: %s", err->message);
+	switch (status) {
+	case G_IO_STATUS_NORMAL:
+		break;
+	case G_IO_STATUS_EOF:
+		return FALSE;
+	default:
+		g_warning ("Fetching data failed: %s",
+				   (err && err->message) ? err->message : "unknown error");
 		return FALSE;
 	}
 
@@ -504,7 +510,7 @@ nm_iodine_start_iodine_binary (NMIodinePlugin *plugin,
 
 	stderr_channel = g_io_channel_unix_new (stderr_fd);
 	g_io_add_watch(stderr_channel,
-	               G_IO_IN,
+	               G_IO_IN | G_IO_HUP,
 	               iodine_stderr_cb,
 	               plugin);
 
