@@ -268,52 +268,80 @@ iodine_parse_stderr_line (NMVpnServicePlugin *plugin,
 	if (g_str_has_prefix(line, "Server tunnel IP is ")) {
 		g_message("PTP address: %s", split[len-1]);
 		val = addr4_to_gvariant (split[len-1]);
-		if (val)
+		if (val) {
 			g_variant_builder_add (&priv->ip4config, "{sv}",
 			                       NM_VPN_PLUGIN_IP4_CONFIG_PTP,
 			                       val);
+		} else {
+			g_warning("Could not set PTP");
+			return -1;
+		}
 		val = addr4_to_gvariant (split[len-1]);
-		if (val)
+		if (val) {
 			g_variant_builder_add (&priv->ip4config, "{sv}",
 			                       NM_VPN_PLUGIN_IP4_CONFIG_INT_GATEWAY,
 			                       val);
+		} else {
+			g_warning("Could not set internal gateway");
+			return -1;
+		}
 	} else if (g_str_has_prefix(line, "Sending DNS queries for ")) {
 		g_message("External gw: %s", split[len-1]);
 		val = addr4_to_gvariant (split[len-1]);
-		if (val)
+		if (val) {
 			g_variant_builder_add (&priv->ip4config, "{sv}",
 			                       NM_VPN_PLUGIN_IP4_CONFIG_EXT_GATEWAY,
 			                       val);
+		} else {
+			g_warning("Could not set external gateway");
+			return -1;
+		}
 	} else if (g_str_has_prefix(line, "Sending raw traffic directly to ")) {
 		/* If the DNS server is directly reachable we need to set it
-		   as external gateway overwriting the above valus */
+		   as external gateway overwriting the above values */
 		g_message("Overwrite ext. gw.  address: %s", split[len-1]);
 		val = addr4_to_gvariant (split[len-1]);
-		if (val)
+		if (val) {
 			g_variant_builder_add (&priv->ip4config, "{sv}",
 			                       NM_VPN_PLUGIN_IP4_CONFIG_EXT_GATEWAY,
 			                       val);
+		} else {
+			g_warning("Could not set external gateway");
+			return -1;
+		}
 	} else if (g_str_has_prefix(line, "Setting IP of dns")) {
 		g_message("Address: %s", split[len-1]);
 		val = addr4_to_gvariant (split[len-1]);
-		if (val)
+		if (val) {
 			g_variant_builder_add (&priv->ip4config, "{sv}",
 			                       NM_VPN_PLUGIN_IP4_CONFIG_ADDRESS,
 			                       val);
+		} else {
+			g_warning("Could not set address");
+			return -1;
+		}
 	} else if (g_str_has_prefix(line, "Setting MTU of ")) {
 		g_message("MTU: %s", split[len-1]);
 		val = addr4_to_gvariant (split[len-1]);
-		if (val)
+		if (val) {
 			g_variant_builder_add (&priv->ip4config, "{sv}",
 			                       NM_VPN_PLUGIN_IP4_CONFIG_MTU,
 			                       val);
+		} else {
+			g_warning("Could not set MTU");
+			return -1;
+		}
 	} else if (g_str_has_prefix(line, "Opened dns")) {
 		g_message("Interface: %s", split[len-1]);
 		val = str_to_gvariant (split[len-1], FALSE);
-		if (val)
+		if (val) {
 			g_variant_builder_add (&priv->ip4config, "{sv}",
 			                       NM_VPN_PLUGIN_IP4_CONFIG_TUNDEV,
 			                       val);
+		} else {
+			g_warning("Could not set tundev");
+			return -1;
+		}
 	} else if (g_str_has_prefix(line,
 		                    "Connection setup complete, "
 		                    "transmitting data.")) {
@@ -323,7 +351,7 @@ iodine_parse_stderr_line (NMVpnServicePlugin *plugin,
 		                       val);
 		ret = 0; /* success */
 	} else
-		g_message("%s", line);
+		g_message("Unparsed: %s", line);
 
 out:
 	g_strfreev(split);
