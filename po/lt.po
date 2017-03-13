@@ -6,11 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: network-manager-iodine master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
-"product=network-manager-iodine&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-04-23 07:06+0000\n"
-"PO-Revision-Date: 2016-08-15 14:22+0300\n"
-"Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-12 15:08+0000\n"
+"PO-Revision-Date: 2017-03-13 22:14+0200\n"
+"Last-Translator: Moo\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
@@ -18,23 +17,22 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
 "%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Gtranslator 2.91.7\n"
+"X-Generator: Poedit 1.8.11\n"
 
-#: ../appdata/network-manager-iodine.appdata.xml.in.h:1
+#: ../appdata/network-manager-iodine.metainfo.xml.in.h:1
 #: ../properties/nm-iodine.c:60
 msgid "Iodine DNS Tunnel"
 msgstr "Iodine DNS tunelis"
 
-#: ../appdata/network-manager-iodine.appdata.xml.in.h:2
-#| msgid "Iodine DNS Tunnel"
+#: ../appdata/network-manager-iodine.metainfo.xml.in.h:2
 msgid "Client for Iodine DNS Tunnel"
 msgstr "Iodine DNS tunelio klientas"
 
-#: ../appdata/network-manager-iodine.appdata.xml.in.h:3
+#: ../appdata/network-manager-iodine.metainfo.xml.in.h:3
 msgid "Support for tunnelling IP traffic via DNS using Iodine."
 msgstr "IP srauto tuneliavimo per DNS naudojant Iodine palaikymas."
 
-#: ../appdata/network-manager-iodine.appdata.xml.in.h:4
+#: ../appdata/network-manager-iodine.metainfo.xml.in.h:4
 msgid ""
 "This is useful to get useful connectivity in cases where Internet access is "
 "severely filtered."
@@ -42,19 +40,20 @@ msgstr ""
 "Tai yra naudinga geram ryšiui gauti, kai interneto prieiga yra smarkiai "
 "filtruojama."
 
-#: ../appdata/network-manager-iodine.appdata.xml.in.h:5
+#: ../appdata/network-manager-iodine.metainfo.xml.in.h:5
 msgid "Guido Günther"
 msgstr "Guido Günther"
 
 #: ../auth-dialog/main.c:169
 #, c-format
-msgid "You need to authenticate to access the Virtual Private Network '%s'."
+msgid "You need to authenticate to access the Virtual Private Network “%s”."
 msgstr ""
-"Jums reikia patvirtinti tapatybę Virtualiam Privačiam Tinklui „%s“ pasiekti."
+"Norint gauti prieigą prie Virtualiojo Privačiojo Tinklo „%s“, reikia "
+"nustatyti jūsų tapatybę."
 
 #: ../auth-dialog/main.c:182 ../auth-dialog/main.c:205
 msgid "Authenticate VPN"
-msgstr "Patvirtinti VPN tapatybę"
+msgstr "Nustatyti VPN tapatybę"
 
 #: ../auth-dialog/main.c:185
 msgid "Password:"
@@ -78,11 +77,11 @@ msgstr "Bendra"
 
 #: ../properties/nm-iodine-dialog.ui.h:4
 msgid "_Toplevel Domain:"
-msgstr "_Aukščiausio lygio domenas:"
+msgstr "_Aukščiausio lygio sritis:"
 
 #: ../properties/nm-iodine-dialog.ui.h:5
 msgid "Optional"
-msgstr "Papildoma"
+msgstr "Nebūtina"
 
 #: ../properties/nm-iodine-dialog.ui.h:6
 msgid "_Nameserver:"
@@ -102,22 +101,22 @@ msgstr "Rodyti slaptažodį"
 
 #: ../src/nm-iodine-service.c:133
 #, c-format
-msgid "invalid integer property '%s' or out of range [%d -> %d]"
-msgstr "netinkama sveiko skaičiaus savybė „%s“ arba už ribų [%d -> %d]"
+msgid "invalid integer property “%s” or out of range [%d -> %d]"
+msgstr "netinkama sveikaskaitinė savybė „%s“ arba už ribų [%d -> %d]"
 
 #: ../src/nm-iodine-service.c:144
 #, c-format
-msgid "invalid boolean property '%s' (not yes or no)"
+msgid "invalid boolean property “%s” (not yes or no)"
 msgstr "netinkama loginė savybė „%s“ (ne taip arba ne)"
 
 #: ../src/nm-iodine-service.c:151
 #, c-format
-msgid "unhandled property '%s' type %s"
+msgid "unhandled property “%s” type %s"
 msgstr "neapdorotas savybės „%s“ tipas %s"
 
 #: ../src/nm-iodine-service.c:165
 #, c-format
-msgid "property '%s' invalid or not supported"
+msgid "property “%s” invalid or not supported"
 msgstr "savybė „%s“ netinkama arba nepalaikoma"
 
 #: ../src/nm-iodine-service.c:181
@@ -128,7 +127,7 @@ msgstr "Nėra VPN konfigūracijos parametrų."
 msgid "No VPN secrets!"
 msgstr "Nėra VPN paslapčių!"
 
-#: ../src/nm-iodine-service.c:450
+#: ../src/nm-iodine-service.c:494
 msgid "Could not find iodine binary."
 msgstr "Nepavyko rasti iodine programos."
 
