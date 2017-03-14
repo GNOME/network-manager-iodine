@@ -1,15 +1,14 @@
 # Italian translations for network-manager-iodine package
-# Copyright (C) 2012, 2013, 2014, 2016 the network-manager-iodine copyright holder
+# Copyright (C) 2012, 2013, 2014, 2016, 2017 the network-manager-iodine copyright holder
 # This file is distributed under the same license as the network-manager-iodine package.
-# Milo Casagrande <milo@ubuntu.com>, 2012, 2013, 2014, 2016.
+# Milo Casagrande <milo@milo.name>, 2012, 2013, 2014, 2016, 2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: network-manager-iodine\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
-"product=network-manager-iodine&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-04-23 07:06+0000\n"
-"PO-Revision-Date: 2016-05-08 13:01+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-26 08:35+0000\n"
+"PO-Revision-Date: 2017-03-14 10:02+0100\n"
 "Last-Translator: Milo Casagrande <milo@milo.name>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "Language: it\n"
@@ -17,22 +16,22 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 2.0beta3\n"
 
-#: ../appdata/network-manager-iodine.appdata.xml.in.h:1
+#: ../appdata/network-manager-iodine.metainfo.xml.in.h:1
 #: ../properties/nm-iodine.c:60
 msgid "Iodine DNS Tunnel"
 msgstr "Tunnel DNS iodine"
 
-#: ../appdata/network-manager-iodine.appdata.xml.in.h:2
+#: ../appdata/network-manager-iodine.metainfo.xml.in.h:2
 msgid "Client for Iodine DNS Tunnel"
 msgstr "Client per tunnel DNS iodine"
 
-#: ../appdata/network-manager-iodine.appdata.xml.in.h:3
+#: ../appdata/network-manager-iodine.metainfo.xml.in.h:3
 msgid "Support for tunnelling IP traffic via DNS using Iodine."
 msgstr "Supporta il \"tunnelling\" del traffico IP via DNS utilizzando Iodine."
 
-#: ../appdata/network-manager-iodine.appdata.xml.in.h:4
+#: ../appdata/network-manager-iodine.metainfo.xml.in.h:4
 msgid ""
 "This is useful to get useful connectivity in cases where Internet access is "
 "severely filtered."
@@ -40,13 +39,13 @@ msgstr ""
 "Utile per avere una buona connessione a Internet nei casi in cui l'accesso "
 "alla rete sia altamente filtrato."
 
-#: ../appdata/network-manager-iodine.appdata.xml.in.h:5
+#: ../appdata/network-manager-iodine.metainfo.xml.in.h:5
 msgid "Guido Günther"
 msgstr "Guido Günther"
 
 #: ../auth-dialog/main.c:169
 #, c-format
-msgid "You need to authenticate to access the Virtual Private Network '%s'."
+msgid "You need to authenticate to access the Virtual Private Network “%s”."
 msgstr ""
 "È necessario autenticarsi per accedere alla Rete Privata Virtuale (VPN) «%s»."
 
@@ -100,22 +99,22 @@ msgstr "Mostra password"
 
 #: ../src/nm-iodine-service.c:133
 #, c-format
-msgid "invalid integer property '%s' or out of range [%d -> %d]"
+msgid "invalid integer property “%s” or out of range [%d -> %d]"
 msgstr "Proprietà intera «%s» non valida o fuori intervallo [%d → %d]"
 
 #: ../src/nm-iodine-service.c:144
 #, c-format
-msgid "invalid boolean property '%s' (not yes or no)"
+msgid "invalid boolean property “%s” (not yes or no)"
 msgstr "Proprietà booleana «%s» non valida (non yes o no)"
 
 #: ../src/nm-iodine-service.c:151
 #, c-format
-msgid "unhandled property '%s' type %s"
+msgid "unhandled property “%s” type %s"
 msgstr "Proprietà «%s» di tipo %s non gestita"
 
 #: ../src/nm-iodine-service.c:165
 #, c-format
-msgid "property '%s' invalid or not supported"
+msgid "property “%s” invalid or not supported"
 msgstr "Proprietà «%s» non valida o non supportata"
 
 #: ../src/nm-iodine-service.c:181
@@ -126,7 +125,7 @@ msgstr "Nessuna opzione di configurazione VPN."
 msgid "No VPN secrets!"
 msgstr "Nessun segreto VPN."
 
-#: ../src/nm-iodine-service.c:450
+#: ../src/nm-iodine-service.c:494
 msgid "Could not find iodine binary."
 msgstr "Impossibile trovare il file binario iodine."
 
