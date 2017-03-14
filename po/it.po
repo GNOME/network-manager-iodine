@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: network-manager-iodine\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-26 08:35+0000\n"
-"PO-Revision-Date: 2017-03-14 10:02+0100\n"
+"PO-Revision-Date: 2017-03-14 13:34+0100\n"
 "Last-Translator: Milo Casagrande <milo@milo.name>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "Language: it\n"
@@ -47,7 +47,7 @@ msgstr "Guido Günther"
 #, c-format
 msgid "You need to authenticate to access the Virtual Private Network “%s”."
 msgstr ""
-"È necessario autenticarsi per accedere alla Rete Privata Virtuale (VPN) «%s»."
+"È necessario autenticarsi per accedere alla VPN (rete privata virtuale) «%s»."
 
 #: ../auth-dialog/main.c:182 ../auth-dialog/main.c:205
 msgid "Authenticate VPN"
