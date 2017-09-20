@@ -2,14 +2,14 @@
 # Copyright (C) 2012 network-manager-iodine's COPYRIGHT HOLDER
 # This file is distributed under the same license as the network-manager-iodine package.
 #
-# Matej Urbančič <mateju@svn.gnome.org>, 2012-2016.
+# Matej Urbančič <mateju@svn.gnome.org>, 2012–2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: network-manager-iodine master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-25 22:37+0200\n"
-"PO-Revision-Date: 2016-08-25 22:38+0200\n"
+"POT-Creation-Date: 2017-09-18 21:15+0200\n"
+"PO-Revision-Date: 2017-09-18 21:15+0200\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.0.1\n"
 
 #: ../appdata/network-manager-iodine.metainfo.xml.in.h:1
 #: ../properties/nm-iodine.c:60
@@ -45,8 +45,9 @@ msgid "Guido Günther"
 msgstr "Guido Günther"
 
 #: ../auth-dialog/main.c:169
-#, c-format
-msgid "You need to authenticate to access the Virtual Private Network '%s'."
+#, fuzzy, c-format
+#| msgid "You need to authenticate to access the Virtual Private Network '%s'."
+msgid "You need to authenticate to access the Virtual Private Network “%s”."
 msgstr "Za dostop do navideznega zasebnega omrežja '%s' je zahtevana overitev."
 
 #: ../auth-dialog/main.c:182 ../auth-dialog/main.c:205
@@ -99,23 +100,23 @@ msgstr "Pokaži geslo"
 
 #: ../src/nm-iodine-service.c:133
 #, c-format
-msgid "invalid integer property '%s' or out of range [%d -> %d]"
-msgstr "neveljavna logična lastnost '%s' obsega [%d -> %d]"
+msgid "invalid integer property “%s” or out of range [%d -> %d]"
+msgstr "neveljavna logična lastnost »%s« obsega [%d -> %d]"
 
 #: ../src/nm-iodine-service.c:144
 #, c-format
-msgid "invalid boolean property '%s' (not yes or no)"
-msgstr "neveljavna logična lastnost '%s' (ni da ali ne)"
+msgid "invalid boolean property “%s” (not yes or no)"
+msgstr "neveljavna logična lastnost »%s« (ni da ali ne)"
 
 #: ../src/nm-iodine-service.c:151
 #, c-format
-msgid "unhandled property '%s' type %s"
-msgstr "neupravljana lastnost '%s' vrste %s"
+msgid "unhandled property “%s” type %s"
+msgstr "neupravljana lastnost »%s« vrste %s"
 
 #: ../src/nm-iodine-service.c:165
 #, c-format
-msgid "property '%s' invalid or not supported"
-msgstr "lastnost '%s' je neveljavna ali pa ni podprta"
+msgid "property “%s” invalid or not supported"
+msgstr "lastnost »%s« je neveljavna ali pa ni podprta"
 
 #: ../src/nm-iodine-service.c:181
 msgid "No VPN configuration options."
@@ -125,7 +126,7 @@ msgstr "Ni možnosti nastavitev VPN."
 msgid "No VPN secrets!"
 msgstr "Ni gesel za VPN!"
 
-#: ../src/nm-iodine-service.c:450
+#: ../src/nm-iodine-service.c:494
 msgid "Could not find iodine binary."
 msgstr "Ni mogoče najti dvojiške datoteke iodine."
 
