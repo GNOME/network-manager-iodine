@@ -129,7 +129,7 @@ import (NMVpnEditorPlugin *iface, const char *path, GError **error)
 	keyfile = g_key_file_new ();
 	flags = G_KEY_FILE_KEEP_COMMENTS | G_KEY_FILE_KEEP_TRANSLATIONS;
 
-	if (!g_key_file_load_from_file (keyfile, path, flags, error)) {
+	if (!g_key_file_load_from_file (keyfile, path, flags, NULL)) {
 		g_set_error (error,
 		             NM_IODINE_IMPORT_EXPORT_ERROR,
 		             NM_IODINE_IMPORT_EXPORT_ERROR_NOT_IODINE,
