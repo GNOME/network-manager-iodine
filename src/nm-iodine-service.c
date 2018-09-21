@@ -50,7 +50,7 @@
 #define NM_IODINE_USER "nm-iodine"
 #define NM_IODINE_RUNDIR LOCALSTATEDIR "/run/" NM_IODINE_USER
 
-G_DEFINE_TYPE (NMIodinePlugin, nm_iodine_plugin, NM_TYPE_VPN_SERVICE_PLUGIN)
+G_DEFINE_TYPE_WITH_PRIVATE (NMIodinePlugin, nm_iodine_plugin, NM_TYPE_VPN_SERVICE_PLUGIN)
 
 typedef struct {
 	GPid pid;
@@ -666,8 +666,6 @@ nm_iodine_plugin_class_init (NMIodinePluginClass *iodine_class)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (iodine_class);
 	NMVpnServicePluginClass *parent_class = NM_VPN_SERVICE_PLUGIN_CLASS (iodine_class);
-
-	g_type_class_add_private (object_class, sizeof (NMIodinePluginPrivate));
 
 	/* virtual methods */
 	parent_class->connect    = real_connect;
