@@ -1,7 +1,8 @@
 # Japanese translation for network-manager-iodine.
-# Copyright (C) 2013 network-manager-iodine's COPYRIGHT HOLDER
+# Copyright (C) 2013, 2020 network-manager-iodine's COPYRIGHT HOLDER
 # This file is distributed under the same license as the network-manager-iodine package.
 # Hajime Taira <htaira@redhat.com>, 2013.
+# sicklylife <translation@sicklylife.jp>, 2020.
 #
 msgid ""
 msgstr ""
@@ -9,8 +10,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-iodine/"
 "issues\n"
 "POT-Creation-Date: 2019-10-27 10:40+0000\n"
-"PO-Revision-Date: 2013-10-03 14:08+0900\n"
-"Last-Translator: Hajime Taira <htaira@redhat.com>\n"
+"PO-Revision-Date: 2020-02-12 00:00+0900\n"
+"Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -24,10 +25,8 @@ msgid "Iodine DNS Tunnel"
 msgstr "Iodine DNS トンネリング"
 
 #: ../appdata/network-manager-iodine.metainfo.xml.in.h:2
-#, fuzzy
-#| msgid "Iodine DNS Tunnel"
 msgid "Client for Iodine DNS Tunnel"
-msgstr "Iodine DNS トンネリング"
+msgstr "Iodine DNS トンネリング用クライアント"
 
 #: ../appdata/network-manager-iodine.metainfo.xml.in.h:3
 msgid "Support for tunnelling IP traffic via DNS using Iodine."
@@ -41,13 +40,12 @@ msgstr ""
 
 #: ../appdata/network-manager-iodine.metainfo.xml.in.h:5
 msgid "Guido Günther"
-msgstr ""
+msgstr "Guido Günther"
 
 #: ../auth-dialog/main.c:169
-#, fuzzy, c-format
-#| msgid "You need to authenticate to access the Virtual Private Network '%s'."
+#, c-format
 msgid "You need to authenticate to access the Virtual Private Network “%s”."
-msgstr "仮想プライベートネットワーク '%s' にアクセスするには認証が必要です。"
+msgstr "仮想プライベートネットワーク“%s”にアクセスするには認証が必要です。"
 
 #: ../auth-dialog/main.c:182 ../auth-dialog/main.c:205
 msgid "Authenticate VPN"
@@ -95,33 +93,29 @@ msgstr "フラグメントサイズ(_F):"
 
 #: ../properties/nm-iodine-dialog.ui.h:9
 msgid "Show password"
-msgstr "パスワードを表示します。"
+msgstr "パスワードを表示する"
 
 #: ../src/nm-iodine-service.c:133
-#, fuzzy, c-format
-#| msgid "invalid integer property '%s' or out of range [%d -> %d]"
+#, c-format
 msgid "invalid integer property “%s” or out of range [%d -> %d]"
 msgstr ""
-"数値型プロパティ '%s' が無効な数値か、もしくは設定値が範囲外です。[%d -> %d]"
+"数値型プロパティ“%s”が無効な値、または設定値が範囲外です [%d -> %d]"
 
 #: ../src/nm-iodine-service.c:144
-#, fuzzy, c-format
-#| msgid "invalid boolean property '%s' (not yes or no)"
+#, c-format
 msgid "invalid boolean property “%s” (not yes or no)"
 msgstr ""
-"ブーリアン型プロパティ '%s' が無効な値です。(値はyes、noではありません)"
+"ブーリアン型プロパティ“%s”が無効な値です (値は yes、no ではありません)"
 
 #: ../src/nm-iodine-service.c:151
-#, fuzzy, c-format
-#| msgid "unhandled property '%s' type %s"
+#, c-format
 msgid "unhandled property “%s” type %s"
-msgstr "プロパティ '%s' の型 (%s) を処理できません。"
+msgstr "プロパティ“%s”の型 (%s) を処理できません"
 
 #: ../src/nm-iodine-service.c:165
-#, fuzzy, c-format
-#| msgid "property '%s' invalid or not supported"
+#, c-format
 msgid "property “%s” invalid or not supported"
-msgstr "プロパティ '%s' は無効かサポートされていません。"
+msgstr "プロパティ“%s”は無効かサポートしていません"
 
 #: ../src/nm-iodine-service.c:181
 msgid "No VPN configuration options."
@@ -133,7 +127,7 @@ msgstr "VPN シークレットがありません。"
 
 #: ../src/nm-iodine-service.c:494
 msgid "Could not find iodine binary."
-msgstr "iodine のバイナリが見つかりません"
+msgstr "iodine のバイナリが見つかりません。"
 
 #~ msgid "_Cancel"
 #~ msgstr "キャンセル(_C)"
