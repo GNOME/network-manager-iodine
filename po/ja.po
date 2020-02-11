@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: network-manager-iodine master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=network-manager-iodine&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-11-03 21:20+0000\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-iodine/"
+"issues\n"
+"POT-Creation-Date: 2019-10-27 10:40+0000\n"
 "PO-Revision-Date: 2013-10-03 14:08+0900\n"
 "Last-Translator: Hajime Taira <htaira@redhat.com>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
@@ -17,50 +18,46 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../auth-dialog/main.c:152
-#, c-format
-msgid "You need to authenticate to access the Virtual Private Network '%s'."
-msgstr "仮想プライベートネットワーク '%s' にアクセスするには認証が必要です。"
-
-#. Otherwise, we have no saved password, or the password flags indicated
-#. * that the password should never be saved.
-#.
-#: ../auth-dialog/main.c:165 ../auth-dialog/main.c:188
-msgid "Authenticate VPN"
-msgstr "VPN 認証"
-
-#: ../auth-dialog/main.c:168
-msgid "Password:"
-msgstr "パスワード:"
-
-#: ../auth-dialog/vpn-password-dialog.c:90
-#: ../properties/nm-iodine-dialog.ui.h:7
-msgid "_Password:"
-msgstr "パスワード(_P):"
-
-#: ../auth-dialog/vpn-password-dialog.c:187
-msgid "_Cancel"
-msgstr "キャンセル(_C)"
-
-#: ../auth-dialog/vpn-password-dialog.c:188
-msgid "_Ok"
-msgstr "OK(_O)"
-
-#: ../auth-dialog/vpn-password-dialog.c:223
-msgid "Sh_ow passwords"
-msgstr "パスワードを表示します。(_O)"
-
-#: ../auth-dialog/vpn-password-dialog.c:248
-#, fuzzy
-#| msgid "Show password"
-msgid "dialog-password"
-msgstr "パスワードを表示します。"
-
-#: ../properties/nm-iodine.c:46
+#: ../appdata/network-manager-iodine.metainfo.xml.in.h:1
+#: ../properties/nm-iodine.c:60
 msgid "Iodine DNS Tunnel"
 msgstr "Iodine DNS トンネリング"
 
-#: ../properties/nm-iodine.c:47
+#: ../appdata/network-manager-iodine.metainfo.xml.in.h:2
+#, fuzzy
+#| msgid "Iodine DNS Tunnel"
+msgid "Client for Iodine DNS Tunnel"
+msgstr "Iodine DNS トンネリング"
+
+#: ../appdata/network-manager-iodine.metainfo.xml.in.h:3
+msgid "Support for tunnelling IP traffic via DNS using Iodine."
+msgstr ""
+
+#: ../appdata/network-manager-iodine.metainfo.xml.in.h:4
+msgid ""
+"This is useful to get useful connectivity in cases where Internet access is "
+"severely filtered."
+msgstr ""
+
+#: ../appdata/network-manager-iodine.metainfo.xml.in.h:5
+msgid "Guido Günther"
+msgstr ""
+
+#: ../auth-dialog/main.c:169
+#, fuzzy, c-format
+#| msgid "You need to authenticate to access the Virtual Private Network '%s'."
+msgid "You need to authenticate to access the Virtual Private Network “%s”."
+msgstr "仮想プライベートネットワーク '%s' にアクセスするには認証が必要です。"
+
+#: ../auth-dialog/main.c:182 ../auth-dialog/main.c:205
+msgid "Authenticate VPN"
+msgstr "VPN 認証"
+
+#: ../auth-dialog/main.c:185
+msgid "Password:"
+msgstr "パスワード:"
+
+#: ../properties/nm-iodine.c:61
 msgid "Tunnel connections via DNS."
 msgstr "DNS 経由のトンネリング接続"
 
@@ -88,6 +85,10 @@ msgstr "任意"
 msgid "_Nameserver:"
 msgstr "ネームサーバー(_N):"
 
+#: ../properties/nm-iodine-dialog.ui.h:7
+msgid "_Password:"
+msgstr "パスワード(_P):"
+
 #: ../properties/nm-iodine-dialog.ui.h:8
 msgid "_Fragment Size:"
 msgstr "フラグメントサイズ(_F):"
@@ -96,34 +97,54 @@ msgstr "フラグメントサイズ(_F):"
 msgid "Show password"
 msgstr "パスワードを表示します。"
 
-#: ../src/nm-iodine-service.c:131
-#, c-format
-msgid "invalid integer property '%s' or out of range [%d -> %d]"
-msgstr "数値型プロパティ '%s' が無効な数値か、もしくは設定値が範囲外です。[%d -> %d]"
+#: ../src/nm-iodine-service.c:133
+#, fuzzy, c-format
+#| msgid "invalid integer property '%s' or out of range [%d -> %d]"
+msgid "invalid integer property “%s” or out of range [%d -> %d]"
+msgstr ""
+"数値型プロパティ '%s' が無効な数値か、もしくは設定値が範囲外です。[%d -> %d]"
 
-#: ../src/nm-iodine-service.c:142
-#, c-format
-msgid "invalid boolean property '%s' (not yes or no)"
-msgstr "ブーリアン型プロパティ '%s' が無効な値です。(値はyes、noではありません)"
+#: ../src/nm-iodine-service.c:144
+#, fuzzy, c-format
+#| msgid "invalid boolean property '%s' (not yes or no)"
+msgid "invalid boolean property “%s” (not yes or no)"
+msgstr ""
+"ブーリアン型プロパティ '%s' が無効な値です。(値はyes、noではありません)"
 
-#: ../src/nm-iodine-service.c:149
-#, c-format
-msgid "unhandled property '%s' type %s"
+#: ../src/nm-iodine-service.c:151
+#, fuzzy, c-format
+#| msgid "unhandled property '%s' type %s"
+msgid "unhandled property “%s” type %s"
 msgstr "プロパティ '%s' の型 (%s) を処理できません。"
 
-#: ../src/nm-iodine-service.c:163
-#, c-format
-msgid "property '%s' invalid or not supported"
+#: ../src/nm-iodine-service.c:165
+#, fuzzy, c-format
+#| msgid "property '%s' invalid or not supported"
+msgid "property “%s” invalid or not supported"
 msgstr "プロパティ '%s' は無効かサポートされていません。"
 
-#: ../src/nm-iodine-service.c:179
+#: ../src/nm-iodine-service.c:181
 msgid "No VPN configuration options."
 msgstr "VPN 構成オプションがありません。"
 
-#: ../src/nm-iodine-service.c:198
+#: ../src/nm-iodine-service.c:200
 msgid "No VPN secrets!"
 msgstr "VPN シークレットがありません。"
 
-#: ../src/nm-iodine-service.c:483
+#: ../src/nm-iodine-service.c:494
 msgid "Could not find iodine binary."
 msgstr "iodine のバイナリが見つかりません"
+
+#~ msgid "_Cancel"
+#~ msgstr "キャンセル(_C)"
+
+#~ msgid "_Ok"
+#~ msgstr "OK(_O)"
+
+#~ msgid "Sh_ow passwords"
+#~ msgstr "パスワードを表示します。(_O)"
+
+#, fuzzy
+#~| msgid "Show password"
+#~ msgid "dialog-password"
+#~ msgstr "パスワードを表示します。"
