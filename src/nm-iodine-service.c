@@ -662,7 +662,7 @@ nm_iodine_plugin_class_init (NMIodinePluginClass *iodine_class)
 	GObjectClass *object_class = G_OBJECT_CLASS (iodine_class);
 	NMVpnServicePluginClass *parent_class = NM_VPN_SERVICE_PLUGIN_CLASS (iodine_class);
 
-	g_type_class_add_private (object_class, sizeof (NMIodinePluginPrivate));
+	G_ADD_PRIVATE (object_class, sizeof (NMIodinePluginPrivate));
 
 	/* virtual methods */
 	parent_class->connect    = real_connect;

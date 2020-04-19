@@ -651,7 +651,7 @@ iodine_editor_class_init (IodineEditorClass *req_class)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (req_class);
 
-	g_type_class_add_private (req_class, sizeof (IodineEditorPrivate));
+	G_ADD_PRIVATE (req_class, sizeof (IodineEditorPrivate));
 
 	object_class->dispose = dispose;
 }
