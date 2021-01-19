@@ -30,14 +30,14 @@ msgstr "Client per al túnel DNS Iodine"
 #: ../appdata/network-manager-iodine.metainfo.xml.in.h:3
 msgid "Support for tunnelling IP traffic via DNS using Iodine."
 msgstr ""
-"Suport per fer un túnel amb el tràfic IP a través de DNS usant l'Iodine."
+"Suport per a fer un túnel amb el tràfic IP a través de DNS usant l'Iodine."
 
 #: ../appdata/network-manager-iodine.metainfo.xml.in.h:4
 msgid ""
 "This is useful to get useful connectivity in cases where Internet access is "
 "severely filtered."
 msgstr ""
-"Això és útil per obtenir una connectivitat útil en els casos on l'accés a "
+"Això és útil per a obtenir una connectivitat útil en els casos on l'accés a "
 "Internet està severament filtrat."
 
 #: ../appdata/network-manager-iodine.metainfo.xml.in.h:5
@@ -47,7 +47,7 @@ msgstr "Guido Günther"
 #: ../auth-dialog/main.c:169
 #, c-format
 msgid "You need to authenticate to access the Virtual Private Network “%s”."
-msgstr "Heu d'autentificar-vos per accedir la xarxa privada virtual «%s»."
+msgstr "Heu d'autentificar-vos per a accedir la xarxa privada virtual «%s»."
 
 #: ../auth-dialog/main.c:182 ../auth-dialog/main.c:205
 msgid "Authenticate VPN"
@@ -119,7 +119,7 @@ msgstr "propietat «%s» no vàlida o sense suport"
 
 #: ../src/nm-iodine-service.c:181
 msgid "No VPN configuration options."
-msgstr "No hi ha opcions de configuració de la VPN"
+msgstr "No hi ha opcions de configuració de la VPN."
 
 #: ../src/nm-iodine-service.c:200
 msgid "No VPN secrets!"
