@@ -2,21 +2,22 @@
 # Copyright (C) 2017 network-manager-iodine's COPYRIGHT HOLDER
 # This file is distributed under the same license as the network-manager-iodine package.
 # Alan Mortensen <alanmortensen.am@gmail.com>, 2017.
+# scootergrisen, 2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: network-manager-iodine master\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-26 08:35+0000\n"
-"PO-Revision-Date: 2017-03-12 15:30+0100\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-iodine/"
+"issues\n"
+"POT-Creation-Date: 2020-07-15 14:34+0000\n"
+"PO-Revision-Date: 2020-12-30 00:00+0200\n"
+"Last-Translator: scootergrisen\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
-"X-Generator: Poedit 1.8.7.1\n"
 
 #: ../appdata/network-manager-iodine.metainfo.xml.in.h:1
 #: ../properties/nm-iodine.c:60
@@ -29,7 +30,7 @@ msgstr "Klient til Iodine DNS-tunnel"
 
 #: ../appdata/network-manager-iodine.metainfo.xml.in.h:3
 msgid "Support for tunnelling IP traffic via DNS using Iodine."
-msgstr "Understøttelse for IP-tunneltrafik via DNS med Iodine."
+msgstr "Understøttelse af IP-tunneltrafik via DNS med Iodine."
 
 #: ../appdata/network-manager-iodine.metainfo.xml.in.h:4
 msgid ""
@@ -47,7 +48,7 @@ msgstr "Guido Günther"
 #, c-format
 msgid "You need to authenticate to access the Virtual Private Network “%s”."
 msgstr ""
-"Du skal godkende for at få adgang til det virtuelle private netværk “%s”."
+"Du skal godkendes for at få adgang til det virtuelle private netværk “%s”."
 
 #: ../auth-dialog/main.c:182 ../auth-dialog/main.c:205
 msgid "Authenticate VPN"
@@ -97,25 +98,21 @@ msgstr "_Fragmentstørrelse:"
 msgid "Show password"
 msgstr "Vis adgangskode"
 
-# streng findes også i openvpn
 #: ../src/nm-iodine-service.c:133
 #, c-format
 msgid "invalid integer property “%s” or out of range [%d -> %d]"
 msgstr "ugyldig heltalsegenskab “%s” eller uden for interval [%d -> %d]"
 
-# streng findes også i openvpn
 #: ../src/nm-iodine-service.c:144
 #, c-format
 msgid "invalid boolean property “%s” (not yes or no)"
 msgstr "ugyldig boolesk egenskab “%s” (ikke ja eller nej)"
 
-# streng findes også i openvpn
 #: ../src/nm-iodine-service.c:151
 #, c-format
 msgid "unhandled property “%s” type %s"
-msgstr "uhåndteret egenskab “%s” type %s"
+msgstr "uhåndteret egenskab “%s” typen %s"
 
-# streng findes også i openvpn
 #: ../src/nm-iodine-service.c:165
 #, c-format
 msgid "property “%s” invalid or not supported"
