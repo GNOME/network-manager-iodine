@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-iodine/"
 "issues\n"
 "POT-Creation-Date: 2021-03-13 14:44+0000\n"
-"PO-Revision-Date: 2021-10-01 18:28+0200\n"
+"PO-Revision-Date: 2021-10-01 18:33+0200\n"
 "Language-Team: Croatian <hr@li.org>\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
@@ -31,7 +31,7 @@ msgstr "Klijent za Iodine DNS tunel"
 
 #: ../appdata/network-manager-iodine.metainfo.xml.in.h:3
 msgid "Support for tunnelling IP traffic via DNS using Iodine."
-msgstr "Podrška za tuneliranje IP prometa putem DNS koristeći Iodine."
+msgstr "Podrška za tuneliranje IP prometa putem DNS-a koristeći Iodine."
 
 #: ../appdata/network-manager-iodine.metainfo.xml.in.h:4
 msgid ""
@@ -111,7 +111,7 @@ msgstr "nevaljano bulovo svojstvo “%s” (not da ili ne)"
 #: ../src/nm-iodine-service.c:151
 #, c-format
 msgid "unhandled property “%s” type %s"
-msgstr "svojstvo s kojim se ne može rukovati “%s” vrste %s"
+msgstr "nerukujuće svojstvo “%s” vrste %s"
 
 #: ../src/nm-iodine-service.c:165
 #, c-format
