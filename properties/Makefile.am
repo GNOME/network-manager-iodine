@@ -1,6 +1,6 @@
 plugindir = $(libdir)/NetworkManager
 plugin_LTLIBRARIES = libnm-vpn-plugin-iodine.la
-if WITH_LIBNM_GLIB
+if WITH_GNOME
 plugin_LTLIBRARIES += libnm-iodine-properties.la
 endif
 
@@ -32,7 +32,6 @@ libnm_vpn_plugin_iodine_la_CFLAGS =                     \
 
 libnm_iodine_properties_la_CFLAGS =                     \
         -DNM_IODINE_OLD                                 \
-        $(LIBNM_GLIB_CFLAGS)                            \
         $(common_CFLAGS)
 
 libnm_vpn_plugin_iodine_la_LIBADD =                     \
@@ -41,8 +40,7 @@ libnm_vpn_plugin_iodine_la_LIBADD =                     \
         $(LIBNM_LIBS)
 
 libnm_iodine_properties_la_LIBADD =                     \
-        $(GTK_LIBS)                                     \
-        $(LIBNM_GLIB_LIBS)
+        $(GTK_LIBS)
 
 libnm_vpn_plugin_iodine_la_LDFLAGS =                    \
         -avoid-version

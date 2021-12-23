@@ -45,9 +45,6 @@ AM_CONDITIONAL(WITH_GNOME, test x"$with_gnome" != xno)
 AC_ARG_WITH(authdlg, AS_HELP_STRING([--without-authdlg], [Build NetworkManager-iodine without authentication dialog]))
 AM_CONDITIONAL(WITH_AUTHDLG, test x"$with_authdlg" != xno)
 
-AC_ARG_WITH(libnm-glib, AS_HELP_STRING([--without-libnm-glib], [Build NetworkManager-iodine without libnm-glib comatibility]))
-AM_CONDITIONAL(WITH_LIBNM_GLIB, test x"$with_libnm_glib" != xno)
-
 AC_ARG_ENABLE(absolute-paths, AS_HELP_STRING([--enable-absolute-paths], [Use absolute paths to in .name files. Useful for development. (default is no)]))
 
 GETTEXT_PACKAGE=NetworkManager-iodine
@@ -58,22 +55,7 @@ IT_PROG_INTLTOOL([0.35])
 AM_GLIB_GNU_GETTEXT
 
 if test x"$with_gnome" != xno; then
-	gtk3_req=2.91.4
-	PKG_CHECK_MODULES(GTK, gtk+-3.0 > $gtk3_req, ,
-	                  [PKG_CHECK_MODULES(GTK, gtk+-2.0 > $gtk2_req)])
-
-	PKG_CHECK_MODULES(LIBNMA, libnma >= 1.1.0)
-        PKG_CHECK_MODULES(LIBSECRET, libsecret-1)
-
-	if test x"$with_libnm_glib" != xno; then
-		PKG_CHECK_MODULES(LIBNM_GTK, libnm-gtk >= 0.9.9.0)
-		PKG_CHECK_MODULES(LIBNM_GLIB,
-		                  NetworkManager >= 1.1.0
-		                  libnm-util >= 1.1.0
-		                  libnm-glib  >= 1.1.0
-		                  libnm-glib-vpn >= 1.1.0)
-	fi
-
+	with_gnome=yes
 fi
 
 PKG_CHECK_MODULES(LIBNM, libnm >= 1.1.0)

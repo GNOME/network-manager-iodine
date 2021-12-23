@@ -33,26 +33,11 @@
 #include <string.h>
 #include <gtk/gtk.h>
 
-#ifdef NM_IODINE_OLD
-#define NM_VPN_LIBNM_COMPAT
-#include <nm-vpn-plugin-ui-interface.h>
-#include <nm-setting-vpn.h>
-#include <nm-setting-connection.h>
-#include <nm-setting-ip4-config.h>
-
-#define nm_simple_connection_new nm_connection_new
-
-#define IODINE_EDITOR_PLUGIN_ERROR                     NM_SETTING_VPN_ERROR
-#define IODINE_EDITOR_PLUGIN_ERROR_INVALID_PROPERTY    NM_SETTING_VPN_ERROR_INVALID_PROPERTY
- 
-#else /* !NM_IODINE_OLD */
-
 #include <NetworkManager.h>
 #include <nma-ui-utils.h>
 
 #define IODINE_EDITOR_PLUGIN_ERROR                     NM_CONNECTION_ERROR
 #define IODINE_EDITOR_PLUGIN_ERROR_INVALID_PROPERTY    NM_CONNECTION_ERROR_INVALID_PROPERTY
-#endif
 
 #include "nm-iodine-service-defines.h"
 #include "nm-iodine.h"

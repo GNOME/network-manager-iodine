@@ -16,21 +16,6 @@ dbusservice_DATA = nm-iodine-service.conf
 nmvpnservicedir = $(NM_VPN_SERVICE_DIR)
 nmvpnservice_DATA = nm-iodine-service.name
 
-if WITH_LIBNM_GLIB
-# Install a file with full path to plugins for an old gnome-shell
-# https://bugzilla.gnome.org/show_bug.cgi?id=693590
-install-data-hook:
-	mkdir -p $(DESTDIR)$(sysconfdir)/NetworkManager/VPN
-	sed -e "1s|^|# This file is obsoleted by a file in $(NM_VPN_SERVICE_DIR)\n\n|" \
-	    -e 's|[@]LIBEXECDIR[@]|$(libexecdir)|g' \
-	    -e 's|[@]PLUGINDIR[@]|$(libdir)/NetworkManager|g' \
-	    <$(srcdir)/nm-iodine-service.name.in \
-	    >$(DESTDIR)$(sysconfdir)/NetworkManager/VPN/nm-iodine-service.name
-
-uninstall-hook:
-	rm -f $(DESTDIR)$(sysconfdir)/NetworkManager/VPN/nm-iodine-service.name
-endif
-
 appdatadir = $(datadir)/appdata
 appdata_DATA = $(appdata_in_files:.xml.in=.xml)
 appdata_in_files = appdata/network-manager-iodine.metainfo.xml.in
