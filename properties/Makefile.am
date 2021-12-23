@@ -31,7 +31,7 @@ libnm_vpn_plugin_iodine_la_CFLAGS =                     \
         $(common_CFLAGS)
 
 libnm_iodine_properties_la_CFLAGS =                     \
-        -DNM_IODINE_OLD                                 \
+        $(LIBNM_CFLAGS)                                 \
         $(common_CFLAGS)
 
 libnm_vpn_plugin_iodine_la_LIBADD =                     \
