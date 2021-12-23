@@ -663,7 +663,6 @@ nm_iodine_plugin_init (NMIodinePlugin *plugin)
 static void
 nm_iodine_plugin_class_init (NMIodinePluginClass *iodine_class)
 {
-	GObjectClass *object_class = G_OBJECT_CLASS (iodine_class);
 	NMVpnServicePluginClass *parent_class = NM_VPN_SERVICE_PLUGIN_CLASS (iodine_class);
 
 	/* virtual methods */
