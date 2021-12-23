@@ -50,15 +50,13 @@
 #define NM_IODINE_USER "nm-iodine"
 #define NM_IODINE_RUNDIR LOCALSTATEDIR "/run/" NM_IODINE_USER
 
-G_DEFINE_TYPE_WITH_PRIVATE (NMIodinePlugin, nm_iodine_plugin, NM_TYPE_VPN_SERVICE_PLUGIN)
-
 typedef struct {
 	GPid pid;
 	NMVpnPluginFailure failure;
 	GVariantBuilder ip4config;
 } NMIodinePluginPrivate;
 
-#define NM_IODINE_PLUGIN_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), NM_TYPE_IODINE_PLUGIN, NMIodinePluginPrivate))
+G_DEFINE_TYPE_WITH_PRIVATE (NMIodinePlugin, nm_iodine_plugin, NM_TYPE_VPN_SERVICE_PLUGIN)
 
 static const char *iodine_binary_paths[] =
 {
@@ -247,7 +245,7 @@ static gint
 iodine_parse_stderr_line (NMVpnServicePlugin *plugin,
                           const char* line)
 {
-	NMIodinePluginPrivate *priv = NM_IODINE_PLUGIN_GET_PRIVATE (plugin);
+	NMIodinePluginPrivate *priv = nm_iodine_plugin_get_instance_private (NM_IODINE_PLUGIN(plugin));
 	gchar **split = NULL;
 	GVariant *val;
 	long int mtu;
@@ -373,7 +371,7 @@ iodine_stderr_cb (GIOChannel *source, GIOCondition condition, gpointer plugin)
 	GError *err = NULL;
 	gchar *line;
 	gint ret, l;
-	NMIodinePluginPrivate *priv = NM_IODINE_PLUGIN_GET_PRIVATE (plugin);
+	NMIodinePluginPrivate *priv = nm_iodine_plugin_get_instance_private (NM_IODINE_PLUGIN(plugin));
 
 	status = g_io_channel_read_line (source, &line, NULL, NULL, &err);
 	switch (status) {
@@ -411,7 +409,7 @@ static void
 iodine_watch_cb (GPid pid, gint status, gpointer user_data)
 {
 	NMIodinePlugin *plugin = NM_IODINE_PLUGIN (user_data);
-	NMIodinePluginPrivate *priv = NM_IODINE_PLUGIN_GET_PRIVATE (plugin);
+	NMIodinePluginPrivate *priv = nm_iodine_plugin_get_instance_private (NM_IODINE_PLUGIN(plugin));
 	guint error = 0;
 
 	if (WIFEXITED (status)) {
@@ -482,6 +480,7 @@ nm_iodine_start_iodine_binary (NMIodinePlugin *plugin,
 	GIOChannel *stderr_channel;
 	gint stdin_fd, stderr_fd;
 	const char *props_topdomain, *props_fragsize, *props_nameserver;
+	NMIodinePluginPrivate *priv = nm_iodine_plugin_get_instance_private (NM_IODINE_PLUGIN(plugin));
 
 	/* Find iodine */
 	iodine_binary = iodine_binary_paths;
@@ -554,7 +553,7 @@ nm_iodine_start_iodine_binary (NMIodinePlugin *plugin,
 	               iodine_stderr_cb,
 	               plugin);
 
-	NM_IODINE_PLUGIN_GET_PRIVATE (plugin)->pid = pid;
+	priv->pid = pid;
 	iodine_watch = g_child_watch_source_new (pid);
 	g_source_set_callback (iodine_watch,
 	                       (GSourceFunc) iodine_watch_cb,
@@ -572,7 +571,7 @@ real_connect (NMVpnServicePlugin *plugin,
               GError **error)
 {
 	NMSettingVpn *s_vpn;
-	NMIodinePluginPrivate *priv = NM_IODINE_PLUGIN_GET_PRIVATE (plugin);
+	NMIodinePluginPrivate *priv = nm_iodine_plugin_get_instance_private (NM_IODINE_PLUGIN(plugin));
 	gint ret = -1;
 
 	g_variant_builder_init(&priv->ip4config, G_VARIANT_TYPE_VARDICT);
@@ -638,7 +637,7 @@ ensure_killed (gpointer data)
 static gboolean
 real_disconnect (NMVpnServicePlugin *plugin, GError **err)
 {
-	NMIodinePluginPrivate *priv = NM_IODINE_PLUGIN_GET_PRIVATE (plugin);
+	NMIodinePluginPrivate *priv = nm_iodine_plugin_get_instance_private (NM_IODINE_PLUGIN(plugin));
 
 	if (priv->pid) {
 		if (kill (priv->pid, SIGTERM) == 0)
@@ -656,7 +655,7 @@ real_disconnect (NMVpnServicePlugin *plugin, GError **err)
 static void
 nm_iodine_plugin_init (NMIodinePlugin *plugin)
 {
-	NMIodinePluginPrivate *priv = NM_IODINE_PLUGIN_GET_PRIVATE (plugin);
+	NMIodinePluginPrivate *priv = nm_iodine_plugin_get_instance_private (NM_IODINE_PLUGIN(plugin));
 
 	priv->failure = -1;
 }
