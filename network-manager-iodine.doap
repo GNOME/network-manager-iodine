@@ -13,6 +13,8 @@
   <category rdf:resource="http://api.gnome.org/doap-extensions#infrastructure" />
   <programming-language>C</programming-language>
   <download-page rdf:resource="https://download.gnome.org/sources/NetworkManager-iodine/" />
+  <developer-forum rdf:resource="https://discourse.gnome.org/tag/networkmanager" />
+  <support-forum rdf:resource="https://discourse.gnome.org/tag/networkmanager" />
 
   <maintainer>
     <foaf:Person>
