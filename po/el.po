@@ -6,11 +6,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: network-manager-iodine master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
-"product=network-manager-iodine&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-03-09 20:36+0000\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-iodine/"
+"issues\n"
+"POT-Creation-Date: 2022-07-28 17:58+0000\n"
 "PO-Revision-Date: 2014-04-24 19:48+0200\n"
-"Last-Translator: Tom Tryfonidis <tomtryf@gmail.com>\n"
+"Last-Translator: Giannis Antypas <gianni.antypas@gmail.com>\n"
 "Language-Team: team@gnome.gr\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
@@ -20,46 +20,50 @@ msgstr ""
 "X-Generator: Poedit 1.6.4\n"
 "X-Project-Style: gnome\n"
 
-#: ../auth-dialog/main.c:152
-#, c-format
-msgid "You need to authenticate to access the Virtual Private Network '%s'."
+#: ../appdata/network-manager-iodine.metainfo.xml.in.h:1
+#: ../properties/nm-iodine.c:44
+msgid "Iodine DNS Tunnel"
+msgstr "Διοχέτευση DNS Iodine"
+
+#: ../appdata/network-manager-iodine.metainfo.xml.in.h:2
+#, fuzzy
+#| msgid "Iodine DNS Tunnel"
+msgid "Client for Iodine DNS Tunnel"
+msgstr "Διοχέτευση DNS Iodine"
+
+#: ../appdata/network-manager-iodine.metainfo.xml.in.h:3
+msgid "Support for tunnelling IP traffic via DNS using Iodine."
+msgstr "Υποστήριξη για διοχέτευση της κίνησης IP μέσω DNS χρησιμοποιώντας Iodine."
+
+#: ../appdata/network-manager-iodine.metainfo.xml.in.h:4
+msgid ""
+"This is useful to get useful connectivity in cases where Internet access is "
+"severely filtered."
+msgstr ""
+"Είναι χρήσιμο να έχετε εύχρηστη συνδεσιμότητα σε περιπτώσεις όπου η πρόσβαση στο διαδίκτυο είναι "
+"εξαιρετικά φιλτραρισμένη."
+
+#: ../appdata/network-manager-iodine.metainfo.xml.in.h:5
+msgid "Guido Günther"
+msgstr "Guido Günther"
+
+#: ../auth-dialog/main.c:169
+#, fuzzy, c-format
+#| msgid "You need to authenticate to access the Virtual Private Network '%s'."
+msgid "You need to authenticate to access the Virtual Private Network “%s”."
 msgstr ""
 "Χρειάζεστε πιστοποίηση για να αποκτήσετε πρόσβαση στο ιδιωτικό εικονικό "
 "δίκτυο (VPN) '%s'."
 
-#. Otherwise, we have no saved password, or the password flags indicated
-#. * that the password should never be saved.
-#.
-#: ../auth-dialog/main.c:165 ../auth-dialog/main.c:188
+#: ../auth-dialog/main.c:182 ../auth-dialog/main.c:205
 msgid "Authenticate VPN"
 msgstr "Πιστοποίηση VPN"
 
-#: ../auth-dialog/main.c:168
+#: ../auth-dialog/main.c:185
 msgid "Password:"
 msgstr "Κωδικός πρόσβασης:"
 
-#: ../auth-dialog/vpn-password-dialog.c:90
-#: ../properties/nm-iodine-dialog.ui.h:7
-msgid "_Password:"
-msgstr "_Κωδικός πρόσβασης:"
-
-#: ../auth-dialog/vpn-password-dialog.c:187
-msgid "_Cancel"
-msgstr "Ακύ_ρωση"
-
-#: ../auth-dialog/vpn-password-dialog.c:188
-msgid "_Ok"
-msgstr "_Εντάξει"
-
-#: ../auth-dialog/vpn-password-dialog.c:223
-msgid "Sh_ow passwords"
-msgstr "Εμ_φάνιση κωδικών πρόσβασης"
-
-#: ../properties/nm-iodine.c:46
-msgid "Iodine DNS Tunnel"
-msgstr "Διοχέτευση DNS Iodine"
-
-#: ../properties/nm-iodine.c:47
+#: ../properties/nm-iodine.c:45
 msgid "Tunnel connections via DNS."
 msgstr "Συνδέσεις διοχέτευσης μέσα από DNS."
 
@@ -87,6 +91,10 @@ msgstr "Προαιρετικό"
 msgid "_Nameserver:"
 msgstr "Ό_νομα διακομιστή:"
 
+#: ../properties/nm-iodine-dialog.ui.h:7
+msgid "_Password:"
+msgstr "_Κωδικός πρόσβασης:"
+
 #: ../properties/nm-iodine-dialog.ui.h:8
 msgid "_Fragment Size:"
 msgstr "Μέγεθος απο_κόμματος:"
@@ -96,23 +104,27 @@ msgid "Show password"
 msgstr "Εμφάνιση κωδικού πρόσβασης"
 
 #: ../src/nm-iodine-service.c:131
-#, c-format
-msgid "invalid integer property '%s' or out of range [%d -> %d]"
+#, fuzzy, c-format
+#| msgid "invalid integer property '%s' or out of range [%d -> %d]"
+msgid "invalid integer property “%s” or out of range [%d -> %d]"
 msgstr "άκυρη ιδιότητα ακεραίου '%s' ή εκτός πεδίου τιμών [%d -> %d]"
 
 #: ../src/nm-iodine-service.c:142
-#, c-format
-msgid "invalid boolean property '%s' (not yes or no)"
+#, fuzzy, c-format
+#| msgid "invalid boolean property '%s' (not yes or no)"
+msgid "invalid boolean property “%s” (not yes or no)"
 msgstr "άκυρη ιδιότητα τιμής Μπουλ '%s' (ούτε ναι ούτε όχι)"
 
 #: ../src/nm-iodine-service.c:149
-#, c-format
-msgid "unhandled property '%s' type %s"
+#, fuzzy, c-format
+#| msgid "unhandled property '%s' type %s"
+msgid "unhandled property “%s” type %s"
 msgstr "ανεπίλυτη ιδιότητα '%s' τύπου %s"
 
 #: ../src/nm-iodine-service.c:163
-#, c-format
-msgid "property '%s' invalid or not supported"
+#, fuzzy, c-format
+#| msgid "property '%s' invalid or not supported"
+msgid "property “%s” invalid or not supported"
 msgstr "άκυρη ή ανυποστήρικτη ιδιότητα '%s'"
 
 #: ../src/nm-iodine-service.c:179
@@ -123,6 +135,15 @@ msgstr "Χωρίς επιλογές διαμόρφωσης VPN."
 msgid "No VPN secrets!"
 msgstr "Δεν υπάρχουν μυστικά VPN!"
 
-#: ../src/nm-iodine-service.c:483
+#: ../src/nm-iodine-service.c:498
 msgid "Could not find iodine binary."
 msgstr "Αδύνατη η εύρεση δυαδικού iodine."
+
+#~ msgid "_Cancel"
+#~ msgstr "Ακύ_ρωση"
+
+#~ msgid "_Ok"
+#~ msgstr "_Εντάξει"
+
+#~ msgid "Sh_ow passwords"
+#~ msgstr "Εμ_φάνιση κωδικών πρόσβασης"
