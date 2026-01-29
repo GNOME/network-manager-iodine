@@ -1,0 +1,137 @@
+# Cornish translation for network-manager-iodine.
+# Copyright (C) 2026 network-manager-iodine's COPYRIGHT HOLDER
+# This file is distributed under the same license as the network-manager-iodine package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Flynn Peck <cirilla@tuta.io>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: network-manager-iodine master\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/network-manager-iodine/"
+"issues\n"
+"POT-Creation-Date: 2026-01-12 04:06+0000\n"
+"PO-Revision-Date: 2026-01-29 14:49+0000\n"
+"Last-Translator: Flynn Peck <cirilla@tuta.io>\n"
+"Language-Team: kw\n"
+"Language: kw\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-DL-VCS-Web: https://gitlab.gnome.org/GNOME/network-manager-iodine/\n"
+"X-DL-Lang: kw\n"
+"X-DL-Module: network-manager-iodine\n"
+"X-DL-Branch: master\n"
+"X-DL-Domain: po\n"
+"X-DL-State: Translating\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Gtranslator 49.0\n"
+
+#: ../appdata/network-manager-iodine.metainfo.xml.in.h:1
+#: ../properties/nm-iodine.c:44
+msgid "Iodine DNS Tunnel"
+msgstr "Tron DNS Iodine"
+
+#: ../appdata/network-manager-iodine.metainfo.xml.in.h:2
+msgid "Client for Iodine DNS Tunnel"
+msgstr "Kliens rag Tron DNS Iodine"
+
+#: ../appdata/network-manager-iodine.metainfo.xml.in.h:3
+msgid "Support for tunnelling IP traffic via DNS using Iodine."
+msgstr "Skoodhyans rag tronya traffik IP dre DNS ow devnydhya Iodine."
+
+#: ../appdata/network-manager-iodine.metainfo.xml.in.h:4
+msgid ""
+"This is useful to get useful connectivity in cases where Internet access is "
+"severely filtered."
+msgstr ""
+"Hemm yw gwerek rag kavos junyadow gwerek yn kasys le may hedhas Kesrosweyth "
+"yw sidhlys yn kales."
+
+#: ../appdata/network-manager-iodine.metainfo.xml.in.h:5
+msgid "Guido Günther"
+msgstr "Guido Günther"
+
+#: ../auth-dialog/main.c:169
+#, c-format
+msgid "You need to authenticate to access the Virtual Private Network “%s”."
+msgstr "Ty res omgelmi rag drehedhes an VPN “%s”."
+
+#: ../auth-dialog/main.c:182 ../auth-dialog/main.c:205
+msgid "Authenticate VPN"
+msgstr "Omgelmi VPN"
+
+#: ../auth-dialog/main.c:185
+msgid "Password:"
+msgstr "Ger-Tremena:"
+
+#: ../properties/nm-iodine.c:45
+msgid "Tunnel connections via DNS."
+msgstr "Junyansow tron dre DNS."
+
+#: ../properties/nm-iodine-dialog.ui.h:1
+msgid "Saved"
+msgstr "Sawys"
+
+#: ../properties/nm-iodine-dialog.ui.h:2
+msgid "Always ask"
+msgstr "Peji pub prys"
+
+#: ../properties/nm-iodine-dialog.ui.h:3
+msgid "General"
+msgstr "Ollgemmyn"
+
+#: ../properties/nm-iodine-dialog.ui.h:4
+msgid "_Toplevel Domain:"
+msgstr "_Arlotteh Pennnivel:"
+
+#: ../properties/nm-iodine-dialog.ui.h:5
+msgid "Optional"
+msgstr "Dre Dhewis"
+
+#: ../properties/nm-iodine-dialog.ui.h:6
+msgid "_Nameserver:"
+msgstr "_Hanowservell:"
+
+#: ../properties/nm-iodine-dialog.ui.h:7
+msgid "_Password:"
+msgstr "_Ger-Tremena:"
+
+#: ../properties/nm-iodine-dialog.ui.h:8
+msgid "_Fragment Size:"
+msgstr "_Braster Darn:"
+
+#: ../properties/nm-iodine-dialog.ui.h:9
+msgid "Show password"
+msgstr "Diskwedhes ger-tremena"
+
+#: ../src/nm-iodine-service.c:131
+#, c-format
+msgid "invalid integer property “%s” or out of range [%d -> %d]"
+msgstr "niver anewn “%s” po mes a efander [%d -> %d]"
+
+#: ../src/nm-iodine-service.c:142
+#, c-format
+msgid "invalid boolean property “%s” (not yes or no)"
+msgstr "gwir-po-fals anewn “%s” (na ya po na)"
+
+#: ../src/nm-iodine-service.c:149
+#, c-format
+msgid "unhandled property “%s” type %s"
+msgstr "oberadow anhandlys “%s” eghen %s"
+
+#: ../src/nm-iodine-service.c:163
+#, c-format
+msgid "property “%s” invalid or not supported"
+msgstr "“%s” anewn po anskoodhys"
+
+#: ../src/nm-iodine-service.c:179
+msgid "No VPN configuration options."
+msgstr "Dewisyow selyans VPN vyth."
+
+#: ../src/nm-iodine-service.c:198
+msgid "No VPN secrets!"
+msgstr "Kevrinyow VPN vyth!"
+
+#: ../src/nm-iodine-service.c:498
+msgid "Could not find iodine binary."
+msgstr "Ny yllir kavos dewek iodine."
