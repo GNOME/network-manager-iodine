@@ -11,7 +11,7 @@ variables:
         libtool
 
 build-debian:
-  image: debian:bookworm
+  image: debian:forky
   stage: build
   before_script:
     - apt-get update
