@@ -468,7 +468,7 @@ send_password(gint fd, NMSettingVpn *s_vpn)
 }
 
 
-static gint
+static gboolean
 nm_iodine_start_iodine_binary (NMIodinePlugin *plugin,
                                NMSettingVpn *s_vpn,
                                GError **error)
@@ -496,7 +496,7 @@ nm_iodine_start_iodine_binary (NMIodinePlugin *plugin,
 		             NM_VPN_PLUGIN_ERROR_LAUNCH_FAILED,
 		             "%s",
 		             _("Could not find iodine binary."));
-		return -1;
+		return FALSE;
 	}
 
 	props_fragsize = nm_setting_vpn_get_data_item (s_vpn, NM_IODINE_KEY_FRAGSIZE);
@@ -536,7 +536,7 @@ nm_iodine_start_iodine_binary (NMIodinePlugin *plugin,
 	                               NULL, NULL,
 	                               &pid, &stdin_fd, NULL, &stderr_fd, error)) {
 		g_warning ("iodine failed to start. error: '%s'", (*error)->message);
-		return -1;
+		return FALSE;
 	}
 
 	g_message ("iodine started with pid %d", pid);
@@ -559,7 +559,7 @@ nm_iodine_start_iodine_binary (NMIodinePlugin *plugin,
 	g_source_attach (iodine_watch, NULL);
 	g_source_unref (iodine_watch);
 
-	return 0;
+	return TRUE;
 }
 
 static gboolean
@@ -569,7 +569,7 @@ real_connect (NMVpnServicePlugin *plugin,
 {
 	NMSettingVpn *s_vpn;
 	NMIodinePluginPrivate *priv = nm_iodine_plugin_get_instance_private (NM_IODINE_PLUGIN(plugin));
-	gint ret = -1;
+	gboolean success;
 
 	g_variant_builder_init(&priv->ip4config, G_VARIANT_TYPE_VARDICT);
 
@@ -581,8 +581,8 @@ real_connect (NMVpnServicePlugin *plugin,
 	if (!nm_iodine_secrets_validate (s_vpn, error))
 		goto out;
 
-	ret = nm_iodine_start_iodine_binary (NM_IODINE_PLUGIN (plugin), s_vpn, error);
-	if (!ret)
+	success = nm_iodine_start_iodine_binary (NM_IODINE_PLUGIN (plugin), s_vpn, error);
+	if (success)
 		return TRUE;
 
  out:
