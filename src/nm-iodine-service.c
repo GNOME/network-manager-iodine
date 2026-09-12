@@ -491,11 +491,10 @@ nm_iodine_start_iodine_binary (NMIodinePlugin *plugin,
 	}
 
 	if (!*iodine_binary) {
-		g_set_error (error,
-		             NM_VPN_PLUGIN_ERROR,
-		             NM_VPN_PLUGIN_ERROR_LAUNCH_FAILED,
-		             "%s",
-		             _("Could not find iodine binary."));
+		g_set_error_literal (error,
+							 NM_VPN_PLUGIN_ERROR,
+							 NM_VPN_PLUGIN_ERROR_LAUNCH_FAILED,
+							 _("Could not find iodine binary."));
 		return FALSE;
 	}
 
