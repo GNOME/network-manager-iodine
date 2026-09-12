@@ -556,7 +556,7 @@ nm_iodine_start_iodine_binary (NMIodinePlugin *plugin,
 	priv->pid = pid;
 	iodine_watch = g_child_watch_source_new (pid);
 	g_source_set_callback (iodine_watch,
-	                       (GSourceFunc) iodine_watch_cb,
+	                       G_SOURCE_FUNC (iodine_watch_cb),
 	                       plugin,
 	                       NULL);
 	g_source_attach (iodine_watch, NULL);
