@@ -475,7 +475,7 @@ nm_iodine_start_iodine_binary (NMIodinePlugin *plugin,
 {
 	GPid pid;
 	const char **iodine_binary = NULL;
-	GPtrArray *iodine_argv;
+	g_autoptr (GPtrArray) iodine_argv = g_ptr_array_new_full (12, NULL);
 	GSource *iodine_watch;
 	GIOChannel *stderr_channel;
 	gint stdin_fd, stderr_fd;
@@ -502,7 +502,6 @@ nm_iodine_start_iodine_binary (NMIodinePlugin *plugin,
 	props_fragsize = nm_setting_vpn_get_data_item (s_vpn, NM_IODINE_KEY_FRAGSIZE);
 	props_nameserver = nm_setting_vpn_get_data_item (s_vpn, NM_IODINE_KEY_NAMESERVER);
 	props_topdomain = nm_setting_vpn_get_data_item (s_vpn, NM_IODINE_KEY_TOPDOMAIN);
-	iodine_argv = g_ptr_array_new ();
 	g_ptr_array_add (iodine_argv, (gpointer) (*iodine_binary));
 	/* Run in foreground */
 	g_ptr_array_add (iodine_argv, (gpointer) "-f");
@@ -536,11 +535,9 @@ nm_iodine_start_iodine_binary (NMIodinePlugin *plugin,
 	                               G_SPAWN_DO_NOT_REAP_CHILD,
 	                               NULL, NULL,
 	                               &pid, &stdin_fd, NULL, &stderr_fd, error)) {
-		g_ptr_array_free (iodine_argv, TRUE);
 		g_warning ("iodine failed to start. error: '%s'", (*error)->message);
 		return -1;
 	}
-	g_ptr_array_free (iodine_argv, TRUE);
 
 	g_message ("iodine started with pid %d", pid);
 
