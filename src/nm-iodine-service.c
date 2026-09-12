@@ -507,11 +507,6 @@ nm_iodine_start_iodine_binary (NMIodinePlugin *plugin,
 	/* Run in foreground */
 	g_ptr_array_add (iodine_argv, (gpointer) "-f");
 
-	if (props_fragsize && strlen(props_fragsize)) {
-		g_ptr_array_add (iodine_argv, (gpointer) "-m");
-		g_ptr_array_add (iodine_argv, (gpointer) props_fragsize);
-	}
-
 	if (has_user(NM_IODINE_USER)) {
 		g_ptr_array_add (iodine_argv, (gpointer) "-u");
 		g_ptr_array_add (iodine_argv, (gpointer) NM_IODINE_USER);
@@ -523,6 +518,11 @@ nm_iodine_start_iodine_binary (NMIodinePlugin *plugin,
 		g_ptr_array_add (iodine_argv, (gpointer) NM_IODINE_RUNDIR);
 	} else
 		g_warning("Not running chrooted");
+
+	if (props_fragsize && strlen(props_fragsize)) {
+		g_ptr_array_add (iodine_argv, (gpointer) "-m");
+		g_ptr_array_add (iodine_argv, (gpointer) props_fragsize);
+	}
 
 	if (props_nameserver && strlen(props_nameserver))
 		g_ptr_array_add (iodine_argv, (gpointer) props_nameserver);
