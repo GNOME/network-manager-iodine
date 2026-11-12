@@ -1,8 +1,65 @@
 =============
+Version 1.4.0
+=============
+* Fix command injection (CVE-2026-91837)
+* Switch to GTK4
+* Build system and other cleanups
+* Contributors:
+    * Andre Klapper
+    * Beniamino Galvani
+    * Dominique Leuenberger
+    * Guido Günther
+    * Íñigo Huguet
+    * Lubomir Rintel
+    * Mickaël Thomas
+    * Piotr Drąg
+    * worldofpeace
+* UI translations:
+    * Alan Mortensen (da)
+    * Alexandre Franke (fr)
+    * Anders Jonsson (sv)
+    * Andika Triwidada (id)
+    * Asier Sarasua Garmendia (eu)
+    * Ask Hjorth Larsen (da)
+    * Aurimas Černius (lt)
+    * Balázs Meskó (hu)
+    * Baurzhan Muftakhidinov (kk)
+    * Daniel Korostil (uk)
+    * Daniel Mustieles (es)
+    * Dz Chen (zh_CN)
+    * Emin Tufan Çetin (tr)
+    * Fabio Tomat (fur)
+    * Florentina Mușat (ro)
+    * Flynn Peck (kw)
+    * Gábor Kelemen (hu)
+    * Giannis Antypas (el)
+    * Goran Vidović (hr)
+    * Hugo Carvalho (pt)
+    * Jordi Mas (ca)
+    * Jordi Mas i Hernandez (ca)
+    * Makoto Sakaguchi (ja)
+    * Mario Blättermann (de)
+    * Matej Urbančič (sl)
+    * Milo Casagrande (it)
+    * Nathan Follens (nl)
+    * Piotr Drąg (pl)
+    * Rafael Fontenelle (pt_BR)
+    * Rūdolfs Mazurs (lv)
+    * Scrambled 777 (hi)
+    * Serdar Sağlam (tr)
+    * Sergej A (ru)
+    * sicklylife (ja)
+    * twlvnn kraftwerk (bg)
+    * Vasil Pupkin (be)
+    * Zdeněk Hataš (cs)
+    * Zurab Kargareteli (ka)
+    * Мирослав Николић (sr) (sr@latin)
+
+=============
 Version 0.0.5
 =============
 * Use libsecret
-* Use libmm-gtk
+* Use libnm-gtk
 * UI translations:
 	Andika Triwidada (id)
 	Antonio Fernandes C. Neto (pt_BR)
