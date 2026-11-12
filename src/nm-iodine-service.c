@@ -79,7 +79,7 @@ typedef struct {
 static ValidProperty valid_properties[] = {
 	{ NM_IODINE_KEY_TOPDOMAIN,  G_TYPE_STRING, 0, 0 },
 	{ NM_IODINE_KEY_NAMESERVER, G_TYPE_STRING, 0, 0 },
-	{ NM_IODINE_KEY_FRAGSIZE,   G_TYPE_STRING, 0, 0 },
+	{ NM_IODINE_KEY_FRAGSIZE,   G_TYPE_INT, 1, 65535 },
 	{ NULL,                     G_TYPE_NONE, 0, 0 }
 };
 
