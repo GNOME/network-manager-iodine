@@ -522,6 +522,8 @@ nm_iodine_start_iodine_binary (NMIodinePlugin *plugin,
 		g_ptr_array_add (iodine_argv, (gpointer) props_fragsize);
 	}
 
+	g_ptr_array_add (iodine_argv, (gpointer) "--");
+
 	if (props_nameserver && strlen(props_nameserver))
 		g_ptr_array_add (iodine_argv, (gpointer) props_nameserver);
 
