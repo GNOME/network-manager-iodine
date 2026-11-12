@@ -239,7 +239,7 @@ check_validity (IodineEditor *self, GError **error)
 	const char *str;
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "topdomain_entry"));
-	str = gtk_entry_get_text (GTK_ENTRY (widget));
+	str = gtk_editable_get_text (GTK_EDITABLE (widget));
 	if (!str || !strlen (str)) {
 		g_set_error (error,
 		             IODINE_EDITOR_PLUGIN_ERROR,
@@ -279,7 +279,7 @@ setup_password_widget (IodineEditor *self,
 
 	if (s_vpn) {
 		value = nm_setting_vpn_get_secret (s_vpn, secret_name);
-		gtk_entry_set_text (GTK_ENTRY (widget), value ? value : "");
+		gtk_editable_set_text (GTK_EDITABLE (widget), value ? value : "");
 		nm_setting_get_secret_flags (NM_SETTING (s_vpn),
 		                             secret_name,
 		                             &secret_flags,
@@ -302,7 +302,7 @@ show_toggled_cb (GtkCheckButton *button, IodineEditor *self)
 	GtkWidget *widget;
 	gboolean visible;
 
-	visible = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
+	visible = gtk_check_button_get_active (button);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "password_entry"));
 	g_assert (widget);
@@ -310,7 +310,7 @@ show_toggled_cb (GtkCheckButton *button, IodineEditor *self)
 }
 
 static void
-pw_type_combo_changed_cb (GtkWidget *combo, gpointer user_data)
+pw_type_combo_changed_cb (GtkWidget *combo, GParamSpec *pspec, gpointer user_data)
 {
 	IodineEditor *self = IODINE_EDITOR (user_data);
 	IodineEditorPrivate *priv = iodine_editor_get_instance_private (self);
@@ -322,10 +322,10 @@ pw_type_combo_changed_cb (GtkWidget *combo, gpointer user_data)
 	/* If the user chose "Not required", desensitize and clear the correct
 	 * password entry.
 	 */
-	switch (gtk_combo_box_get_active (GTK_COMBO_BOX (combo))) {
+	switch (gtk_drop_down_get_selected (GTK_DROP_DOWN (combo))) {
 	case PW_TYPE_ASK:
 	case PW_TYPE_UNUSED:
-		gtk_entry_set_text (GTK_ENTRY (entry), "");
+		gtk_editable_set_text (GTK_EDITABLE (entry), "");
 		gtk_widget_set_sensitive (entry, FALSE);
 		break;
 	default:
@@ -346,7 +346,6 @@ init_one_pw_combo (IodineEditor *self,
 	IodineEditorPrivate *priv = iodine_editor_get_instance_private (self);
 	int active = -1;
 	GtkWidget *widget;
-	GtkListStore *store;
 	const char *value = NULL;
 	guint32 default_idx = 1;
 	NMSettingSecretFlags pw_flags = NM_SETTING_SECRET_FLAG_NONE;
@@ -356,12 +355,9 @@ init_one_pw_combo (IodineEditor *self,
 	 */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, entry_name));
 	g_assert (widget);
-	value = gtk_entry_get_text (GTK_ENTRY (widget));
+	value = gtk_editable_get_text (GTK_EDITABLE (widget));
 	if (value && strlen (value))
 		default_idx = 0;
-
-	store = GTK_LIST_STORE(gtk_builder_get_object (priv->builder, "pass_type_model"));
-	g_assert (store);
 
 	if (s_vpn)
 		nm_setting_get_secret_flags (NM_SETTING (s_vpn),
@@ -382,12 +378,12 @@ init_one_pw_combo (IodineEditor *self,
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, combo_name));
 	g_assert (widget);
-	gtk_combo_box_set_active (GTK_COMBO_BOX (widget),
-	                          active < 0 ? default_idx : active);
+	gtk_drop_down_set_selected (GTK_DROP_DOWN (widget),
+	                            active < 0 ? default_idx : active);
 
-	pw_type_combo_changed_cb (widget, self);
+	pw_type_combo_changed_cb (widget, NULL, self);
 	g_signal_connect (G_OBJECT (widget),
-	                  "changed",
+	                  "notify::selected",
 	                  G_CALLBACK (pw_type_combo_changed_cb), self);
 }
 
@@ -412,7 +408,7 @@ init_editor_plugin (IodineEditor *self,
 	if (s_vpn) {
 		value = nm_setting_vpn_get_data_item (s_vpn, NM_IODINE_KEY_TOPDOMAIN);
 		if (value)
-			gtk_entry_set_text (GTK_ENTRY (widget), value);
+			gtk_editable_set_text (GTK_EDITABLE (widget), value);
 	}
 	g_signal_connect (G_OBJECT (widget),
 	                  "changed",
@@ -425,7 +421,7 @@ init_editor_plugin (IodineEditor *self,
 	if (s_vpn) {
 		value = nm_setting_vpn_get_data_item (s_vpn, NM_IODINE_KEY_NAMESERVER);
 		if (value)
-			gtk_entry_set_text (GTK_ENTRY (widget), value);
+			gtk_editable_set_text (GTK_EDITABLE (widget), value);
 	}
 	g_signal_connect (G_OBJECT (widget),
 	                  "changed",
@@ -437,7 +433,7 @@ init_editor_plugin (IodineEditor *self,
 	if (s_vpn) {
 		value = nm_setting_vpn_get_data_item (s_vpn, NM_IODINE_KEY_FRAGSIZE);
 		if (value)
-			gtk_entry_set_text (GTK_ENTRY (widget), value);
+			gtk_editable_set_text (GTK_EDITABLE (widget), value);
 	}
 	g_signal_connect (G_OBJECT (widget),
 	                  "changed",
@@ -489,9 +485,9 @@ save_password_and_flags (NMSettingVpn *s_vpn,
 	/* And set new ones based on the type combo */
 	combo = GTK_WIDGET (gtk_builder_get_object (builder, combo_name));
 
-	switch (gtk_combo_box_get_active (GTK_COMBO_BOX (combo))) {
+	switch (gtk_drop_down_get_selected (GTK_DROP_DOWN (combo))) {
 	case PW_TYPE_SAVE:
-		password = gtk_entry_get_text (GTK_ENTRY (entry));
+		password = gtk_editable_get_text (GTK_EDITABLE (entry));
 		if (password && strlen (password))
 			nm_setting_vpn_add_secret (s_vpn, secret_key, password);
 		break;
@@ -529,19 +525,19 @@ update_connection (NMVpnEditor *iface,
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "topdomain_entry"));
 	g_assert(widget);
-	str = (char *) gtk_entry_get_text (GTK_ENTRY (widget));
+	str = (char *) gtk_editable_get_text (GTK_EDITABLE (widget));
 	if (str && strlen (str))
 		nm_setting_vpn_add_data_item (s_vpn, NM_IODINE_KEY_TOPDOMAIN, str);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "nameserver_entry"));
 	g_assert(widget);
-	str = (char *) gtk_entry_get_text (GTK_ENTRY (widget));
+	str = (char *) gtk_editable_get_text (GTK_EDITABLE (widget));
 	if (str && strlen (str))
 		nm_setting_vpn_add_data_item (s_vpn, NM_IODINE_KEY_NAMESERVER, str);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "fragsize_entry"));
 	g_assert(widget);
-	str = (char *) gtk_entry_get_text (GTK_ENTRY (widget));
+	str = (char *) gtk_editable_get_text (GTK_EDITABLE (widget));
 	if (str && strlen (str))
 		nm_setting_vpn_add_data_item (s_vpn, NM_IODINE_KEY_FRAGSIZE, str);
 

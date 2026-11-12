@@ -208,8 +208,6 @@ get_secrets (const char *vpn_uuid,
 	if (pw && !(pw_flags & NM_SETTING_SECRET_FLAG_NOT_SAVED))
 		nma_vpn_password_dialog_set_password (dialog, pw);
 
-	gtk_widget_show (GTK_WIDGET (dialog));
-
 	if (nma_vpn_password_dialog_run_and_block (dialog)) {
 
 		new_password = nma_vpn_password_dialog_get_password (dialog);
@@ -219,8 +217,7 @@ get_secrets (const char *vpn_uuid,
 		}
 	}
 
-	gtk_widget_hide (GTK_WIDGET (dialog));
-	gtk_widget_destroy (GTK_WIDGET (dialog));
+	gtk_window_destroy (GTK_WINDOW (dialog));
 
  out:
 	g_free (prompt);
@@ -285,7 +282,7 @@ main (int argc, char *argv[])
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
-	gtk_init (&argc, &argv);
+	gtk_init ();
 
 	context = g_option_context_new ("- iodine auth dialog");
 	g_option_context_add_main_entries (context, entries, GETTEXT_PACKAGE);
