@@ -16,6 +16,6 @@ PKG_NAME=NetworkManager-iodine
     autoreconf --install &&
     intltoolize --force &&
     autoreconf &&
-    ./configure --enable-maintainer-mode $@
+    ./configure --enable-maintainer-mode --enable-more-warnings=error $@
 )
 

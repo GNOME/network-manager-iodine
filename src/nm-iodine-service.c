@@ -79,7 +79,7 @@ typedef struct {
 static ValidProperty valid_properties[] = {
 	{ NM_IODINE_KEY_TOPDOMAIN,  G_TYPE_STRING, 0, 0 },
 	{ NM_IODINE_KEY_NAMESERVER, G_TYPE_STRING, 0, 0 },
-	{ NM_IODINE_KEY_FRAGSIZE,   G_TYPE_STRING, 0, 0 },
+	{ NM_IODINE_KEY_FRAGSIZE,   G_TYPE_INT, 1, 65535 },
 	{ NULL,                     G_TYPE_NONE, 0, 0 }
 };
 
@@ -468,14 +468,14 @@ send_password(gint fd, NMSettingVpn *s_vpn)
 }
 
 
-static gint
+static gboolean
 nm_iodine_start_iodine_binary (NMIodinePlugin *plugin,
                                NMSettingVpn *s_vpn,
                                GError **error)
 {
 	GPid pid;
 	const char **iodine_binary = NULL;
-	GPtrArray *iodine_argv;
+	g_autoptr (GPtrArray) iodine_argv = g_ptr_array_new_full (12, NULL);
 	GSource *iodine_watch;
 	GIOChannel *stderr_channel;
 	gint stdin_fd, stderr_fd;
@@ -491,26 +491,19 @@ nm_iodine_start_iodine_binary (NMIodinePlugin *plugin,
 	}
 
 	if (!*iodine_binary) {
-		g_set_error (error,
-		             NM_VPN_PLUGIN_ERROR,
-		             NM_VPN_PLUGIN_ERROR_LAUNCH_FAILED,
-		             "%s",
-		             _("Could not find iodine binary."));
-		return -1;
+		g_set_error_literal (error,
+							 NM_VPN_PLUGIN_ERROR,
+							 NM_VPN_PLUGIN_ERROR_LAUNCH_FAILED,
+							 _("Could not find iodine binary."));
+		return FALSE;
 	}
 
 	props_fragsize = nm_setting_vpn_get_data_item (s_vpn, NM_IODINE_KEY_FRAGSIZE);
 	props_nameserver = nm_setting_vpn_get_data_item (s_vpn, NM_IODINE_KEY_NAMESERVER);
 	props_topdomain = nm_setting_vpn_get_data_item (s_vpn, NM_IODINE_KEY_TOPDOMAIN);
-	iodine_argv = g_ptr_array_new ();
 	g_ptr_array_add (iodine_argv, (gpointer) (*iodine_binary));
 	/* Run in foreground */
 	g_ptr_array_add (iodine_argv, (gpointer) "-f");
-
-	if (props_fragsize && strlen(props_fragsize)) {
-		g_ptr_array_add (iodine_argv, (gpointer) "-m");
-		g_ptr_array_add (iodine_argv, (gpointer) props_fragsize);
-	}
 
 	if (has_user(NM_IODINE_USER)) {
 		g_ptr_array_add (iodine_argv, (gpointer) "-u");
@@ -524,6 +517,13 @@ nm_iodine_start_iodine_binary (NMIodinePlugin *plugin,
 	} else
 		g_warning("Not running chrooted");
 
+	if (props_fragsize && strlen(props_fragsize)) {
+		g_ptr_array_add (iodine_argv, (gpointer) "-m");
+		g_ptr_array_add (iodine_argv, (gpointer) props_fragsize);
+	}
+
+	g_ptr_array_add (iodine_argv, (gpointer) "--");
+
 	if (props_nameserver && strlen(props_nameserver))
 		g_ptr_array_add (iodine_argv, (gpointer) props_nameserver);
 
@@ -536,11 +536,9 @@ nm_iodine_start_iodine_binary (NMIodinePlugin *plugin,
 	                               G_SPAWN_DO_NOT_REAP_CHILD,
 	                               NULL, NULL,
 	                               &pid, &stdin_fd, NULL, &stderr_fd, error)) {
-		g_ptr_array_free (iodine_argv, TRUE);
 		g_warning ("iodine failed to start. error: '%s'", (*error)->message);
-		return -1;
+		return FALSE;
 	}
-	g_ptr_array_free (iodine_argv, TRUE);
 
 	g_message ("iodine started with pid %d", pid);
 
@@ -556,13 +554,13 @@ nm_iodine_start_iodine_binary (NMIodinePlugin *plugin,
 	priv->pid = pid;
 	iodine_watch = g_child_watch_source_new (pid);
 	g_source_set_callback (iodine_watch,
-	                       (GSourceFunc) iodine_watch_cb,
+	                       G_SOURCE_FUNC (iodine_watch_cb),
 	                       plugin,
 	                       NULL);
 	g_source_attach (iodine_watch, NULL);
 	g_source_unref (iodine_watch);
 
-	return 0;
+	return TRUE;
 }
 
 static gboolean
@@ -572,7 +570,7 @@ real_connect (NMVpnServicePlugin *plugin,
 {
 	NMSettingVpn *s_vpn;
 	NMIodinePluginPrivate *priv = nm_iodine_plugin_get_instance_private (NM_IODINE_PLUGIN(plugin));
-	gint ret = -1;
+	gboolean success;
 
 	g_variant_builder_init(&priv->ip4config, G_VARIANT_TYPE_VARDICT);
 
@@ -584,8 +582,8 @@ real_connect (NMVpnServicePlugin *plugin,
 	if (!nm_iodine_secrets_validate (s_vpn, error))
 		goto out;
 
-	ret = nm_iodine_start_iodine_binary (NM_IODINE_PLUGIN (plugin), s_vpn, error);
-	if (!ret)
+	success = nm_iodine_start_iodine_binary (NM_IODINE_PLUGIN (plugin), s_vpn, error);
+	if (success)
 		return TRUE;
 
  out:
@@ -700,10 +698,6 @@ int main (int argc, char *argv[])
 {
 	NMIodinePlugin *plugin;
 	GMainLoop *main_loop;
-
-#if !GLIB_CHECK_VERSION(2,36,0)
-	g_type_init ();
-#endif
 
 	plugin = nm_iodine_plugin_new ();
 	if (!plugin)
