@@ -16,7 +16,7 @@ dbusservice_DATA = nm-iodine-service.conf
 nmvpnservicedir = $(NM_VPN_SERVICE_DIR)
 nmvpnservice_DATA = nm-iodine-service.name
 
-appdatadir = $(datadir)/appdata
+appdatadir = $(datadir)/metainfo
 appdata_DATA = $(appdata_in_files:.xml.in=.xml)
 appdata_in_files = appdata/network-manager-iodine.metainfo.xml.in
 @INTLTOOL_XML_RULE@
